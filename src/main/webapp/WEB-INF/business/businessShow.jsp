@@ -50,7 +50,7 @@
 			<h1 class="text-center">
 				<c:out value="${business.name }" />
 			</h1>
-			
+
 			<h4 class="text-center">
 				<a href="#" style="color: blue;"><c:out
 						value="${business.address }" /></a>
@@ -61,13 +61,40 @@
 		</div>
 		<div class="album py-3 backgroundColor">
 			<h1 class="text-center">Menu</h1>
+		</div>
+		<div class="container">
+			<div class="row">
+				<h3><c:out value="${business.name }"/></h3>
+				<hr />
+				<c:forEach var="item" items="${business.items }">
+					<div class="col-md-2">
+						<div class="card">
+							<img class="card-img-top" src="${item.photosImagePath }"
+								alt="table food" height="125px" width="125px" />
+							<div class="card-body">
+								<p class="card-text">
+									<c:out value="${item.name }" />
+								</p>
+								<p>
+									$
+									<c:out value="${item.price }" />
+								</p>
 
+								<div class="btn-group">
+									<button type="button" class="btn btn-sm btn-outline-secondary">
+										<a href="/item/${item.id }">View Dish</a>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+
+
+			</div>
 
 		</div>
-		<c:forEach var="item" items="${business.items }">
-			<img alt="${item.name }" src="${item.photosImagePath }" height="100px">
-			<c:out value="${item.name }" />
-		</c:forEach>
 
 
 	</main>

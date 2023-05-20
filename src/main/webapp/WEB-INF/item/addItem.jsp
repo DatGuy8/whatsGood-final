@@ -51,7 +51,7 @@
 			<c:out value="${business.name}" />
 		</h1>
 		<form:form action="/business/${business.id }/item/new" method="POST"
-			modelAttribute="item" enctype="multipart/form-data">
+			modelAttribute="newItem" enctype="multipart/form-data">
 
 			<form:errors path="name" class="text-danger" />
 			<form:label path="name">Item Name: </form:label>

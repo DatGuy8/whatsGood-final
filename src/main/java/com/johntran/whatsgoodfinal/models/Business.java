@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -70,13 +69,13 @@ public class Business {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "favorite_businesses", joinColumns = @JoinColumn(name = "business_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
-	
-	//-----------ITEMS---------------
-	@OneToMany(mappedBy="business", cascade=CascadeType.ALL)
+
+	// -----------ITEMS---------------
+	@OneToMany(mappedBy = "business", fetch = FetchType.LAZY)
 	private List<Item> items;
-	
+
 //==============================METHODS=================================
-	//--------------ADD ITEM TO BUSINESS-----------------
+	// --------------ADD ITEM TO BUSINESS-----------------
 	public void addItem(Item item) {
 		if (item == null) {
 			items = new ArrayList<>();
@@ -107,7 +106,7 @@ public class Business {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
+
 // ==============================GETTERS AND SETTERS=================================
 	public Long getId() {
 		return id;

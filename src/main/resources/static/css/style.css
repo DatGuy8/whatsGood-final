@@ -97,3 +97,28 @@ footer p {
 }
 
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+/* SHOW ITEM JSP STAR RATING */
+.rating {
+  display: inline-block;
+}
+
+.star {
+  font-size: 24px;
+  color: #cccccc;
+  cursor: pointer;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: #ffcc00;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked ~ label {
+  color: #ffcc00;
+}
+

@@ -2,7 +2,7 @@ package com.johntran.whatsgoodfinal.models;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,13 +41,14 @@ public class Item {
 
 	@Min(value = 0)
 	private BigDecimal price;
-
+	
+	
 	private String image;
 
 //==========================RELATIONSHIPS====================================
 	// ------------ITEM RATINGS------------
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
-	private Set<ItemRating> ratings;
+	private List<ItemRating> ratings;
 
 	// -------------BUSINESS------------------
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -65,7 +66,7 @@ public class Item {
 //============================FOR IMAGE UPLOAD======================================	
 	@Transient
 	public String getPhotosImagePath() {
-//		if (image.isBlank()) return "/uploadedImages/stockDishPhoto.jpg";
+		if (image.isBlank()) return "/uploadedImages/stockDishPhoto.jpg";
 		if (image == null || id == null)
 			return null;
 		return "/uploadedImages/business/" + this.business.getId() + "/items/" + image;
@@ -90,14 +91,8 @@ public class Item {
 	public Item() {
 	}
 
-	public Item(String name, String decription, BigDecimal price, Set<ItemRating> ratings) {
-		this.name = name;
-		this.description = decription;
-		this.price = price;
-		this.ratings = ratings;
-	}
 
-//==============================GETTERS AND SETTERS===========================
+	//==============================GETTERS AND SETTERS===========================
 	public Long getId() {
 		return id;
 	}
@@ -130,11 +125,11 @@ public class Item {
 		this.price = price;
 	}
 
-	public Set<ItemRating> getRatings() {
+	public List<ItemRating> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(Set<ItemRating> ratings) {
+	public void setRatings(List<ItemRating> ratings) {
 		this.ratings = ratings;
 	}
 

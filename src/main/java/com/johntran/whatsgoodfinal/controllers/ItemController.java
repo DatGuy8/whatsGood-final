@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
+import com.johntran.whatsgoodfinal.models.ItemRating;
 import com.johntran.whatsgoodfinal.services.BusinessService;
 import com.johntran.whatsgoodfinal.services.ItemService;
 
@@ -31,38 +32,57 @@ public class ItemController {
 	BusinessService businessService;
 
 //==================ADD ITEM SHOW PAGE=========================
-	@GetMapping("business/{id}/item/new")
-	public String addItem(@PathVariable("id") Long id, Model model, @ModelAttribute("item") Item item) {
+	@GetMapping("business/{businessId}/item/new")
+	public String addItem(@ModelAttribute("newItem")Item newItem,@PathVariable("businessId") Long businessId, Model model) {
 
-		Business business = businessService.getOne(id);
+		Business business = businessService.getOne(businessId);
 		model.addAttribute("business", business);
 
 		return "item/addItem.jsp";
 	}
 
 //==================POST ADD ITEM ROUTE=========================
-	@PostMapping("/business/{id}/item/new")
-	public String saveItem(@Valid @ModelAttribute("item") Item item, BindingResult result,@PathVariable("id") Long id) throws IOException {
+	@PostMapping("/business/{businessId}/item/new")
+	public String saveItem(@Valid @ModelAttribute("newItem")Item newItem, BindingResult result,@PathVariable("businessId") Long businessId) throws IOException {
 		if(result.hasErrors()) {
 			return "item/addItem.jsp";
 		}
-		MultipartFile multipartFile = item.getImageFile();
-		String fileName = StringUtils.cleanPath(item.getImageFile().getOriginalFilename());
-		item.setImage(fileName);
-//		Business business = businessService.getOne(id);
-//		item.setBusiness(business);
-//		itemService.addItem(item);
-		businessService.addItem(id, item);
+		MultipartFile multipartFile = newItem.getImageFile();
+		String fileName = StringUtils.cleanPath(newItem.getImageFile().getOriginalFilename());
+		newItem.setImage(fileName);
+		
+		Business business = businessService.getOne(businessId);
+		newItem.setBusiness(business);
+		itemService.addItem(newItem);
 		
 		if(fileName.isBlank()) {
 			System.out.println("no image saved");
-			return "redirect:/business/{id}";
+			return "redirect:/business/{businessId}";
 		}else {
-			String uploadDir = "uploadedImages/business/" + item.getBusiness().getId() + "/items";
+			String uploadDir = "uploadedImages/business/" + newItem.getBusiness().getId() + "/items";
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 			System.out.println("imaged saved");
-			return "redirect:/business/{id}";
+			return "redirect:/business/{businessId}";
 		}
 		
+	}
+	
+//=======================SINGLE ITEM PAGE WITH REVIEWS===========//ADD FORM TOO?==================
+	@GetMapping("/item/{itemId}")
+	public String itemShowPage(
+			@ModelAttribute("itemRating")ItemRating itemRating,
+			@PathVariable("itemId")Long itemId,
+			Model model
+			) {
+		
+		Item menuItem = itemService.getOneItem(itemId);
+		model.addAttribute("menuItem",menuItem);
+		return "item/showItem.jsp";
+	}
+//======================POST ADD ITEM RATING ROUTE==================================
+	@PostMapping("/item/{itemId}")
+	public String itemRatingSave(@ModelAttribute("itemRating")ItemRating itemRating) {
+		System.out.println(itemRating.getRating());
+		return "redirect:/item/{itemId}";
 	}
 }
