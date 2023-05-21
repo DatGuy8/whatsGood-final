@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <!-- New line below to use the JSP Standard Tag Library -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- ========For Forms ============-->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isErrorPage="true"%>
@@ -57,28 +58,32 @@
 					By <a href="/business/${menuItem.business.id }"><c:out
 							value="${menuItem.business.name }" /></a>
 				</p>
-				<p>No Ratings yet</p>
-				<form:form action="/item/${menuItem.id}" method="post" modelAttribute="itemRating">
-				  <div class="rating">
-				    <input type="radio" id="star5" name="rating" value="5" />
-				    <label for="star5" class="star">&#9733;</label>
-				
-				    <input type="radio" id="star4" name="rating" value="4" />
-				    <label for="star4" class="star">&#9733;</label>
-				
-				    <input type="radio" id="star3" name="rating" value="3" />
-				    <label for="star3" class="star">&#9733;</label>
-				
-				    <input type="radio" id="star2" name="rating" value="2" />
-				    <label for="star2" class="star">&#9733;</label>
-				
-				    <input type="radio" id="star1" name="rating" value="1" />
-				    <label for="star1" class="star">&#9733;</label>
-				
-				    <form:textarea path="comment" placeholder="Add a comment"></form:textarea>
-				
-				    <button type="submit">Add rating</button>
-				  </div>
+				<p>
+					<c:out value="${averageRating }" />
+					out of 5 stars (
+					<c:if test="${fn:length(menuItem.ratings) > 0}">
+						${fn:length(menuItem.ratings)}
+					</c:if>
+					reviews )
+				</p>
+				<form:form action="/item/${menuItem.id}" method="post"
+					modelAttribute="itemRating">
+					<div class="rating">
+						<input type="radio" id="star5" name="rating" value="5" /> <label
+							for="star5" class="star">&#9733;</label> <input type="radio"
+							id="star4" name="rating" value="4" /> <label for="star4"
+							class="star">&#9733;</label> <input type="radio" id="star3"
+							name="rating" value="3" /> <label for="star3" class="star">&#9733;</label>
+
+						<input type="radio" id="star2" name="rating" value="2" /> <label
+							for="star2" class="star">&#9733;</label> <input type="radio"
+							id="star1" name="rating" value="1" /> <label for="star1"
+							class="star">&#9733;</label>
+
+						<form:textarea path="comment" placeholder="Add a comment"></form:textarea>
+						<form:errors path="comment" class="text-danger" />
+						<button type="submit">Add rating</button>
+					</div>
 				</form:form>
 			</div>
 
@@ -99,46 +104,26 @@
 			<h1 class="text-center mb-5">Reviews</h1>
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3">
-						<p>
-							<img src="/uploadedImages/stockDishPhoto.jpg" alt="stock" height="100px"
-								width="100px" />
-						</p>
-						<p>User1 rated it 4/5</p>
-						<p>Comments</p>
-					</div>
-					<div class="col-md-3">
-						<p>
-							<img src="/uploadedImages/stockDishPhoto.jpg" alt="stock" height="100px"
-								width="100px" />
-						</p>
-						<p>User1 rated it 4/5</p>
-						<p>Comments</p>
-					</div>
-					<div class="col-md-3">
-						<p>
-							<img src="/uploadedImages/stockDishPhoto.jpg" alt="stock" height="100px"
-								width="100px" />
-						</p>
-						<p>User1 rated it 4/5</p>
-						<p>Comments</p>
-					</div>
-					<div class="col-md-3">
-						<p>
-							<img src="/uploadedImages/stockDishPhoto.jpg" alt="stock" height="100px"
-								width="100px" />
-						</p>
-						<p>User1 rated it 4/5</p>
-						<p>Comments</p>
-					</div>
-					<div class="col-md-3">
-						<p>
-							<img src="/uploadedImages/stockDishPhoto.jpg" alt="stock" height="100px"
-								width="100px" />
-						</p>
-						<p>User1 rated it 4/5</p>
-						<p>Comments</p>
-					</div>
+					<c:forEach var="oneRating" items="${menuItem.ratings }">
+						<div class="col-md-3">
+							<p>
+								<img src="/uploadedImages/stockDishPhoto.jpg" alt="stock"
+									height="100px" width="100px" />
+							</p>
+							<p>
+								<c:out value="${oneRating.user.userName }" />
+								rated it
+							</p>
+							<p>
+								<c:out value="${oneRating.rating }" />
+								stars
+							</p>
+							<p>
+								<c:out value="${oneRating.comment }" />
+							</p>
+						</div>
+					</c:forEach>
+
 				</div>
 
 			</div>

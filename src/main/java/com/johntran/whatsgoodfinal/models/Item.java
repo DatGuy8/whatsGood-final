@@ -42,6 +42,8 @@ public class Item {
 	@Min(value = 0)
 	private BigDecimal price;
 	
+	@Transient
+	private Double averageRating;
 	
 	private String image;
 
@@ -171,5 +173,13 @@ public class Item {
 
 	public void setImageFile(MultipartFile imageFile) {
 		this.imageFile = imageFile;
+	}
+
+	public Double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(Double averageRating) {
+		this.averageRating = averageRating;
 	}
 }

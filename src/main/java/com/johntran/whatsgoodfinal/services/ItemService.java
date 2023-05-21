@@ -14,6 +14,9 @@ public class ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
 	
+	@Autowired
+	private ItemRatingService itemRatingService;
+	
 //=====================ADD ITEM=========================	
 	public Item addItem(Item item) {
 		return itemRepository.save(item);
@@ -21,7 +24,12 @@ public class ItemService {
 
 //===================GET ITEMS FROM ONE BUSINESS==================
 	public List<Item> findBusinessItems(Long businessId){
-		return itemRepository.findByBusinessId(businessId);
+		List<Item> items = itemRepository.findByBusinessId(businessId);
+		for (Item item : items) {
+	        Double averageRating = itemRatingService.getAverageRatingForItem(item);
+	        item.setAverageRating(averageRating);
+		}
+		return items;
 	}
 	
 //=================GET ONE ITEM========================

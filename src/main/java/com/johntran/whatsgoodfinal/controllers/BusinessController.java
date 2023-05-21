@@ -17,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.models.Business;
+import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.services.BusinessService;
+import com.johntran.whatsgoodfinal.services.ItemService;
 import com.johntran.whatsgoodfinal.services.UserService;
 
 import jakarta.validation.Valid;
@@ -30,6 +32,9 @@ public class BusinessController {
 
 	@Autowired
 	BusinessService businessService;
+	
+	@Autowired
+	ItemService itemService;
 
 //==================HOMEPAGE/LANDING PAGE===========================	
 	@GetMapping({ "/", "/home" })
@@ -42,7 +47,7 @@ public class BusinessController {
 	}
 
 //=================ADD BUSINESS PAGE=======================
-	@GetMapping("/business/add")
+	@GetMapping("/business/add") 
 	public String addBusiness(@ModelAttribute("business") Business business, Model model) {
 		return "business/addBusiness.jsp";
 	}
@@ -73,11 +78,13 @@ public class BusinessController {
 	}
 
 //=====================BUSINESS SHOW PAGE===========================
-	@GetMapping("/business/{id}")
-	public String showBusiness(@PathVariable("id") Long id, Model model) {
-
-		Business business = businessService.getOne(id);
+	@GetMapping("/business/{businessId}")
+	public String showBusiness(@PathVariable("businessId") Long businessId, Model model) {
+		
+		Business business = businessService.getOne(businessId);
+		List<Item> items = itemService.findBusinessItems(businessId);
 		model.addAttribute("business", business);
+		model.addAttribute("items", items);
 		return "business/businessShow.jsp";
 	}
 

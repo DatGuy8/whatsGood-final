@@ -1,6 +1,7 @@
 package com.johntran.whatsgoodfinal.controllers;
 
 import java.io.IOException;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,11 @@ import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.ItemRating;
+import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.services.BusinessService;
+import com.johntran.whatsgoodfinal.services.ItemRatingService;
 import com.johntran.whatsgoodfinal.services.ItemService;
+import com.johntran.whatsgoodfinal.services.UserService;
 
 import jakarta.validation.Valid;
 
@@ -30,6 +34,12 @@ public class ItemController {
 
 	@Autowired
 	BusinessService businessService;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	ItemRatingService itemRatingService;
 
 //==================ADD ITEM SHOW PAGE=========================
 	@GetMapping("business/{businessId}/item/new")
@@ -76,13 +86,30 @@ public class ItemController {
 			) {
 		
 		Item menuItem = itemService.getOneItem(itemId);
+		Double averageRating = itemRatingService.getAverageRatingForItem(menuItem);
+		model.addAttribute("averageRating",averageRating);
 		model.addAttribute("menuItem",menuItem);
 		return "item/showItem.jsp";
 	}
 //======================POST ADD ITEM RATING ROUTE==================================
 	@PostMapping("/item/{itemId}")
-	public String itemRatingSave(@ModelAttribute("itemRating")ItemRating itemRating) {
-		System.out.println(itemRating.getRating());
+	public String itemRatingSave(@Valid @ModelAttribute("itemRating")ItemRating itemRating, BindingResult result,@PathVariable("itemId")Long itemId,Principal pricipal) throws IOException {
+		
+		if(result.hasErrors()) {
+			System.out.println(result);
+			return "redirect:/item/{itemId}";
+		}
+		
+		String email = pricipal.getName();
+		User currentUser = userService.findByEmail(email);
+		
+		Item currentItem = itemService.getOneItem(itemId);
+		
+		itemRating.setItem(currentItem);
+		itemRating.setUser(currentUser);
+		
+		itemRatingService.addRating(itemRating);
+		
 		return "redirect:/item/{itemId}";
 	}
 }
