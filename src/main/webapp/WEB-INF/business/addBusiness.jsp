@@ -45,33 +45,40 @@
 		</div>
 	</header>
 	<div class="w-100 mt-3">
-		<h3 class="text-center">Submit a Restaurant to be added</h3>
+		<h3 class="text-center">Submit a Business to be added to What's Good</h3>
 		<form:form class="container" action="/business/new" method="POST"
 			modelAttribute="business" enctype="multipart/form-data">
+			<br>
 			<div class="form-group">
 				<form:errors path="name" class="text-danger" />
-				<form:label path="name">Business Name</form:label>
+				<form:label path="name">Business Name:</form:label>
 				<form:input type="text" class="form-control" path="name"
 					placeholder="ex. Chipotle, Ruth's Chris, Nobu" />
 			</div>
+			<br>
 			<div class="form-group">
 				<form:errors path="address" class="text-danger" />
-				<form:label path="address">Address</form:label>
+				<form:label path="address">Address:</form:label>
 				<form:input type="text" class="form-control" path="address"
 					placeholder="ex. 123 Main Street" />
 			</div>
+			<br>
 			<div class="form-group">
 				<form:errors path="website" class="text-danger" />
-				<form:label path="website">Website</form:label>
+				<form:label path="website">Website:</form:label>
 				<form:input type="text" class="form-control" path="website"
 					placeholder="ex. www.businesswebsite.com" />
 			</div>
+			<br>
 			<div class="form-group">
+				<img id="imagePreview" src="#" alt="Image Preview"
+				style="max-width: 200px; max-height: 200px; display: none;" >
 				<form:errors path="imageFile" class="text-danger" />
-				<form:label path="imageFile">Restaurant Photo: </form:label>
+				<form:label path="imageFile">Business Photo: </form:label>
 				<form:input type="file" path="imageFile"
-					accept="image/png, image/jpeg" name="imageFile" />
+					accept="image/png, image/jpeg" name="imageFile" onchange="previewImage(event)"/>
 			</div>
+			<br>
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form:form>

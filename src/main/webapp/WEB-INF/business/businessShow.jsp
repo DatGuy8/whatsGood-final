@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +65,9 @@
 		</div>
 		<div class="container">
 			<div class="row">
-				<h3><c:out value="${business.name }"/></h3>
+				<h3>
+					<c:out value="${business.name }" />
+				</h3>
 				<hr />
 				<c:forEach var="item" items="${business.items }">
 					<div class="col-md-2">
@@ -79,7 +82,18 @@
 									$
 									<c:out value="${item.price }" />
 								</p>
-
+								<c:choose>
+									<c:when test="${fn:length(item.ratings) > 0}">
+										<c:forEach var="i" begin="1" end="${item.averageRating}">
+											<i class="fa fa-star starAverage"></i>
+											<!-- Replace with your star icon class -->
+										</c:forEach>
+										<p>Number of Ratings: ${fn:length(item.ratings)}</p>
+									</c:when>
+									<c:otherwise>
+										<p>No ratings yet</p>
+									</c:otherwise>
+								</c:choose>
 								<div class="btn-group">
 									<button type="button" class="btn btn-sm btn-outline-secondary">
 										<a href="/item/${item.id }">View Dish</a>

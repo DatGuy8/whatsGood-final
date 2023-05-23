@@ -85,10 +85,10 @@ public class ItemController {
 			Model model
 			) {
 		
-		Item menuItem = itemService.getOneItem(itemId);
-		Double averageRating = itemRatingService.getAverageRatingForItem(menuItem);
+		Item item = itemService.getOneItem(itemId);
+		Double averageRating = itemRatingService.getAverageRatingForItem(item);
 		model.addAttribute("averageRating",averageRating);
-		model.addAttribute("menuItem",menuItem);
+		model.addAttribute("item",item);
 		return "item/showItem.jsp";
 	}
 //======================POST ADD ITEM RATING ROUTE==================================

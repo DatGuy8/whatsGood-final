@@ -45,7 +45,7 @@
 		</div>
 	</header>
 	<div class="container mt-3">
-		<img src="${business.photosImagePath }" height="200px"/>
+		<img src="${business.photosImagePath }" height="200px" />
 		<h1>
 			Add an item to
 			<c:out value="${business.name}" />
@@ -55,27 +55,31 @@
 
 			<form:errors path="name" class="text-danger" />
 			<form:label path="name">Item Name: </form:label>
-			<form:input type="text" path="name" />
+			<form:input type="text" path="name" class="form-control" />
 			<br />
 
 			<form:errors path="description" class="text-danger" />
 			<form:label path="description">Description: </form:label>
-			<form:input type="text" path="description" />
+			<form:textarea type="text" path="description" class="form-control" />
 			<br />
 
 			<form:errors path="price" class="text-danger" />
 			<form:label path="price">Price: </form:label>
-			<form:input type="number" path="price" min="0" step=".01" />
+			<form:input type="number" path="price" min="0" step=".01"
+				class="form-control" />
 			<br />
 
 
 			<form:errors path="imageFile" class="text-danger" />
+			<img id="imagePreview" src="#" alt="Image Preview"
+				style="max-width: 200px; max-height: 200px; display: none;" >
 			<form:label path="imageFile">Add a Photo:</form:label>
 			<form:input type="file" path="imageFile"
-				accept="image/png, image/jpeg" name="imageFile" />
+				accept="image/png, image/jpeg" name="imageFile" class="form-control" onchange="previewImage(event)"/>
+
 			<br />
-			
-			<button>Submit</button>
+
+			<button class="btn btn-primary">Submit</button>
 		</form:form>
 	</div>
 </body>

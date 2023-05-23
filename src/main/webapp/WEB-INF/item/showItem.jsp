@@ -2,7 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <!-- New line below to use the JSP Standard Tag Library -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- ========For Forms ============-->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isErrorPage="true"%>
@@ -49,24 +50,32 @@
 		<section class="jumbotron text-center"
 			style="background-color: #F9F5FF;">
 			<div class="container">
-				<img src="${menuItem.photosImagePath }" alt="stock photo"
-					height="150px" />
+				<img src="${item.photosImagePath }" alt="stock photo" height="150px" />
 				<h1>
-					<c:out value="${menuItem.name }" />
+					<c:out value="${item.name }" />
 				</h1>
 				<p>
-					By <a href="/business/${menuItem.business.id }"><c:out
-							value="${menuItem.business.name }" /></a>
+					By <a href="/business/${item.business.id }"><c:out
+							value="${item.business.name }" /></a>
 				</p>
 				<p>
-					<c:out value="${averageRating }" />
+					<c:choose>
+						<c:when test="${fn:length(item.ratings) > 0}">
+							<fmt:formatNumber value="${averageRating}" pattern="#0.00"
+								var="formattedRating" />
+							<c:out value="${formattedRating}" />
 					out of 5 stars (
-					<c:if test="${fn:length(menuItem.ratings) > 0}">
-						${fn:length(menuItem.ratings)}
+					<c:if test="${fn:length(item.ratings) > 0}">
+						${fn:length(item.ratings)}
 					</c:if>
 					reviews )
+					</c:when>
+						<c:otherwise>
+							<p>No ratings yet</p>
+						</c:otherwise>
+					</c:choose>
 				</p>
-				<form:form action="/item/${menuItem.id}" method="post"
+				<form:form action="/item/${item.id}" method="post"
 					modelAttribute="itemRating">
 					<div class="rating">
 						<input type="radio" id="star5" name="rating" value="5" /> <label
@@ -104,7 +113,7 @@
 			<h1 class="text-center mb-5">Reviews</h1>
 			<div class="container">
 				<div class="row">
-					<c:forEach var="oneRating" items="${menuItem.ratings }">
+					<c:forEach var="oneRating" items="${item.ratings }">
 						<div class="col-md-3">
 							<p>
 								<img src="/uploadedImages/stockDishPhoto.jpg" alt="stock"

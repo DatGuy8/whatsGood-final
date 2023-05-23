@@ -2,6 +2,9 @@
 
 @charset "ISO-8859-1";
 
+body {
+  background-color: grey;
+}
 
 :root {
   --jumbotron-padding-y: 3rem;
@@ -120,5 +123,10 @@ input[type="radio"] {
 
 input[type="radio"]:checked ~ label {
   color: #ffcc00;
+}
+
+/* Star Average business SHOW */
+.starAverage {
+  color: gold; /* Set the color of the filled star */
 }
 
