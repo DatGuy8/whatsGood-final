@@ -20,7 +20,7 @@ body {
 
 
 .backgroundColor{
-	background-color:#F9F5FF;
+	background-color: grey;
 }
 
 .visible{
@@ -129,4 +129,15 @@ input[type="radio"]:checked ~ label {
 .starAverage {
   color: gold; /* Set the color of the filled star */
 }
+/* MAP BUISNESS SHOW */
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+#map {
+  height: 400px;
+  width:400px;
+  margin:0 auto;
+}
+
 

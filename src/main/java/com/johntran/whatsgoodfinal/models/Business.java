@@ -45,7 +45,10 @@ public class Business {
 
 	@Size(max = 255)
 	private String image;
-
+	
+	@Column(columnDefinition = "boolean default false")
+	private Boolean isApproved;
+	
 //===============================FOR IMAGE UPLOAD======================================
 	@Transient
 	public String getPhotosImagePath() {
@@ -94,6 +97,7 @@ public class Business {
 
 // =================================CONSTRUCTORS==================================================
 	public Business() {
+		this.isApproved = false;
 	}
 
 //=======================AUTO CREATED UPDATED AT=========================================
@@ -194,5 +198,13 @@ public class Business {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public Boolean getIsApproved() {
+		return isApproved;
+	}
+
+	public void setIsApproved(Boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 }

@@ -51,10 +51,7 @@ public class UserController {
 		return "user/loginPage.jsp";
 	}
 	
-	@GetMapping("/admin")
-	public String admin() {
-		return "admin/adminPage.jsp";
-	}
+	
 	
 	
 }

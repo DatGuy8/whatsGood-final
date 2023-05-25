@@ -45,10 +45,6 @@ public class User {
 	private String lastName;
 
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date birthday;
-	
-	@NotNull
 	@Email
 	private String email;
 	
@@ -132,13 +128,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
 
 	public String getEmail() {
 		return email;

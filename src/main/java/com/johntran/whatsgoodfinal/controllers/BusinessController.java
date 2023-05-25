@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
+import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.services.BusinessService;
 import com.johntran.whatsgoodfinal.services.ItemService;
 import com.johntran.whatsgoodfinal.services.UserService;
@@ -31,18 +32,20 @@ public class BusinessController {
 	private UserService userService;
 
 	@Autowired
-	BusinessService businessService;
+	private BusinessService businessService;
 	
 	@Autowired
-	ItemService itemService;
+	private ItemService itemService;
 
 //==================HOMEPAGE/LANDING PAGE===========================	
 	@GetMapping({ "/", "/home" })
 	public String homePage(Principal principal, Model model) {
 		String email = principal.getName();
-		model.addAttribute("currentUser", userService.findByEmail(email));
-		List<Business> businesses = businessService.findAll();
+		User currentUser = userService.findByEmail(email);
+		model.addAttribute("currentUser", currentUser);
+		List<Business> businesses = businessService.findAllApproved(true);
 		model.addAttribute("businesses", businesses);
+		
 		return "business/homePage.jsp";
 	}
 
@@ -86,6 +89,11 @@ public class BusinessController {
 		model.addAttribute("business", business);
 		model.addAttribute("items", items);
 		return "business/businessShow.jsp";
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "test.jsp";
 	}
 
 }

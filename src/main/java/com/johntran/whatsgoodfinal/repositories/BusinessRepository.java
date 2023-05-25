@@ -10,5 +10,5 @@ import com.johntran.whatsgoodfinal.models.Business;
 @Repository
 public interface BusinessRepository extends CrudRepository<Business,Long>{
 	List<Business> findAll();
-	
+	List<Business> findAllByIsApproved(Boolean isApproved);
 }

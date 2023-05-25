@@ -104,10 +104,6 @@
 									<form:input type="text" path="userName" class="form-control" />
 									<form:label class="form-label" path="userName">User Name</form:label>
 								</div>
-								<div class="form-outline mb-4">
-									<form:input type="date" path="birthday" class="form-control" />
-									<form:label class="form-label" path="birthday">Birthday</form:label>
-								</div>
 								<!-- Email input -->
 								<div class="form-outline mb-4">
 									<form:input type="email" path="email" class="form-control" />

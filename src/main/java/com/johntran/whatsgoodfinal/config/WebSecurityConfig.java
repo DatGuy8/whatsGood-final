@@ -22,7 +22,7 @@ public class WebSecurityConfig {
 		http
 		    	.authorizeHttpRequests()
 		    		.requestMatchers("/admin/**").hasRole("ADMIN")
-	            	.requestMatchers("/", "/dashboard").authenticated()
+	            	.requestMatchers("/", "/dashboard","/business/**","/item/**").authenticated()
 	                .anyRequest().permitAll()
 	                .and()
 	            .formLogin()

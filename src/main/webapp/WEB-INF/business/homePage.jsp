@@ -18,12 +18,16 @@
 </head>
 <body>
 	<header>
-
+<!--================================= NAV BAR ========================================-->
 		<div class="navbar navbar-dark betterBlue box-shadow">
 			<div class="container d-flex justify-content-between">
-				<a href="/" class="navbar-brand d-flex align-items-center"> <strong>What's
-						Good</strong>
+			
+				<!---------------------WHATS GOOD LOGO-------------------- -->
+				<a href="/" class="navbar-brand d-flex align-items-center">
+					<strong>What's Good</strong>
 				</a>
+				
+				<!------------------------SEARCH BAR----------------------  -->
 				<form action="action_page.php">
 					<div class="input-group">
 						<input type="text" class="form-control"
@@ -34,57 +38,71 @@
 						</div>
 					</div>
 				</form>
-				<form id="logoutForm" method="POST" action="/logout">
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" /> <input type="submit" value="Logout!" />
-				</form>
+				
+				<!----------------------DROP DOWN MENU WITH LOGOUT AND PROFILE PAGE LINK---------------  -->
+				<div class="dropdown">
+					<button class="dropdown-toggle btn btn-info" onclick="toggleDropdown()"
+						aria-expanded="false"><c:out value="${currentUser.userName }"/></button>
+					<ul class="dropdown-menu" id="dropdownMenu" style="display: none;">
+						<li>
+							<a href="/user/${currentUser.id }">My Profile</a>
+						</li>
+						<li>
+							<form id="logoutForm" method="POST" action="/logout">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+							<input type="submit" value="Logout!" class="btn btn-info"/>
+							</form>
+						</li>
+					</ul>
+				</div>
+				
 			</div>
 		</div>
 	</header>
+<!--=================================END NAV BAR ========================================-->
 
-	<section class="jumbotron text-center"
-		style="height: 450px; background-image: url('/images/Buisness.jpg'); background-size: 70% 450px; background-repeat: no-repeat; background-position: center; background-color: #F9F5FF;">
+<!--================================CAROUSEL======================================  -->
+	<section 
+		class="jumbotron text-center"
+		style="height: 450px; background-image: url('/images/Buisness.jpg'); background-size: 70% 450px; background-repeat: no-repeat; background-position: center; background-color: grey;"
+	>
 		<div class="container">
-
-			<h2 class="mt-3"
-				style="font-weight: 800; color: #F9F5FF; border-radius: 5px;">Look
-				for what food businesses have to offer and what Users are rating
-				those items!</h2>
+			<h2 class="mt-3" style="font-weight: 800; color: #F9F5FF; border-radius: 5px;">
+				Look for what food businesses have to offer and what Users are rating those items!
+			</h2>
 			<p>
-
-				<!-- <a href="#" class="btn btn-primary my-2">See What's Good Nearby</a> -->
-				<a href="/business/add" class="btn btn-primary my-2">Add a
-					Business to What's Good</a>
+				<a href="/business/add" class="btn btn-primary my-2">
+					Add a Business to What's Good
+				</a>
 			</p>
 		</div>
 	</section>
+<!--================================END CAROUSEL======================================  -->	
+
+<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
-		<h1 class="text-center">Restaurants</h1>
+		<h1 class="text-center">Businesses</h1>
 		<div class="container mt-3">
 			<div class="row">
+			<!--------------------LOOPING THROUGH THE LIST OF BUSINESSES--------------------- -->
 				<c:forEach var="business" items="${businesses }">
 					<div class="col-md-4">
-
+						<!--  -->
 						<div class="card mb-4 box-shadow">
-							<img class="card-img-top" src="${business.photosImagePath }"
-								alt="pic of food" height="300px">
+						
+							<img class="card-img-top" src="${business.photosImagePath }" alt="pic of food" height="300px">
+							
 							<div class="card-body">
-								<p class="card-text">
-									<c:out value="${business.name }" />
-								</p>
-								<p>
-									|
-									<c:out value="${business.website}" />
-									|
+							
+								<p class="card-text"><c:out value="${business.name }" /></p>
+								
+								<p>| <c:out value="${business.website}" /> |</p>
 
-								</p>
-
-								<div
-									class="d-flex justify-content-between align-items-center mt-2">
+								<div class="d-flex justify-content-between align-items-center mt-2">
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">
-											<a href="/business/${business.id }" class="textNone">View</a>
-										</button>
+										<a href="/business/${business.id }" class="textNone">
+											<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+										</a>
 									</div>
 									<small class="text-muted">Average Dish Rating</small>
 								</div>
@@ -92,9 +110,11 @@
 						</div>
 					</div>
 				</c:forEach>
-
+			<!--------------------END LOOPING THROUGH THE LIST OF BUSINESSES--------------------- -->
+			
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>
