@@ -13,8 +13,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<c:set var="apiKey" value="${#environment.getProperty('google.maps.api.key')}" />
-<script src="https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<!-- ADD API KEY -->&libraries=places"></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />

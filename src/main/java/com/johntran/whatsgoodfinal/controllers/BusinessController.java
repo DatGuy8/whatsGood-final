@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
+import com.johntran.whatsgoodfinal.config.GoogleMapsApiConfig;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.User;
@@ -37,6 +38,15 @@ public class BusinessController {
 	@Autowired
 	private ItemService itemService;
 
+	//-----------hidden API key for GoogleMaps----------
+	private final String googleApiKey;
+	
+	@Autowired
+	public BusinessController(GoogleMapsApiConfig apiConfig) {
+		this.googleApiKey = apiConfig.getApiKey();
+	}
+	
+
 //==================HOMEPAGE/LANDING PAGE===========================	
 	@GetMapping({ "/", "/home" })
 	public String homePage(Principal principal, Model model) {
@@ -52,6 +62,7 @@ public class BusinessController {
 //=================ADD BUSINESS PAGE=======================
 	@GetMapping("/business/add") 
 	public String addBusiness(@ModelAttribute("business") Business business, Model model) {
+		model.addAttribute("googleApiKey",googleApiKey);
 		return "business/addBusiness.jsp";
 	}
 
@@ -88,6 +99,7 @@ public class BusinessController {
 		List<Item> items = itemService.findBusinessItems(businessId);
 		model.addAttribute("business", business);
 		model.addAttribute("items", items);
+		model.addAttribute("googleApiKey",googleApiKey);
 		return "business/businessShow.jsp";
 	}
 	

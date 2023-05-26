@@ -71,7 +71,7 @@ public class Item {
 		if (image.isBlank()) return "/uploadedImages/stockDishPhoto.jpg";
 		if (image == null || id == null)
 			return null;
-		return "/uploadedImages/items/" + this.business.getId() + "/" + image;
+		return "/uploadedImages/business/" + this.business.getId() + "/items/" + image;
 	}
 
 	@Transient

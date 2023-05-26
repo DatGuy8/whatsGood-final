@@ -18,7 +18,11 @@
 <!-- For any Bootstrap that uses JS or jQuery-->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/script.js"></script>
+
+<!-- GOOGLE PLACES API FOR ADDRESSES -->
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey }&libraries=places"></script>
+
 </head>
 <body>
 	<header>
@@ -44,8 +48,11 @@
 			</div>
 		</div>
 	</header>
+
+
 	<div class="w-100 mt-3">
-		<h3 class="text-center">Submit a Business to be added to What's Good</h3>
+		<h3 class="text-center">Submit a Business to be added to What's
+			Good</h3>
 		<form:form class="container" action="/business/new" method="POST"
 			modelAttribute="business" enctype="multipart/form-data">
 			<br>
@@ -60,7 +67,7 @@
 				<form:errors path="address" class="text-danger" />
 				<form:label path="address">Address:</form:label>
 				<form:input type="text" class="form-control" path="address"
-					placeholder="ex. 123 Main Street" />
+					id="address" placeholder="Enter Address" />
 			</div>
 			<br>
 			<div class="form-group">
@@ -72,11 +79,12 @@
 			<br>
 			<div class="form-group">
 				<img id="imagePreview" src="#" alt="Image Preview"
-				style="max-width: 200px; max-height: 200px; display: none;" >
+					style="max-width: 200px; max-height: 200px; display: none;">
 				<form:errors path="imageFile" class="text-danger" />
 				<form:label path="imageFile">Business Photo: </form:label>
 				<form:input type="file" path="imageFile"
-					accept="image/png, image/jpeg" name="imageFile" onchange="previewImage(event)"/>
+					accept="image/png, image/jpeg" name="imageFile"
+					onchange="previewImage(event)" />
 			</div>
 			<br>
 
@@ -84,8 +92,7 @@
 		</form:form>
 
 	</div>
-
-
-
+	<script type="text/javascript" src="/js/addBusiness/index.js"></script>
+	
 </body>
 </html>
