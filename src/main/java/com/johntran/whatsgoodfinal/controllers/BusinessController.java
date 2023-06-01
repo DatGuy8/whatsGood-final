@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.LatLng;
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.config.GoogleMapsApiConfig;
 import com.johntran.whatsgoodfinal.models.Business;
@@ -73,10 +78,45 @@ public class BusinessController {
 		if (result.hasErrors()) {
 			return "business/addBusiness.jsp";
 		}
-
+		GeoApiContext context = new GeoApiContext.Builder()
+				.apiKey(googleApiKey)
+				.build();
+		String address = business.getAddress();
 		MultipartFile multipartFile = business.getImageFile();
 		String fileName = StringUtils.cleanPath(business.getImageFile().getOriginalFilename());
 		business.setImage(fileName);
+		
+		 GeocodingResult[] results;
+		    try {
+		        results = GeocodingApi.geocode(context, address).await();
+		        
+		        if (results.length > 0) {
+		            // Retrieve the first result
+		            GeocodingResult apiResult = results[0];
+		            
+		            // Extract the latitude and longitude
+		            LatLng location = apiResult.geometry.location;
+		            double latitude = location.lat;
+		            double longitude = location.lng;
+		            
+		            // Pass the latitude and longitude to the model
+		            business.setLatitude(latitude);
+		            business.setLongitude(longitude);
+		            System.out.println("latitude" + latitude);
+		            System.out.println("longitude" + longitude);
+//		            model.addAttribute("latitude", latitude);
+//		            model.addAttribute("longitude", longitude);
+		        } else {
+		            // Handle case where no results are found
+		        	System.out.println("No geocoding results found.");
+		        }
+		    } catch (ApiException | InterruptedException | IOException e) {
+		        // Handle exceptions
+		    	System.out.println(e.getMessage());
+//		        model.addAttribute("error", "Geocoding error: " + e.getMessage());
+		    }
+		
+		
 		businessService.addBusiness(business);
 
 		if (fileName.isBlank()) {
@@ -94,7 +134,7 @@ public class BusinessController {
 //=====================BUSINESS SHOW PAGE===========================
 	@GetMapping("/business/{businessId}")
 	public String showBusiness(@PathVariable("businessId") Long businessId, Model model) {
-		
+		model.addAttribute("googleApiKey",googleApiKey);
 		Business business = businessService.getOne(businessId);
 		List<Item> items = itemService.findBusinessItems(businessId);
 		model.addAttribute("business", business);

@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,14 +11,15 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=<!-- ADD API KEY -->&libraries=places"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey }&libraries=places"></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
 <!-- For any Bootstrap that uses JS or jQuery-->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<script type="module" src="/js/script.js"></script>
+
 </head>
 <body>
 
@@ -45,18 +44,22 @@
 			</form>
 		</div>
 	</div>
-	
+
 	</header>
 	<main role="main">
 
-		<section class="jumbotron text-center"
+		<section class="jumbotron text-center mt-3"
 			style="height: 450px; background-image: url('${business.photosImagePath}'); background-repeat: no-repeat; background-position: center; background-color: grey;">
 		</section>
 		<div class="container">
 			<h1 class="text-center">
 				<c:out value="${business.name }" />
 			</h1>
+			<!--------------GOOGLE MAP--------------------  -->
 			<div id="map"></div>
+			<p class="text-center">
+				<a href="#" id="getDirections">Get Directions from Google</a>
+			</p>
 			<h4 class="text-center">
 				<a href="#" style="color: blue;"><c:out
 						value="${business.address }" /></a>
@@ -118,8 +121,12 @@
 
 
 	</main>
-	<script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-        ({key: "AIzaSyB3iO0mybHe0fk4VyIIKqIidMl9HSd_xkk", v: "beta"});</script>
 	
+	<script type="module" src="/js/businessShow/index.js"></script>
+	<script>
+  // Define the latitude and longitude variables
+  		var latitude = ${business.latitude};
+  		var longitude = ${business.longitude};
+	</script>
 </body>
 </html>

@@ -90,6 +90,12 @@
 			<artifactId>jquery</artifactId>
 			<version>3.6.0</version>
 		</dependency>
+		<!-- GOOGLE MAPS DEPENDENCY-->
+		<dependency>
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>0.15.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
