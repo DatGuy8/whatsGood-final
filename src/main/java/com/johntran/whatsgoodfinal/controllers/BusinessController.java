@@ -61,6 +61,9 @@ public class BusinessController {
 		List<Business> businesses = businessService.findAllApproved(true);
 		model.addAttribute("businesses", businesses);
 		
+		List<Item> sortedItems = itemService.getHighestRated();
+		System.out.println(sortedItems);
+		model.addAttribute("sortedItems",sortedItems);
 		return "business/homePage.jsp";
 	}
 

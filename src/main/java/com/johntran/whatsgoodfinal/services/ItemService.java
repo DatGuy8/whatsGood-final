@@ -1,5 +1,6 @@
 package com.johntran.whatsgoodfinal.services;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class ItemService {
 		return items;
 	}
 	
-//=================GET ONE ITEM========================
+//=================GET ONE ITEM======================== 
 	public Item getOneItem(Long id) {
 		Optional<Item> oneItem = itemRepository.findById(id);
 		if(oneItem.isPresent()) {
@@ -40,5 +41,21 @@ public class ItemService {
 		}else {
 			return null;
 		}
+	}
+	
+//================GET HIGHEST RATED ITEMS=========================
+	public List<Item> getHighestRated(){
+		System.out.println("itemService");
+		List<Item> allItems = itemRepository.findAll();
+		
+		for(Item item : allItems) {
+			Double averageRating = itemRatingService.getAverageRatingForItem(item);
+			item.setAverageRating(averageRating);
+		}
+		
+		allItems.sort(Comparator.comparingDouble(Item::getAverageRating).reversed());
+		System.out.println(allItems);
+		return allItems;
+		
 	}
 }

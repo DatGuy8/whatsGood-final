@@ -15,13 +15,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "item_ratings")
+@Table(name = "item_ratings", uniqueConstraints = { @UniqueConstraint(columnNames = { "item_id", "user_id" }) })
 public class ItemRating {
 //==============================MEMBER VARIABLES======================================
 	@Id
@@ -62,8 +63,8 @@ public class ItemRating {
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
-	}	
-	
+	}
+
 //==============================CONSTRUCTOR====================================	
 	public ItemRating() {
 	}
@@ -74,7 +75,7 @@ public class ItemRating {
 		this.user = user;
 		this.item = item;
 	}
-	
+
 //==========================GETTERS AND SETTERS================================
 	public Long getId() {
 		return id;

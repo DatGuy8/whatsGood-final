@@ -105,6 +105,11 @@ public class ItemController {
 		
 		Item currentItem = itemService.getOneItem(itemId);
 		
+		if(itemRatingService.hasUserRatedItem(currentUser.getId(), itemId)) {
+			result.rejectValue("rating", "duplicate","You have already rated the item");
+			return "redirect:/item/{itemId}"; 
+		}
+		
 		itemRating.setItem(currentItem);
 		itemRating.setUser(currentUser);
 		

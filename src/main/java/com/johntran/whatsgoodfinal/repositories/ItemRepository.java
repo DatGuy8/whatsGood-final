@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,8 @@ public interface ItemRepository extends CrudRepository<Item,Long>{
 	
 	List<Item> findAll();
 	List<Item> findByBusinessId(Long BusinessId);
+	
+	@Query("SELECT i FROM Item i JOIN FETCH i.ratings r GROUP BY i.id ORDER BY AVG(r.rating) ASC")
+    List<Item> findItemsByAverageRatingAscending();
 	
 }

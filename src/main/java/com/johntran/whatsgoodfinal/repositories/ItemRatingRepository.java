@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.ItemRating;
+import com.johntran.whatsgoodfinal.models.User;
 @Repository
 public interface ItemRatingRepository extends CrudRepository<ItemRating, Long> {
 	
@@ -16,4 +17,6 @@ public interface ItemRatingRepository extends CrudRepository<ItemRating, Long> {
 	
 	@Query("SELECT AVG(ir.rating) FROM ItemRating ir WHERE ir.item = :item")
 	Double calculateAverageRatingForItem(@Param("item")Item item);
+	
+	boolean existsByUserAndItem(User user, Item item);
 }

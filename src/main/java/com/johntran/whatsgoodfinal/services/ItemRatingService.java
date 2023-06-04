@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.ItemRating;
+import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.repositories.ItemRatingRepository;
 
 @Service
@@ -23,5 +24,14 @@ public class ItemRatingService {
 		return itemRatingRepo.calculateAverageRatingForItem(item);
 	}
 
+//=================CHECK TO SEE IF USER RATED AN ITEM ALREADY=======================
+	public boolean hasUserRatedItem(Long userId, Long itemId) {
+		Item item = new Item();
+		item.setId(itemId);
 
+		User user = new User();
+		user.setId(userId);
+		
+		return itemRatingRepo.existsByUserAndItem(user, item);
+	}
 }
