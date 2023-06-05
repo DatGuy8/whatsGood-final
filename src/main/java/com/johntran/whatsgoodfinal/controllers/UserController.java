@@ -52,6 +52,9 @@ public class UserController {
 	}
 	
 	
-	
+	@GetMapping("/test")
+	public String test1() {
+		return "test.jsp";
+	}
 	
 }

@@ -146,9 +146,6 @@ public class BusinessController {
 		return "business/businessShow.jsp";
 	}
 	
-	@GetMapping("/test")
-	public String test() {
-		return "test.jsp";
-	}
+	
 
 }
