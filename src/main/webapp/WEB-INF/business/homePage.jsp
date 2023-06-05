@@ -61,8 +61,8 @@
 		</div>
 	</header>
 	<!--=================================END NAV BAR ========================================-->
-
-	<!--================================CAROUSEL======================================  -->
+	
+	
 	<section class="jumbotron text-center"
 		style="height: 450px; background-image: url('/images/Buisness.jpg'); background-size: 70% 450px; background-repeat: no-repeat; background-position: center; background-color: grey;">
 		<div class="container">
@@ -76,6 +76,51 @@
 			</p>
 		</div>
 	</section>
+
+	<!--================================CAROUSEL======================================  -->
+	<div id="myCarousel" class="carousel slide mb-6"
+			data-bs-ride="carousel" data-bs-theme="light">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<c:forEach var="business" items="${businesses }" varStatus="status">
+				<div class="carousel-item${status.first ? ' active': '' }">
+					<div class="d-flex justify-content-center">
+						<img
+							src="<c:out value="${business.photosImagePath }"/>"
+							height="500px" class="mx-auto">
+					</div>
+					<div class="container">
+						<div class="carousel-caption text-end">
+							<h1><c:out value="${business.name }"/></h1>
+							<p class="opacity-75"><c:out value="${business.website }"/></p>
+							<p>
+								<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+				
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon bg-black "
+					aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon  bg-black" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
 	<!--================================END CAROUSEL======================================  -->
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
