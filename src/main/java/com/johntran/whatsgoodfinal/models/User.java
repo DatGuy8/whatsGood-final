@@ -1,11 +1,13 @@
 package com.johntran.whatsgoodfinal.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -70,6 +72,10 @@ public class User {
 	// ------------USER RATED ITEMS------------
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<ItemRating> ratings;
+	
+	//-------------------USER UPLOADED PHOTOS-------------------
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Photo> photos = new ArrayList<>();
 
 // =========================CREATED AT AND UPDATED AT=================================
 	@Column(updatable = false)
@@ -94,6 +100,18 @@ public class User {
 
 	public User() {
 	}
+	
+//==============================METHOD=========================================
+	//---------------ADD PHOTOS-----------------
+		public void addPhoto(Photo photo) {
+			photos.add(photo);
+			photo.setUser(this);
+		}
+		
+		public void removePhoto(Photo photo) {
+	        photos.remove(photo);
+	        photo.setUser(null);
+	    }
 
 // ==========================GETTERS AND SETTERS===================================
 	public Long getId() {
@@ -191,5 +209,13 @@ public class User {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 }

@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,8 +20,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -44,8 +42,6 @@ public class Business {
 	@Size(min = 5, max = 255)
 	private String website;
 
-	@Size(max = 255)
-	private String image;
 	
 	private Double latitude;
 	
@@ -54,19 +50,6 @@ public class Business {
 	@Column(columnDefinition = "boolean default false")
 	private Boolean isApproved;
 	
-//===============================FOR IMAGE UPLOAD======================================
-	@Transient
-	public String getPhotosImagePath() {
-		if (image.isBlank())
-			return "/uploadedImages/defaultRestaurant.jpg";
-		if (image == null || id == null)
-			return null;
-		return "/uploadedImages/business/" + id + "/" + image;
-	}
-
-	@Transient
-	private MultipartFile imageFile;
-
 //============================RELATIONSHIPS===================================
 	// --------CATEGORIES---------
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -77,6 +60,10 @@ public class Business {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "favorite_businesses", joinColumns = @JoinColumn(name = "business_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
+	
+	//---------PHOTOS--------------
+	@OneToMany(mappedBy="business", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Photo> photos;
 
 	// -----------ITEMS---------------
 	@OneToMany(mappedBy = "business", fetch = FetchType.LAZY)
@@ -91,6 +78,20 @@ public class Business {
 		items.add(item);
 		item.setBusiness(this);
 	}
+	
+	//---------------ADD PHOTOS------------------
+	public void addPhoto(Photo photo) {
+		if (photo == null) {
+			photos = new ArrayList<>();
+		}
+		photos.add(photo);
+		photo.setBusiness(this);
+	}
+	
+	public void removePhoto(Photo photo) {
+        photos.remove(photo);
+        photo.setBusiness(null);
+    }
 
 // =========================CREATED AT AND UPDATED AT=================================
 	@Column(updatable = false)
@@ -181,21 +182,6 @@ public class Business {
 		this.users = users;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public MultipartFile getImageFile() {
-		return imageFile;
-	}
-
-	public void setImageFile(MultipartFile imageFile) {
-		this.imageFile = imageFile;
-	}
 
 	public List<Item> getItems() {
 		return items;
@@ -227,5 +213,13 @@ public class Business {
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 }

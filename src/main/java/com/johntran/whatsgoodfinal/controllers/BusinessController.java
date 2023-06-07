@@ -3,16 +3,17 @@ package com.johntran.whatsgoodfinal.controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.maps.GeoApiContext;
@@ -24,9 +25,11 @@ import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.config.GoogleMapsApiConfig;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
+import com.johntran.whatsgoodfinal.models.Photo;
 import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.services.BusinessService;
 import com.johntran.whatsgoodfinal.services.ItemService;
+import com.johntran.whatsgoodfinal.services.PhotoService;
 import com.johntran.whatsgoodfinal.services.UserService;
 
 import jakarta.validation.Valid;
@@ -42,6 +45,9 @@ public class BusinessController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private PhotoService photoService;
 
 	//-----------hidden API key for GoogleMaps----------
 	private final String googleApiKey;
@@ -76,7 +82,7 @@ public class BusinessController {
 
 //=================POST ROUTE ADD BUSINESS=================
 	@PostMapping("/business/new")
-	public String saveBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result, Model model)
+	public String saveBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result, Model model,@RequestParam("photos[0].imageFile")MultipartFile photoFile,Principal principal)
 			throws IOException {
 		if (result.hasErrors()) {
 			return "business/addBusiness.jsp";
@@ -85,9 +91,9 @@ public class BusinessController {
 				.apiKey(googleApiKey)
 				.build();
 		String address = business.getAddress();
-		MultipartFile multipartFile = business.getImageFile();
-		String fileName = StringUtils.cleanPath(business.getImageFile().getOriginalFilename());
-		business.setImage(fileName);
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		
 		
 		 GeocodingResult[] results;
 		    try {
@@ -107,8 +113,7 @@ public class BusinessController {
 		            business.setLongitude(longitude);
 		            System.out.println("latitude" + latitude);
 		            System.out.println("longitude" + longitude);
-//		            model.addAttribute("latitude", latitude);
-//		            model.addAttribute("longitude", longitude);
+
 		        } else {
 		            // Handle case where no results are found
 		        	System.out.println("No geocoding results found.");
@@ -118,20 +123,39 @@ public class BusinessController {
 		    	System.out.println(e.getMessage());
 //		        model.addAttribute("error", "Geocoding error: " + e.getMessage());
 		    }
+		    
+		    
 		
-		
-		businessService.addBusiness(business);
-
-		if (fileName.isBlank()) {
-			System.out.println("no image saved");
-			return "redirect:/";
-		} else {
-			String uploadDir = "uploadedImages/business/" + business.getId();
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-			System.out.println("imaged saved");
-			return "redirect:/";
+		if (!photoFile.isEmpty()) {
+			try {
+				String uploadDir = "uploadedImages/businesses/";
+				String fileName = UUID.randomUUID().toString() + "_" + photoFile.getOriginalFilename();
+				FileUploadUtil.saveFile(uploadDir, fileName, photoFile);
+				
+				Photo photo = new Photo();//===================fix constructor and add in the items in parathesis
+				photo.setFileName(photoFile.getOriginalFilename());
+				photo.setFilePath(uploadDir + fileName);
+				photo.setFileType(photoFile.getContentType());
+				photo.setFileSize(photoFile.getSize());
+				Business savedBusiness = businessService.addBusiness(business);
+				photo.setBusiness(savedBusiness);
+				photo.setUser(currentUser);
+				
+				Photo savedPhoto = photoService.savePhoto(photo);
+				
+				savedBusiness.addPhoto(savedPhoto);
+				
+				businessService.addBusiness(savedBusiness);
+				
+				
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 		}
 
+		System.out.println("Business controller photofile area");
+		   
+		return "redirect:/";
 	}
 
 //=====================BUSINESS SHOW PAGE===========================

@@ -1,8 +1,5 @@
 package com.johntran.whatsgoodfinal.services;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +15,6 @@ public class BusinessService {
 	@Autowired
 	private BusinessRepository businessRepo;
 
-	
-	
 //====================FIND ALL BUSINESSES======================
 	public List<Business> findAll() {
 		return businessRepo.findAll();
@@ -57,41 +52,41 @@ public class BusinessService {
 		}
 	}
 
-	
 //========================DELETE A BUSINESS==============================
 	public void deleteByBusinessId(Long id) {
 		if (businessRepo.existsById(id)) {
-			Business business = businessRepo.findById(id).orElse(null);
-			
-			if (business != null) {
-				String photoPath = business.getPhotosImagePath();
-				String rootDirectory = "C:\\Users\\names\\OneDrive\\Desktop\\Java\\May2023\\whatsGood-final";
-				if (photoPath != null) {
-					try {
-						Path path = Paths.get(rootDirectory, photoPath);
-						Path photoFolder = path.getParent();
-						
-						Files.deleteIfExists(path);
-						if(photoFolder != null) {
-							Files.deleteIfExists(photoFolder);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
+//			Business business = businessRepo.findById(id).orElse(null);
+//			if (business != null) {
+//				String photoPath = business.getPhotosImagePath();
+//				String rootDirectory = "C:\\Users\\names\\OneDrive\\Desktop\\Java\\May2023\\whatsGood-final";
+//				if (photoPath != null) {
+//					try {
+//						Path path = Paths.get(rootDirectory, photoPath);
+//						Path photoFolder = path.getParent();
+//						
+//						Files.deleteIfExists(path);
+//						if(photoFolder != null) {
+//							Files.deleteIfExists(photoFolder);
+//						}
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
 			businessRepo.deleteById(id);
+		} else {
+			throw new IllegalArgumentException("Business not found with ID: " + id);
 		}
 	}
 
 //======================APPROVE A BUSINESS=======================
 	public void approveBusinessById(Long id) {
 		Optional<Business> oneBusiness = businessRepo.findById(id);
-		if(oneBusiness.isPresent()) {
+		if (oneBusiness.isPresent()) {
 			Business business = oneBusiness.get();
 			business.setIsApproved(true);
 			businessRepo.save(business);
-		}else {
+		} else {
 			throw new IllegalArgumentException("Business not found with ID: " + id);
 		}
 	}

@@ -80,9 +80,9 @@
 			<div class="form-group">
 				<img id="imagePreview" src="#" alt="Image Preview"
 					style="max-width: 200px; max-height: 200px; display: none;">
-				<form:errors path="imageFile" class="text-danger" />
-				<form:label path="imageFile">Business Photo: </form:label>
-				<form:input type="file" path="imageFile"
+				<%-- <form:errors path="photos" class="text-danger" /> --%>
+				<label for="photos[0].imageFile">Business Photo: </label>
+				<input type="file" name="photos[0].imageFile"
 					accept="image/png, image/jpeg" name="imageFile"
 					onchange="previewImage(event)" />
 			</div>
