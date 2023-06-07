@@ -222,4 +222,6 @@ public class Business {
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
 	}
+
+	
 }

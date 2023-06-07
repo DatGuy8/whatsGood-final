@@ -54,7 +54,6 @@ public class ItemService {
 		}
 		
 		allItems.sort(Comparator.comparingDouble(Item::getAverageRating).reversed());
-		System.out.println(allItems);
 		return allItems;
 		
 	}

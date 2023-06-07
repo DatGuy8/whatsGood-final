@@ -82,7 +82,7 @@ public class BusinessController {
 
 //=================POST ROUTE ADD BUSINESS=================
 	@PostMapping("/business/new")
-	public String saveBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result, Model model,@RequestParam("photos[0].imageFile")MultipartFile photoFile,Principal principal)
+	public String saveBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result, Model model,@RequestParam("imageFile")MultipartFile photoFile,Principal principal)
 			throws IOException {
 		if (result.hasErrors()) {
 			return "business/addBusiness.jsp";
@@ -141,11 +141,9 @@ public class BusinessController {
 				photo.setBusiness(savedBusiness);
 				photo.setUser(currentUser);
 				
-				Photo savedPhoto = photoService.savePhoto(photo);
+				photoService.savePhoto(photo);
 				
-				savedBusiness.addPhoto(savedPhoto);
 				
-				businessService.addBusiness(savedBusiness);
 				
 				
 			}catch (Exception e){
