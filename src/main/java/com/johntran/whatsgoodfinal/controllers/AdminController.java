@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.johntran.whatsgoodfinal.models.Business;
+import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.services.BusinessService;
+import com.johntran.whatsgoodfinal.services.ItemService;
 import com.johntran.whatsgoodfinal.services.UserService;
 
 @Controller
@@ -24,16 +26,29 @@ public class AdminController {
 
 	@Autowired
 	private BusinessService businessService;
+	
+	@Autowired
+	private ItemService itemService;
 
 	@GetMapping("/admin")
 	public String adminPage(Principal principal, Model model) {
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		model.addAttribute("currentUser", currentUser);
+		
 		List<Business> businesses = businessService.findAllApproved(false);
+		List<Business> approvedBusinesses =  businessService.findAllApproved(true);
+		List<User> allUsers = userService.allUsers();
+		List<Item> allItems = itemService.getAllItems();
+		
 		model.addAttribute("businesses", businesses);
-
+		model.addAttribute("approvedBusinesses",approvedBusinesses);
+		model.addAttribute("allUsers",allUsers);
+		model.addAttribute("allItems",allItems);
+		
+		
 		return "admin/adminPage.jsp";
+	
 	}
 
 	@PutMapping("/admin/approve/business/{businessId}")

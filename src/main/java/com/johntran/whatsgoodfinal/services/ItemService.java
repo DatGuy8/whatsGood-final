@@ -18,6 +18,11 @@ public class ItemService {
 	@Autowired
 	private ItemRatingService itemRatingService;
 	
+//=====================ALL ITEMS=========================
+	public List<Item> getAllItems(){
+		return itemRepository.findAll();
+	}
+	
 //=====================ADD ITEM=========================	
 	public Item addItem(Item item) {
 		return itemRepository.save(item);

@@ -94,7 +94,7 @@
 				<div class="carousel-item${status.first ? ' active': '' }">
 					<div class="d-flex justify-content-center">
 						<img
-							src="<c:out value="${business.photosImagePath }"/>"
+							src="<c:out value="${business.photos[0].filePath }"/>"
 							height="500px" class="mx-auto">
 					</div>
 					<div class="container">
@@ -134,7 +134,7 @@
 						<!--  -->
 						<div class="card mb-4 box-shadow">
 
-							<img class="card-img-top" src="${business.photosImagePath }"
+							<img class="card-img-top" src="${business.photos[0].filePath }"
 								alt="pic of food" height="300px">
 
 							<div class="card-body">
