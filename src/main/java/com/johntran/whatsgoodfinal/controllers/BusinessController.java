@@ -159,12 +159,11 @@ public class BusinessController {
 //=====================BUSINESS SHOW PAGE===========================
 	@GetMapping("/business/{businessId}")
 	public String showBusiness(@PathVariable("businessId") Long businessId, Model model) {
-		model.addAttribute("googleApiKey",googleApiKey);
+		
 		Business business = businessService.getOne(businessId);
-		List<Item> items = itemService.findBusinessItems(businessId);
+		
 		model.addAttribute("business", business);
-		model.addAttribute("items", items);
-		model.addAttribute("googleApiKey",googleApiKey);
+		
 		return "business/businessShow.jsp";
 	}
 	

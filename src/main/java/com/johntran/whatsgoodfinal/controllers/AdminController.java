@@ -26,7 +26,7 @@ public class AdminController {
 
 	@Autowired
 	private BusinessService businessService;
-	
+
 	@Autowired
 	private ItemService itemService;
 
@@ -35,20 +35,26 @@ public class AdminController {
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		model.addAttribute("currentUser", currentUser);
-		
-		List<Business> businesses = businessService.findAllApproved(false);
-		List<Business> approvedBusinesses =  businessService.findAllApproved(true);
-		List<User> allUsers = userService.allUsers();
-		List<Item> allItems = itemService.getAllItems();
-		
+
+		List<Business> businesses = businessService.findAll();
+
 		model.addAttribute("businesses", businesses);
-		model.addAttribute("approvedBusinesses",approvedBusinesses);
-		model.addAttribute("allUsers",allUsers);
-		model.addAttribute("allItems",allItems);
-		
-		
+
 		return "admin/adminPage.jsp";
-	
+
+	}
+
+	@GetMapping("/admin/users")
+	public String adminBusiness(Principal principal, Model model) {
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		model.addAttribute("currentUser", currentUser);
+
+		List<User> allUsers = userService.allUsers();
+		model.addAttribute("allUsers", allUsers);
+
+		return "admin/business.jsp";
+
 	}
 
 	@PutMapping("/admin/approve/business/{businessId}")
@@ -64,9 +70,11 @@ public class AdminController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/admin/edit/business/{businessId}")
-	public String editBusiness() {
-		
+	@GetMapping("/admin/editbusiness/{businessId}")
+	public String editBusiness(@PathVariable("businessId") Long businessId, Model model) {
+		Business business = businessService.getOne(businessId);
+		model.addAttribute("business", business);
+
 		return "admin/editBusiness.jsp";
 
 	}

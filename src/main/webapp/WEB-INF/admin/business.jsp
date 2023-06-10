@@ -155,46 +155,48 @@
 				</div>
 			</div>
 
-<div class="col-md-4">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top" src="${business.photos[0].filePath }" alt="pic of food" height="300px">
-								<div class="card-body">
-									<p class="card-text">
-										Business Name:
-										<c:out value="${business.name }" />
-									</p>
-									<p>
-										Website:
-										<c:out value="${business.website}" />
-									</p>
-									<p>
-										Address:
-										<c:out value="${business.address}" />
-									</p>
-									<a href="/admin/edit/business/${business.id }">
-										<button class="btn btn-dark">Edit</button>
-									</a>
-									<div
-										class="d-flex justify-content-between align-items-center mt-2">
-										<form action="/admin/approve/business/${business.id }"
-											method="post">
-											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" /> <input type="hidden"
-												name="_method" value="put" />
-											<button class="btn btn-primary">Approve</button>
-										</form>
-										<form action="/admin/delete/business/${business.id }"
-											method="POST">
-											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" /> <input type="hidden"
-												name="_method" value="delete" />
-											<button class="btn btn-danger">Deny</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
+	
+	
+	
+	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+	      <h1 class="h3 text-center">Users</h1>
+	    </div>
+	    <div class="btn-group" role="group" aria-label="Filter">
+		  <button type="button" class="btn btn-primary filter-btn" data-filter="all">All</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="true">Admins</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="false">Users</button>
+		</div>
+	    <div class="table-responsive small">
+	    	 <table class="table table-striped table-sm" id="businessTable">
+		        <thead>
+		          <tr>
+		            <th scope="col">ID</th>
+		            <th scope="col">Username</th>
+		            <th scope="col">First Name</th>
+		            <th scope="col">Last Name</th>
+		            <th scope="col">Email</th>
+		            <th scope="col">Admin?</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		        <c:forEach var="user" items="${allUsers }">
+		          <tr>
+		            <td>${user.id }</td>
+		            <td>${user.userName }</td>
+		            <td>${user.firstName }</td>
+		            <td>${user.lastName }</td>
+		            <td>${user.email}</td>
+		            <td>${user.roles[0].name}</td>
+		          </tr>
+		          </c:forEach>
+		         </tbody>
+		     </table>
+	    </div>
+	    
 
+		
+	</main>
 </div>
 </div>
 	<!-- For any Bootstrap that uses JS or jQuery-->

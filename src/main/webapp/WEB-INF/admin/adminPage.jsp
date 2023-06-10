@@ -10,22 +10,21 @@
 <!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
-<link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/admin/index.css" />
 </head>
 <body>
 	<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow">
 
 		<!------------------------ NAV BAR------------------------>
-		<div class="container d-flex justify-content-between p-0">
+		
 
-			<a href="/" class="navbar-brand text-white"><strong>What's
+			<a href="/" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white"><strong>What's
 					Good</strong></a>
 			<!------------------SEARCH BAR--------------------  -->
 			<div class="d-none d-md-block">
 				<form action="action_page.php">
-					<div class="input-group">
-						<input type="text" class="form-control"
+					<div class="input-group d-flex align-items-center">
+						<input type="text" class="form-control height40px"
 							placeholder="Search What's Good">
 						<div class="input-group-append">
 							<button class="btn bg-danger" type="submit">Search</button>
@@ -59,10 +58,11 @@
 					</button>
 				</li>
 			</ul>
+			
 			<div id="navbarSearch" class="navbar-search w-100 collapse d-md-none">
 				<form action="action_page.php">
 					<div class="input-group">
-						<input type="text" class="form-control"
+						<input type="text" class="form-control height40px"
 							placeholder="Search What's Good"
 							aria-label="Recipient's username" aria-describedby="basic-addon2">
 						<div class="input-group-append">
@@ -72,33 +72,21 @@
 				</form>
 			</div>
 
-			<%-- <div class="dropdown">
-				<button class="dropdown-toggle btn btn-info"
-					onclick="toggleDropdown()" aria-expanded="false">
-					<c:out value="${currentUser.userName }" />
-				</button>
-				<ul class="dropdown-menu" id="dropdownMenu" style="display: none;">
-					<li><a href="/user/${currentUser.id }">My Profile</a></li>
-
-					<li><form id="logoutForm" method="POST" action="/logout">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <input type="submit" value="Logout!" />
-						</form></li>
-				</ul>
-			</div> --%>
-		</div>
-
+		
+<!----------------------------SIDE BAR----------------------------------->
 	</header>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-				<div class="offcanvas-lg offcanvas-end bg-white" tabindex="-1"
+			<div class="sidebar border border-right col-md-3 col-lg-2 p-0">
+				<div class="offcanvas-lg offcanvas-end" tabindex="-1"
 					id="sidebarMenu">
+					
 					<div class="offcanvas-header">
 						<h5 class="offcanvas-title" id="sidebarMenuLabel">What's Good</h5>
 						<button type="button" class="btn-close"
 							data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"></button>
 					</div>
+					
 					<div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
 						<ul class="nav flex-column">
 							<li class="nav-item">
@@ -127,7 +115,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="/admin/complaints" class="nav-link align-items-center gap-2">
+								<a href="/admin/complaints" class="nav-link align-items-center gap-2" type="submit">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-card-text" viewBox="0 0 16 16">
   									<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
   									<path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
@@ -136,37 +124,86 @@
 								</a>
 							</li>
 						</ul>
+						
+						
 						<hr class="my-3">
+						
 						<ul class="nav flex-column mb-auto">
 				          <li class="nav-item">
 				            <a class="nav-link d-flex align-items-center gap-2" href="#">
-				              
+				              	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-gear-fill" viewBox="0 0 16 16">
+  									<path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+								</svg>
 				              Settings
 				            </a>
 				          </li>
 				          <li class="nav-item">
-				            <a class="nav-link d-flex align-items-center gap-2" href="#">
-				              
-				              Sign out
-				            </a>
+					          <form id="logoutForm" method="POST" action="/logout">
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+					            <a class="nav-link d-flex align-items-center gap-2" href="#">
+					              	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-door-closed" viewBox="0 0 16 16">
+									  <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+									  <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+									</svg>
+					            <input type="submit" value="Logout!" class="nav-link btn btn-link p-0"/>
+					            </a>
+							</form>
 				          </li>
         				</ul>
 					</div>
 				</div>
 			</div>
 
+	
+	
+	
+	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+	      <h1 class="h3 text-center">Businesses</h1>
+	    </div>
+	    <div class="btn-group" role="group" aria-label="Filter">
+		  <button type="button" class="btn btn-primary filter-btn" data-filter="all">All</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="true">Approved</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="false">Not Approved</button>
 		</div>
-	</div>
-	<div class="container">
-		<h1 class="text-center mt-1">Businesses Seeking Approval</h1>
+	    <div class="table-responsive small">
+	    	 <table class="table table-striped table-sm" id="businessTable">
+		        <thead>
+		          <tr>
+		            <th scope="col">ID</th>
+		            <th scope="col">Name</th>
+		            <th scope="col">Address</th>
+		            <th scope="col">Website</th>
+		            <th scope="col">Approved?</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		        <c:forEach var="business" items="${businesses }">
+		          <tr>
+		            <td>${business.id }</td>
+		            <td><a href="/admin/editbusiness/${business.id }">${business.name }</a></td>
+		            <td>${business.address }</td>
+		            <td>${business.website }</td>
+		            <td>${business.isApproved}</td>
+		          </tr>
+		          </c:forEach>
+		         </tbody>
+		     </table>
+	    </div>
+	    
+	
+	
+	
+	
+		
 		<div class="album backgroundColor">
 			<div class="container mt-3">
 				<div class="row">
 					<c:forEach var="business" items="${businesses }">
 						<div class="col-md-4">
 							<div class="card mb-4 box-shadow">
-								<img class="card-img-top" src="${business.photos[0].filePath }"
-									alt="pic of food" height="300px">
+								<img class="card-img-top" src="${business.photos[0].filePath }" alt="pic of food" height="300px">
 								<div class="card-body">
 									<p class="card-text">
 										Business Name:
@@ -208,30 +245,13 @@
 				</div>
 			</div>
 		</div>
-		<div>Approved Businesses</div>
-		<div>
-			<c:forEach var="business" items="${ approvedBusinesses}">
-				<p>${business.name }</p>
-			</c:forEach>
-		</div>
-		<div>Users</div>
-		<div>
-			<c:forEach var="oneUser" items="${allUsers }">
-				<p>${oneUser.userName }</p>
-			</c:forEach>
-		</div>
-		<div>All Items</div>
-		<div>
-			<c:forEach var="oneItem" items="${ allItems}">
-				<p>${oneItem.name }</p>
-			</c:forEach>
-		</div>
-	</div>
-
-
+		
+	</main>
+</div>
+</div>
 	<!-- For any Bootstrap that uses JS or jQuery-->
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/script.js"></script>
+	<script type="text/javascript" src="/js/admin/index.js"></script>
 </body>
 </html>

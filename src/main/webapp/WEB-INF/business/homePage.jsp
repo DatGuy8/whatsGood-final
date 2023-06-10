@@ -134,7 +134,7 @@
 						<!--  -->
 						<div class="card mb-4 box-shadow">
 
-							<img class="card-img-top" src="${business.photos[0].filePath }"
+							<img class="card-img-top img-thumbnail" src="${business.photos[0].filePath }"
 								alt="pic of food" height="300px">
 
 							<div class="card-body">
