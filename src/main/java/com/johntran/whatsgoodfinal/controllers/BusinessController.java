@@ -142,10 +142,7 @@ public class BusinessController {
 				photo.setUser(currentUser);
 				
 				photoService.savePhoto(photo);
-				
-				
-				
-				
+		
 			}catch (Exception e){
 				e.printStackTrace();
 			}

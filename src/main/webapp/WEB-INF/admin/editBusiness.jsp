@@ -14,10 +14,7 @@
 </head>
 <body>
 	<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow">
-
-		<!------------------------ NAV BAR------------------------>
-		
-
+			<!------------------------ NAV BAR------------------------>
 			<a href="/" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white"><strong>What's
 					Good</strong></a>
 			<!------------------SEARCH BAR--------------------  -->
@@ -32,10 +29,8 @@
 					</div>
 				</form>
 			</div>
-
 			<!------------------------SEARCH AND LIST BUTTON ON MID OR LOWER SCREENS------------------------>
 			<ul class="navbar-nav flex-row d-md-none">
-				
 				<li class="nav-item text-nowrap">
 					<button class="nav-link px-3 text-white bg-dark border-0" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSearch"
@@ -71,9 +66,7 @@
 					</div>
 				</form>
 			</div>
-
-		
-<!----------------------------SIDE BAR----------------------------------->
+	<!----------------------------SIDE BAR----------------------------------->
 	</header>
 	<div class="container-fluid">
 		<div class="row">
@@ -125,7 +118,6 @@
 							</li>
 						</ul>
 						
-						
 						<hr class="my-3">
 						
 						<ul class="nav flex-column mb-auto">
@@ -154,8 +146,8 @@
 					</div>
 				</div>
 			</div>
-
-<div class="col-md-4">
+			
+						<div class="col-md-4">
 							<div class="card mb-4 box-shadow">
 								<img class="card-img-top" src="${business.photos[0].filePath }" alt="pic of food" height="300px">
 								<div class="card-body">
@@ -194,7 +186,6 @@
 								</div>
 							</div>
 						</div>
-
 </div>
 </div>
 	<!-- For any Bootstrap that uses JS or jQuery-->
