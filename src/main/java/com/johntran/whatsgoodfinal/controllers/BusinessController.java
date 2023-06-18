@@ -128,7 +128,7 @@ public class BusinessController {
 		
 		if (!photoFile.isEmpty()) {
 			try {
-				String uploadDir = "uploadedImages/businesses/";
+				String uploadDir = "uploadedImages/";
 				String fileName = UUID.randomUUID().toString() + "_" + photoFile.getOriginalFilename();
 				FileUploadUtil.saveFile(uploadDir, fileName, photoFile);
 				

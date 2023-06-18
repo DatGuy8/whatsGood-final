@@ -44,12 +44,12 @@
 			</form>
 		</div>
 	</div>
-
+	
 	</header>
 	<main role="main">
 
 		<section class="jumbotron text-center mt-3"
-			style="height: 450px; background-image: url('${business.photosImagePath}'); background-repeat: no-repeat; background-position: center; background-color: grey;">
+			style="height: 450px; background-image: url('${business.photos[0].filePath}'); background-repeat: no-repeat; background-position: center; background-color: grey;">
 		</section>
 		<div class="container">
 			<h1 class="text-center">

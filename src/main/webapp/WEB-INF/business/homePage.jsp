@@ -46,7 +46,7 @@
 						<c:out value="${currentUser.userName }" />
 					</button>
 					<ul class="dropdown-menu" id="dropdownMenu" style="display: none;">
-						<li><a href="/user/${currentUser.id }">My Profile</a></li>
+						<li><a href="/user/${currentUser.id }"><button class="btn btn-info">My Profile</button></a></li>
 						<li>
 							<form id="logoutForm" method="POST" action="/logout">
 								<input type="hidden" name="${_csrf.parameterName}"

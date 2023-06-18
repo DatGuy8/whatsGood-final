@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.johntran.whatsgoodfinal.models.Business;
-import com.johntran.whatsgoodfinal.models.Item;
+import com.johntran.whatsgoodfinal.models.Photo;
 import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.services.BusinessService;
 import com.johntran.whatsgoodfinal.services.ItemService;
@@ -74,7 +74,8 @@ public class AdminController {
 	public String editBusiness(@PathVariable("businessId") Long businessId, Model model) {
 		Business business = businessService.getOne(businessId);
 		model.addAttribute("business", business);
-
+		List<Photo> photos = business.getPhotos();
+		model.addAttribute("photos", photos);
 		return "admin/editBusiness.jsp";
 
 	}
