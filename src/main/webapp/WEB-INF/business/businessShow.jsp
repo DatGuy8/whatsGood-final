@@ -12,7 +12,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script
-	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey }&libraries=places"></script>
+	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey1 }&libraries=places"></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
@@ -48,10 +48,51 @@
 	</header>
 	<main role="main">
 
-		<section class="jumbotron text-center mt-3"
-			style="height: 450px; background-image: url('${business.photos[0].filePath}'); background-repeat: no-repeat; background-position: center; background-color: grey;">
-		</section>
-		<div class="container">
+		<!--================================CAROUSEL======================================  -->
+	<div id="myCarousel" class="carousel slide mb-6"
+			data-bs-ride="carousel" data-bs-theme="light">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#myCarousel"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<c:forEach var="photo" items="${business.photos }" varStatus="status">
+				<div class="carousel-item${status.first ? ' active': '' }">
+					<div class="d-flex justify-content-center">
+						<img
+							src="<c:out value="/${photo.filePath }"/>"
+							height="500px" class="mx-auto">
+					</div>
+					<div class="container">
+						<div class="carousel-caption text-end">
+							<h1><c:out value="${business.name }"/></h1>
+							<p class="opacity-75"><c:out value="${business.website }"/></p>
+							<p>
+								<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+				
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon bg-black "
+					aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon  bg-black" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	<!--================================END CAROUSEL======================================  -->
 			<h1 class="text-center">
 				<c:out value="${business.name }" />
 			</h1>

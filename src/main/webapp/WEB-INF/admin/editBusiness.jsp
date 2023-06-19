@@ -146,10 +146,10 @@
 					</div>
 				</div>
 			</div>
-			
+						
 						<div class="col-md-4">
 							<div class="card mb-4 box-shadow">
-								<img class="card-img-top" src="${photos[0].filePath }" alt="pic of food" height="300px">
+								<img class="card-img-top" src="/${business.photos[0].filePath }" alt="pic of food" height="300px">
 								<div class="card-body">
 									<p class="card-text">
 										Business Name:

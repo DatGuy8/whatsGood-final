@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -129,7 +130,7 @@ public class BusinessController {
 		if (!photoFile.isEmpty()) {
 			try {
 				String uploadDir = "uploadedImages/";
-				String fileName = UUID.randomUUID().toString() + "_" + photoFile.getOriginalFilename();
+				String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(photoFile.getOriginalFilename());
 				FileUploadUtil.saveFile(uploadDir, fileName, photoFile);
 				
 				Photo photo = new Photo();//===================fix constructor and add in the items in parathesis
@@ -158,7 +159,6 @@ public class BusinessController {
 	public String showBusiness(@PathVariable("businessId") Long businessId, Model model) {
 		
 		Business business = businessService.getOne(businessId);
-		
 		model.addAttribute("business", business);
 		
 		return "business/businessShow.jsp";
