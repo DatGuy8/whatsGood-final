@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -45,8 +46,6 @@ public class Item {
 	@Transient
 	private Double averageRating;
 	
-	private String image;
-
 //==========================RELATIONSHIPS====================================
 	// ------------ITEM RATINGS------------
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
@@ -56,6 +55,10 @@ public class Item {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "business_id")
 	private Business business;
+	
+	//---------PHOTOS--------------
+	@OneToMany(mappedBy="item", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Photo> photos;
 
 // =========================CREATED AT AND UPDATED AT=================================
 	@Column(updatable = false)
@@ -65,17 +68,6 @@ public class Item {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 
-//============================FOR IMAGE UPLOAD======================================	
-	@Transient
-	public String getPhotosImagePath() {
-		if (image.isBlank()) return "/uploadedImages/stockDishPhoto.jpg";
-		if (image == null || id == null)
-			return null;
-		return "/uploadedImages/business/" + this.business.getId() + "/items/" + image;
-	}
-
-	@Transient
-	private MultipartFile imageFile;
 
 // =======================AUTO CREATED UPDATED AT=========================================
 
@@ -151,13 +143,6 @@ public class Item {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
 
 	public Business getBusiness() {
 		return business;
@@ -167,13 +152,6 @@ public class Item {
 		this.business = business;
 	}
 
-	public MultipartFile getImageFile() {
-		return imageFile;
-	}
-
-	public void setImageFile(MultipartFile imageFile) {
-		this.imageFile = imageFile;
-	}
 
 	public Double getAverageRating() {
 		return averageRating;
@@ -181,5 +159,13 @@ public class Item {
 
 	public void setAverageRating(Double averageRating) {
 		this.averageRating = averageRating;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 }

@@ -65,7 +65,7 @@
 				<div class="carousel-item${status.first ? ' active': '' }">
 					<div class="d-flex justify-content-center">
 						<img
-							src="<c:out value="/${photo.filePath }"/>"
+							src="<c:out value="${photo.filePath }"/>"
 							height="500px" class="mx-auto">
 					</div>
 					<div class="container">
@@ -122,7 +122,7 @@
 				<c:forEach var="item" items="${business.items }">
 					<div class="col-md-2">
 						<div class="card">
-							<img class="card-img-top" src="${item.photosImagePath }"
+							<img class="card-img-top" src="${item.photos[0].filePath }"
 								alt="table food" height="125px" width="125px" />
 							<div class="card-body">
 								<p class="card-text">

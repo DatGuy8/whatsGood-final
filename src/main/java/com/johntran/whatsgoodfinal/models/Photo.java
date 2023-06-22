@@ -12,7 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,30 +31,42 @@ public class Photo {
 	
     private String filePath;
 
-	
-    private String fileType;
-
-	
-    private Long fileSize;
     
-	
-    @Column(updatable = false)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date uploadDate;
-    
-    @PrePersist
-	protected void onCreate() {
-		this.uploadDate = new Date();
-	}
+	@ManyToOne(fetch= FetchType.LAZY)
+	@JoinColumn(name="uploaded_by_user_id")
+	private User uploadedBy;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_id")
     private Business business;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "item_id")
+    private Item item;
 
+    // =========================CREATED AT AND UPDATED AT=================================
+    @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createdAt;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date updatedAt;
+    
+// =======================AUTO CREATED UPDATED AT=========================================
+    
+    @PrePersist
+    protected void onCreate() {
+    	this.createdAt = new Date();
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+    	this.updatedAt = new Date();
+    }
+    
 //====================================CONSTRUCTOR======================================
     public Photo() {}
     
@@ -82,29 +96,6 @@ public class Photo {
 		this.filePath = filePath;
 	}
 
-	public String getFileType() {
-		return fileType;
-	}
-
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
-	}
-
-	public Long getFileSize() {
-		return fileSize;
-	}
-
-	public void setFileSize(Long fileSize) {
-		this.fileSize = fileSize;
-	}
-
-	public Date getUploadDate() {
-		return uploadDate;
-	}
-
-	public void setUploadDate(Date uploadDate) {
-		this.uploadDate = uploadDate;
-	}
 
 	public Business getBusiness() {
 		return business;
@@ -122,6 +113,40 @@ public class Photo {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	public Item getItem() {
+		return item;
+	}
+
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	public User getUploadedBy() {
+		return uploadedBy;
+	}
+
+	public void setUploadedBy(User uploadedBy) {
+		this.uploadedBy = uploadedBy;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	

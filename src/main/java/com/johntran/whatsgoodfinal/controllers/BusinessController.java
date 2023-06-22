@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -69,7 +68,6 @@ public class BusinessController {
 		model.addAttribute("businesses", businesses);
 		
 		List<Item> sortedItems = itemService.getHighestRated();
-		System.out.println(sortedItems);
 		model.addAttribute("sortedItems",sortedItems);
 		return "business/homePage.jsp";
 	}
@@ -129,18 +127,17 @@ public class BusinessController {
 		
 		if (!photoFile.isEmpty()) {
 			try {
-				String uploadDir = "uploadedImages/";
-				String fileName = UUID.randomUUID().toString() + "_" + StringUtils.cleanPath(photoFile.getOriginalFilename());
-				FileUploadUtil.saveFile(uploadDir, fileName, photoFile);
+				String uploadDir = "/uploadedImages/businesses/";
+				String fileName = UUID.randomUUID().toString() + "_" + photoFile.getOriginalFilename();
+				FileUploadUtil.saveFile("uploadedImages/businesses/", fileName, photoFile);
 				
 				Photo photo = new Photo();//===================fix constructor and add in the items in parathesis
 				photo.setFileName(photoFile.getOriginalFilename());
 				photo.setFilePath(uploadDir + fileName);
-				photo.setFileType(photoFile.getContentType());
-				photo.setFileSize(photoFile.getSize());
+				
 				Business savedBusiness = businessService.addBusiness(business);
 				photo.setBusiness(savedBusiness);
-				photo.setUser(currentUser);
+				photo.setUploadedBy(currentUser);
 				
 				photoService.savePhoto(photo);
 		

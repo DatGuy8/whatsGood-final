@@ -2,26 +2,29 @@ package com.johntran.whatsgoodfinal.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.ItemRating;
+import com.johntran.whatsgoodfinal.models.Photo;
 import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.services.BusinessService;
 import com.johntran.whatsgoodfinal.services.ItemRatingService;
 import com.johntran.whatsgoodfinal.services.ItemService;
+import com.johntran.whatsgoodfinal.services.PhotoService;
 import com.johntran.whatsgoodfinal.services.UserService;
 
 import jakarta.validation.Valid;
@@ -40,6 +43,9 @@ public class ItemController {
 	
 	@Autowired
 	ItemRatingService itemRatingService;
+	
+	@Autowired
+	PhotoService photoService;
 
 //==================ADD ITEM SHOW PAGE=========================
 	@GetMapping("business/{businessId}/item/new")
@@ -53,28 +59,49 @@ public class ItemController {
 
 //==================POST ADD ITEM ROUTE=========================
 	@PostMapping("/business/{businessId}/item/new")
-	public String saveItem(@Valid @ModelAttribute("newItem")Item newItem, BindingResult result,@PathVariable("businessId") Long businessId) throws IOException {
+	public String saveItem(@Valid @ModelAttribute("newItem")Item newItem, BindingResult result,@PathVariable("businessId") Long businessId,@RequestParam("imageFile")MultipartFile multipartFile,Principal principal) throws IOException {
 		if(result.hasErrors()) {
 			return "item/addItem.jsp";
 		}
-		MultipartFile multipartFile = newItem.getImageFile();
-		String fileName = StringUtils.cleanPath(newItem.getImageFile().getOriginalFilename());
-		newItem.setImage(fileName);
-		
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
 		Business business = businessService.getOne(businessId);
 		newItem.setBusiness(business);
-		itemService.addItem(newItem);
-		
-		if(fileName.isBlank()) {
-			System.out.println("no image saved");
-			return "redirect:/business/{businessId}";
-		}else {
-			String uploadDir = "uploadedImages/business/" + newItem.getBusiness().getId() + "/items";
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-			System.out.println("imaged saved");
-			return "redirect:/business/{businessId}";
+		Item savedItem = itemService.addItem(newItem);
+		if(!multipartFile.isEmpty()) {
+			try {
+				String uploadDir = "/uploadedImages/items/";
+				String fileName = UUID.randomUUID().toString() + "_" + multipartFile.getOriginalFilename();
+				FileUploadUtil.saveFile("uploadedImages/items/", fileName, multipartFile);
+				
+				Photo photo = new Photo();//===================fix constructor and add in the items in parathesis
+				photo.setFileName(multipartFile.getOriginalFilename());
+				photo.setFilePath(uploadDir + fileName);
+				
+				photo.setUploadedBy(currentUser);
+				photo.setItem(savedItem);
+				
+				photoService.savePhoto(photo);
+				System.out.println("did it save?");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
+	
+		return "redirect:/item/" + savedItem.getId();
+		
+//		if(fileName.isBlank()) {
+//			System.out.println("no image saved");
+//			return "redirect:/business/{businessId}";
+//		}else {
+//			String uploadDir = "uploadedImages/business/" + newItem.getBusiness().getId() + "/items";
+//			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+//			System.out.println("imaged saved");
+//			
+//		}
+//		
 	}
 	
 //=======================SINGLE ITEM PAGE WITH REVIEWS===========//ADD FORM TOO?==================

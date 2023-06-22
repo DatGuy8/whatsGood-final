@@ -20,8 +20,9 @@
 
 			<a href="/" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white"><strong>What's
 					Good</strong></a>
-			<!------------------SEARCH BAR--------------------  -->
-			<div class="d-none d-md-block">
+					
+			<!------------------SEARCH BAR-------------------- -->
+			<div class="d-none d-md-block mx-3">
 				<form action="action_page.php">
 					<div class="input-group d-flex align-items-center">
 						<input type="text" class="form-control height40px"
@@ -58,7 +59,6 @@
 					</button>
 				</li>
 			</ul>
-			
 			<div id="navbarSearch" class="navbar-search w-100 collapse d-md-none">
 				<form action="action_page.php">
 					<div class="input-group">
@@ -154,7 +154,7 @@
 					</div>
 				</div>
 			</div>
-
+<!---------------------------- END SIDE BAR----------------------------------->
 	
 	
 	

@@ -78,17 +78,10 @@
 	</section>
 
 	<!--================================CAROUSEL======================================  -->
+	<h2 class="text-center">Featured Businesses</h2>
 	<div id="myCarousel" class="carousel slide mb-6"
 			data-bs-ride="carousel" data-bs-theme="light">
-			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="0" class="active" aria-current="true"
-					aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="2" aria-label="Slide 3"></button>
-			</div>
+			
 			<div class="carousel-inner">
 				<c:forEach var="business" items="${businesses }" varStatus="status">
 				<div class="carousel-item${status.first ? ' active': '' }">
@@ -102,7 +95,7 @@
 							<h1><c:out value="${business.name }"/></h1>
 							<p class="opacity-75"><c:out value="${business.website }"/></p>
 							<p>
-								<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
+								<a class="btn btn-lg btn-primary" href="/business/${business.id }">View Business</a>
 							</p>
 						</div>
 					</div>
@@ -125,7 +118,7 @@
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
-		<h1 class="text-center">Businesses</h1>
+		<h1 class="text-center">Businesses Near You?</h1>
 		<div class="container mt-3">
 			<div class="row">
 				<!--------------------LOOPING THROUGH THE LIST OF BUSINESSES--------------------- -->
@@ -134,7 +127,7 @@
 						<!--  -->
 						<div class="card mb-4 box-shadow">
 
-							<img class="card-img-top img-thumbnail" src="${business.photos[0].filePath }"
+							<img class="card-img-top" src="${business.photos[0].filePath }"
 								alt="pic of food" height="300px">
 
 							<div class="card-body">
@@ -170,7 +163,7 @@
 
 		<!-- HIGHEST RATED DISHES  -->
 		<div>
-			<h1 class="text-center">Highest Rated Dishes</h1>
+			<h1 class="text-center">Highly Rated Dishes</h1>
 			<div class="container mt-3">
 				<div class="row">
 				<c:forEach var="item" items="${sortedItems }">
@@ -178,7 +171,7 @@
 						<!--  -->
 						<div class="card box-shadow" style="width: 18rem;">
 
-							<img class="card-img-top" src="${item.photosImagePath }" alt="pic of food"
+							<img class="card-img-top" src="${item.photos[0].filePath }" alt="pic of food"
 								height="300px">
 
 							<div class="card-body">

@@ -50,7 +50,7 @@
 		<section class="jumbotron text-center"
 			style="background-color: #F9F5FF;">
 			<div class="container">
-				<img src="${item.photosImagePath }" alt="stock photo" height="150px" />
+				<img src="${item.photos[0].filePath }" alt="stock photo" height="150px" />
 				<h1>
 					<c:out value="${item.name }" />
 				</h1>

@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -73,9 +74,13 @@ public class User {
 	private Set<ItemRating> ratings;
 	
 	//-------------------USER UPLOADED PHOTOS-------------------
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Photo> photos;
-
+	@OneToOne(mappedBy="user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="photo_id")
+	private Photo userPhoto;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+	private List<Photo> userUploadedPhotos;
+	
 // =========================CREATED AT AND UPDATED AT=================================
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -198,11 +203,13 @@ public class User {
 		this.roles = roles;
 	}
 
-	public List<Photo> getPhotos() {
-		return photos;
+	public Photo getUserPhoto() {
+		return userPhoto;
 	}
 
-	public void setPhotos(List<Photo> photos) {
-		this.photos = photos;
+	public void setUserPhoto(Photo userPhoto) {
+		this.userPhoto = userPhoto;
 	}
+
+
 }

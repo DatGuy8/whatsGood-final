@@ -50,7 +50,6 @@ public class ItemService {
 	
 //================GET HIGHEST RATED ITEMS=========================
 	public List<Item> getHighestRated(){
-		System.out.println("itemService");
 		List<Item> allItems = itemRepository.findAll();
 		
 		for(Item item : allItems) {

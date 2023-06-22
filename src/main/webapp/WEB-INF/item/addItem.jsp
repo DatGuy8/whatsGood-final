@@ -16,9 +16,7 @@
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
 <!-- For any Bootstrap that uses JS or jQuery-->
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/script.js"></script>
+
 </head>
 <body>
 	<header>
@@ -45,7 +43,7 @@
 		</div>
 	</header>
 	<div class="container mt-3">
-		<img src="${business.photosImagePath }" height="200px" />
+		<img src="${business.photos[0].filePath }" height="200px" />
 		<h1>
 			Add an item to
 			<c:out value="${business.name}" />
@@ -70,17 +68,23 @@
 			<br />
 
 
-			<form:errors path="imageFile" class="text-danger" />
-			<img id="imagePreview" src="#" alt="Image Preview"
-				style="max-width: 200px; max-height: 200px; display: none;" >
-			<form:label path="imageFile">Add a Photo:</form:label>
-			<form:input type="file" path="imageFile"
-				accept="image/png, image/jpeg" name="imageFile" class="form-control" onchange="previewImage(event)"/>
-
+			<div class="form-group">
+				<img id="imagePreview" src="#" alt="Image Preview"
+					style="max-width: 200px; max-height: 200px; display: none;">
+				<%-- <form:errors path="photos" class="text-danger" /> --%>
+				<label for="imageFile">Item Photo: </label>
+				<input type="file" name="imageFile"
+					accept="image/png, image/jpeg" name="imageFile"
+					onchange="previewImage(event)" />
+			</div>
 			<br />
 
 			<button class="btn btn-primary">Submit</button>
 		</form:form>
 	</div>
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
+	<script type="text/javascript" src="/js/item/addItem.js"></script>
 </body>
 </html>
