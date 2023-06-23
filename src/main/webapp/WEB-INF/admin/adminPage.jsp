@@ -197,7 +197,7 @@
 	
 	
 		
-		<div class="album backgroundColor">
+		<%-- <div class="album backgroundColor">
 			<div class="container mt-3">
 				<div class="row">
 					<c:forEach var="business" items="${businesses }">
@@ -244,7 +244,7 @@
 
 				</div>
 			</div>
-		</div>
+		</div> --%>
 		
 	</main>
 </div>

@@ -73,7 +73,7 @@
 							<h1><c:out value="${business.name }"/></h1>
 							<p class="opacity-75"><c:out value="${business.website }"/></p>
 							<p>
-								<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
+								<a class="btn btn-lg btn-primary" href="#">Add a photo to ${business.name }</a>
 							</p>
 						</div>
 					</div>
