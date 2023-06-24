@@ -63,14 +63,14 @@ public class AdminController {
 	@PutMapping("/admin/approve/business/{businessId}")
 	public String approveBusiness(@PathVariable("businessId") Long businessId) {
 		businessService.approveBusinessById(businessId);
-		return "redirect:/";
+		return "redirect:/admin";
 
 	}
 
 	@DeleteMapping("/admin/delete/business/{businessId}")
 	public String deleteBusiness(@PathVariable("businessId") Long businessId) {
 		businessService.deleteByBusinessId(businessId);
-		return "redirect:/";
+		return "redirect:/admin";
 	}
 
 	
@@ -90,7 +90,7 @@ public class AdminController {
 			return "admin/editBusiness.jsp";
 		} else {
 			businessService.addBusiness(business);
-			return "admin/editBusiness.jsp";
+			return "redirect:/admin";
 		}
 	}
 

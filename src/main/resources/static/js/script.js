@@ -11,3 +11,11 @@ function toggleDropdown() {
   }
 }
 
+function validateSearchForm() {
+    var searchInput = document.getElementsByName("searchParams")[0].value;
+    if (searchInput.length < 3) {
+        alert("Search input should have at least 3 characters.");
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}

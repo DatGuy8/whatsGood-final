@@ -28,11 +28,10 @@
 				</a>
 
 				<!------------------------SEARCH BAR----------------------  -->
-				<form action="action_page.php">
+				<form action="/search" method="GET" onsubmit="return validateSearchForm()">
 					<div class="input-group">
 						<input type="text" class="form-control"
-							placeholder="Search What's Good"
-							aria-label="Recipient's username" aria-describedby="basic-addon2">
+							placeholder="Search What's Good" name="searchParams">
 						<div class="input-group-append">
 							<button class="btn btn-outline-secondary bg-danger" type="submit">Search</button>
 						</div>

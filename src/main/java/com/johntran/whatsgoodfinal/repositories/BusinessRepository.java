@@ -11,4 +11,5 @@ import com.johntran.whatsgoodfinal.models.Business;
 public interface BusinessRepository extends CrudRepository<Business,Long>{
 	List<Business> findAll();
 	List<Business> findAllByIsApproved(Boolean isApproved);
+	List<Business> findByIsApprovedTrueAndNameContainingIgnoreCaseOrIsApprovedTrueAndWebsiteContainingIgnoreCaseOrIsApprovedTrueAndAddressContainingIgnoreCase(String name, String website, String address);
 }
