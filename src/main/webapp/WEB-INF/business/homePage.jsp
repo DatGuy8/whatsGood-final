@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/homePage/index.css" />
 <!-- For any Bootstrap that uses JS or jQuery-->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -28,7 +29,8 @@
 				</a>
 
 				<!------------------------SEARCH BAR----------------------  -->
-				<form action="/search" method="GET" onsubmit="return validateSearchForm()">
+				<form action="/search" method="GET"
+					onsubmit="return validateSearchForm()">
 					<div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="Search What's Good" name="searchParams">
@@ -45,7 +47,8 @@
 						<c:out value="${currentUser.userName }" />
 					</button>
 					<ul class="dropdown-menu" id="dropdownMenu" style="display: none;">
-						<li><a href="/user/${currentUser.id }"><button class="btn btn-info">My Profile</button></a></li>
+						<li><a href="/user/${currentUser.id }"><button
+									class="btn btn-info">My Profile</button></a></li>
 						<li>
 							<form id="logoutForm" method="POST" action="/logout">
 								<input type="hidden" name="${_csrf.parameterName}"
@@ -55,20 +58,20 @@
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
 		</div>
 	</header>
 	<!--=================================END NAV BAR ========================================-->
-	
-	
-	<section class="jumbotron text-center"
-		style="height: 450px; background-image: url('/images/Buisness.jpg'); background-size: 70% 450px; background-repeat: no-repeat; background-position: center; background-color: grey;">
+
+
+	<section class="jumbotron text-center section-home">
 		<div class="container">
-			<h2 class="mt-3"
-				style="font-weight: 800; color: #F9F5FF; border-radius: 5px;">
+			<h2 class="mt-3 text-white">
+				<!-- style="font-weight: 800; color: #F9F5FF; border-radius: 5px;" -->
 				Look for what food businesses have to offer and what Users are
-				rating those items!</h2>
+				rating those items!
+			</h2>
 			<p>
 				<a href="/business/add" class="btn btn-primary my-2"> Add a
 					Business to What's Good </a>
@@ -79,40 +82,44 @@
 	<!--================================CAROUSEL======================================  -->
 	<h2 class="text-center">Featured Businesses</h2>
 	<div id="myCarousel" class="carousel slide mb-6"
-			data-bs-ride="carousel" data-bs-theme="light">
-			
-			<div class="carousel-inner">
-				<c:forEach var="business" items="${businesses }" varStatus="status">
+		data-bs-ride="carousel" data-bs-theme="light">
+
+		<div class="carousel-inner">
+			<c:forEach var="business" items="${businesses }" varStatus="status">
 				<div class="carousel-item${status.first ? ' active': '' }">
 					<div class="d-flex justify-content-center">
-						<img
-							src="<c:out value="${business.photos[0].filePath }"/>"
+						<img src="<c:out value="${business.photos[0].filePath }"/>"
 							height="500px" class="mx-auto">
 					</div>
 					<div class="container">
 						<div class="carousel-caption text-end">
-							<h1><c:out value="${business.name }"/></h1>
-							<p class="opacity-75"><c:out value="${business.website }"/></p>
+							<h1>
+								<c:out value="${business.name }" />
+							</h1>
+							<p class="opacity-75">
+								<c:out value="${business.website }" />
+							</p>
 							<p>
-								<a class="btn btn-lg btn-primary" href="/business/${business.id }">View Business</a>
+								<a class="btn btn-lg btn-primary"
+									href="/business/${business.id }">View Business</a>
 							</p>
 						</div>
 					</div>
 				</div>
-				</c:forEach>
-				
-			</div>
-			<button class="carousel-control-prev" type="button"
-				data-bs-target="#myCarousel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon bg-black "
-					aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button"
-				data-bs-target="#myCarousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon  bg-black" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
+			</c:forEach>
+
 		</div>
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#myCarousel" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon bg-black " aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#myCarousel" data-bs-slide="next">
+			<span class="carousel-control-next-icon  bg-black" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
 	<!--================================END CAROUSEL======================================  -->
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
@@ -165,34 +172,41 @@
 			<h1 class="text-center">Highly Rated Dishes</h1>
 			<div class="container mt-3">
 				<div class="row">
-				<c:forEach var="item" items="${sortedItems }">
-					<div class="col-3 my-3">
-						<!--  -->
-						<div class="card box-shadow" style="width: 18rem;">
+					<c:forEach var="item" items="${sortedItems }">
+						<div class="col-3 my-3">
+							<!--  -->
+							<div class="card box-shadow" style="width: 18rem;">
 
-							<img class="card-img-top" src="${item.photos[0].filePath }" alt="pic of food"
-								height="300px">
+								<img class="card-img-top" src="${item.photos[0].filePath }"
+									alt="pic of food" height="300px">
 
-							<div class="card-body">
+								<div class="card-body">
 
-								<p class="card-text"><c:out value="${item.name}"/></p>
+									<p class="card-text">
+										<c:out value="${item.name}" />
+									</p>
 
-								<p>| <c:out value="${item.business.name}"/> |</p>
+									<p>
+										|
+										<c:out value="${item.business.name}" />
+										|
+									</p>
 
-								<div
-									class="d-flex justify-content-between align-items-center mt-2">
-									<div class="btn-group">
-										<a href="#" class="textNone">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-										</a>
+									<div
+										class="d-flex justify-content-between align-items-center mt-2">
+										<div class="btn-group">
+											<a href="#" class="textNone">
+												<button type="button"
+													class="btn btn-sm btn-outline-secondary">View</button>
+											</a>
+										</div>
+										<small class="text-muted"><c:out
+												value="${item.averageRating}" /> stars</small>
 									</div>
-									<small class="text-muted"><c:out value="${item.averageRating}"/> stars</small>
 								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -201,34 +215,42 @@
 			<h1 class="text-center">Top 8 Dishes</h1>
 			<div class="container mt-3">
 				<div class="row">
-				<c:forEach var="item" begin="1" end="8">
-					<div class="col-3 my-3">
-						
-						<div class="card box-shadow" style="width: 18rem;">
+					<c:forEach var="item" begin="1" end="8">
+						<div class="col-3 my-3">
 
-							<img class="card-img-top" src="https://images.pexels.com/photos/16960416/pexels-photo-16960416/free-photo-of-deniz-manzarasi.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="pic of food"
-								height="300px">
+							<div class="card box-shadow" style="width: 18rem;">
 
-							<div class="card-body">
+								<img class="card-img-top"
+									src="https://images.pexels.com/photos/16960416/pexels-photo-16960416/free-photo-of-deniz-manzarasi.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+									alt="pic of food" height="300px">
 
-								<p class="card-text"><c:out value="${item}"/></p>
+								<div class="card-body">
 
-								<p>| <c:out value="${item}"/> |</p>
+									<p class="card-text">
+										<c:out value="${item}" />
+									</p>
 
-								<div
-									class="d-flex justify-content-between align-items-center mt-2">
-									<div class="btn-group">
-										<a href="#" class="textNone">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">View</button>
-										</a>
+									<p>
+										|
+										<c:out value="${item}" />
+										|
+									</p>
+
+									<div
+										class="d-flex justify-content-between align-items-center mt-2">
+										<div class="btn-group">
+											<a href="#" class="textNone">
+												<button type="button"
+													class="btn btn-sm btn-outline-secondary">View</button>
+											</a>
+										</div>
+										<small class="text-muted"><c:out value="${item}" />
+											stars</small>
 									</div>
-									<small class="text-muted"><c:out value="${item}"/> stars</small>
 								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
