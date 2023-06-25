@@ -18,15 +18,18 @@
 <script type="text/javascript" src="/js/script.js"></script>
 </head>
 <body>
+	<section class="section-home">
 	<header>
 		<!--================================= NAV BAR ========================================-->
-		<div class="navbar navbar-dark betterBlue box-shadow">
-			<div class="container d-flex justify-content-between">
-
+		
+			<div class="container d-flex justify-content-between pt-3">
+				
+				<div>
 				<!---------------------WHATS GOOD LOGO-------------------- -->
-				<a href="/" class="navbar-brand d-flex align-items-center"> <strong>What's
-						Good</strong>
-				</a>
+				<a href="/" class="navbar-brand d-flex align-items-center text-white logo-text"><img src="/images/icon-whats-good.png" alt="whats good logo" class="logo-whats-good"> <strong>What's
+						Good</strong></a>
+				</div>
+				
 
 				<!------------------------SEARCH BAR----------------------  -->
 				<form action="/search" method="GET"
@@ -35,39 +38,41 @@
 						<input type="text" class="form-control"
 							placeholder="Search What's Good" name="searchParams">
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary bg-danger" type="submit">Search</button>
+							<button class="btn btn-primary" type="submit">Search</button>
 						</div>
 					</div>
 				</form>
 
 				<!----------------------DROP DOWN MENU WITH LOGOUT AND PROFILE PAGE LINK---------------  -->
 				<div class="dropdown">
-					<button class="dropdown-toggle btn btn-info"
+				<button class="btn"
 						onclick="toggleDropdown()" aria-expanded="false">
-						<c:out value="${currentUser.userName }" />
-					</button>
+					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+					  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+					</svg>
+				</button>
 					<ul class="dropdown-menu" id="dropdownMenu" style="display: none;">
-						<li><a href="/user/${currentUser.id }"><button
-									class="btn btn-info">My Profile</button></a></li>
+						<li><p><a href="/user/${currentUser.id }" class="textNone">
+									My Profile</a></p></li>
 						<li>
 							<form id="logoutForm" method="POST" action="/logout">
 								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <input type="submit" value="Logout!"
-									class="btn btn-info" />
+									value="${_csrf.token}" /> 
+									<button type="submit" class="logout-link">Logout!</button>
 							</form>
 						</li>
 					</ul>
 				</div>
-
+			
 			</div>
-		</div>
+		
 	</header>
 	<!--=================================END NAV BAR ========================================-->
 
 
-	<section class="jumbotron text-center section-home">
-		<div class="container">
-			<h2 class="mt-3 text-white">
+		<div class="container text-box">
+			
+			<h2>
 				<!-- style="font-weight: 800; color: #F9F5FF; border-radius: 5px;" -->
 				Look for what food businesses have to offer and what Users are
 				rating those items!

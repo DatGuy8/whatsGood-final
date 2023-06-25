@@ -1,33 +1,48 @@
 @charset "ISO-8859-1";
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rubik:wght@400;500;700&display=swap');
+
 *{
 	margin: 0;
 	padding:0;
-}
-
-body {
-  background-color: grey;
+	font-family: 'Roboto', sans-serif;
+	font-family: 'Rubik', sans-serif;
 }
 
 :root {
   --jumbotron-padding-y: 3rem;
 }
 
-.betterBlue{
-	background-color: #28262C;
+.navColor{
+	background-color: green;
+}
+
+.logo-text{
+	font-size:26px;
+}
+
+.logout-link{
+	background: none;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
 }
 
 .textNone{
 	text-decoration: none;
 }
 
-
-.backgroundColor{
-	background-color: grey;
+.search-btn-color{
+	background-color:#284b63;
 }
 
+.logo-whats-good{
+	filter: invert(100%);
+	margin-right: 5px
+}
 .visible{
-	
 	color:white;
 }
 
@@ -43,43 +58,7 @@ body {
     padding-bottom: calc(var(--jumbotron-padding-y) * 2);
   }
 }
-* {
-  box-sizing: border-box;
-}
 
-/* Style the search field */
-form.example input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
-}
-
-/* Style the submit button */
-form.example button {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  background: #2196F3;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none; /* Prevent double borders */
-  cursor: pointer;
-}
-
-form.example button:hover {
-  background: #0b7dda;
-}
-
-/* Clear floats */
-form.example::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 
 .jumbotron p:last-child {
   margin-bottom: 0;
