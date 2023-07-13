@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,30 +45,31 @@ public class Item {
 	@Transient
 	private Double averageRating;
 	
-//==========================RELATIONSHIPS====================================
-	// ------------ITEM RATINGS------------
+	@Column(columnDefinition = "boolean default false")
+	private Boolean isFeatured;
+	
+	//--------------------RELATIONSHIPS-----------------------
+	
+	// ITEM RATINGS
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "item")
 	private List<ItemRating> ratings;
 
-	// -------------BUSINESS------------------
+	// BUSINESS
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "business_id")
 	private Business business;
 	
-	//---------PHOTOS--------------
+	// PHOTOS
 	@OneToMany(mappedBy="item", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Photo> photos;
 
-// =========================CREATED AT AND UPDATED AT=================================
+	//----------------CREATED AT AND UPDATED AT--------------------
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-
-
-// =======================AUTO CREATED UPDATED AT=========================================
 
 	@PrePersist
 	protected void onCreate() {
@@ -83,10 +83,11 @@ public class Item {
 
 //=====================CONSTRUCTOR============================
 	public Item() {
+		this.isFeatured = false;
 	}
 
 
-	//==============================GETTERS AND SETTERS===========================
+//==============================GETTERS AND SETTERS===========================
 	public Long getId() {
 		return id;
 	}
@@ -167,5 +168,13 @@ public class Item {
 
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
+	}
+
+	public Boolean getIsFeatured() {
+		return isFeatured;
+	}
+
+	public void setIsFeatured(Boolean isFeatured) {
+		this.isFeatured = isFeatured;
 	}
 }

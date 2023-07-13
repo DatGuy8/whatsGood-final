@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/homePage/index.css" />
+<link rel="stylesheet" href="/css/business/homePage.css" />
 <!-- For any Bootstrap that uses JS or jQuery-->
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -22,7 +22,7 @@
 	<header>
 		<!--================================= NAV BAR ========================================-->
 		
-			<div class="container d-flex justify-content-between pt-3">
+			<div class="d-flex justify-content-between pt-3 navBar">
 				
 				<div>
 				<!---------------------WHATS GOOD LOGO-------------------- -->
@@ -74,13 +74,17 @@
 			
 			<h2>
 				<!-- style="font-weight: 800; color: #F9F5FF; border-radius: 5px;" -->
-				Look for what food businesses have to offer and what Users are
+				Look for food ratings that businesses/restaurants have to offer and what Users are
 				rating those items!
 			</h2>
 			<p>
 				<a href="/business/add" class="btn btn-primary my-2"> Add a
 					Business to What's Good </a>
 			</p>
+			<!-- Content to show for Admin users -->
+			<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
+				<p><a href="/admin" class="btn btn-primary">Admin Page</a></p>
+			</c:if>
 		</div>
 	</section>
 

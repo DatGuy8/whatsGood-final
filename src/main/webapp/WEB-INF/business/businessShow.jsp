@@ -12,7 +12,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script
-	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey1 }&libraries=places"></script>
+	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey }&libraries=places"></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
@@ -23,9 +23,9 @@
 </head>
 <body>
 
-	<div class="navbar navbar-dark betterBlue box-shadow">
+	<div class="navbar navbar-dark box-shadow">
 		<div class="container d-flex justify-content-between">
-			<a href="/" class="navbar-brand d-flex align-items-center"> <strong>What's
+			<a href="/" class="d-flex align-items-center logo-text navbar-brand text-dark"> <strong>What's
 					Good</strong>
 			</a>
 			<form action="action_page.php">

@@ -89,7 +89,7 @@ public class BusinessController {
 		GeoApiContext context = new GeoApiContext.Builder()
 				.apiKey(googleApiKey)
 				.build();
-		String address = business.getAddress();
+		String address = business.getAddress().getStreet();
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		
@@ -157,7 +157,7 @@ public class BusinessController {
 		
 		Business business = businessService.getOne(businessId);
 		model.addAttribute("business", business);
-		
+		model.addAttribute("googleApiKey",googleApiKey);
 		return "business/businessShow.jsp";
 	}
 	

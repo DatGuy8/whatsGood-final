@@ -4,12 +4,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig {
+	//=============SECURITY================
+	
 	private UserDetailsService userDetailsService;
 	
 	@Bean
@@ -21,15 +25,15 @@ public class WebSecurityConfig {
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{	
 		http
 		    	.authorizeHttpRequests()
-		    		.requestMatchers("/admin/**").hasRole("ADMIN")
-	            	.requestMatchers("/", "/dashboard","/business/**","/item/**").authenticated()
+	            	.requestMatchers("/admin/**").hasRole("ADMIN")
+	            	.requestMatchers("/", "/home","/business/**","/item/**").authenticated()
 	                .anyRequest().permitAll()
 	                .and()
 	            .formLogin()
 	                .permitAll()
 	                .loginPage("/login")
 	                .usernameParameter("email") // Use email instead of userName for login purposes
-	                .defaultSuccessUrl("/")
+	                .defaultSuccessUrl("/home")
 	                .and()
 	            .logout()
 	                .permitAll();

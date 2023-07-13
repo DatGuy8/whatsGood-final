@@ -16,23 +16,27 @@ import com.johntran.whatsgoodfinal.repositories.UserRepository;
 public class SearchService {
 	@Autowired
 	private BusinessRepository businessRepo;
-	
+
 	@Autowired
 	private ItemRepository itemRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
+
 	
-	public List<Business> searchBusiness(String name,String website, String address){
-		return businessRepo.findByIsApprovedTrueAndNameContainingIgnoreCaseOrIsApprovedTrueAndWebsiteContainingIgnoreCaseOrIsApprovedTrueAndAddressContainingIgnoreCase(name, website, address);
+	public List<Business> searchBusiness(String name, String website) {
+		return businessRepo
+				.findByIsApprovedTrueAndNameContainingIgnoreCaseOrIsApprovedTrueAndWebsiteContainingIgnoreCaseOrIsApprovedTrue(
+						name, website);
 	}
+
 	
-	public List<Item> searchItems(String name,String description){
+	public List<Item> searchItems(String name, String description) {
 		return itemRepo.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(name, description);
 	}
-	
-	public List<User> searchUsers(String name){
+
+	public List<User> searchUsers(String name) {
 		return userRepo.findByUserNameContainingIgnoreCase(name);
 	}
-	
+
 }

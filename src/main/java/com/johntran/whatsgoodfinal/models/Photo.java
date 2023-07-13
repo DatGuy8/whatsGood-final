@@ -12,66 +12,58 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="photos")
+@Table(name = "photos")
 public class Photo {
-
+//=============================MEMBER VARIABLES============================
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
-	
-    private String fileName;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	
-    private String filePath;
+	private String fileName;
 
-    
-	@ManyToOne(fetch= FetchType.LAZY)
-	@JoinColumn(name="uploaded_by_user_id")
+	private String filePath;
+
+	// -----------------RELATIONSHIPS-------------------
+	
+	// WHO IT IS UPLOADED BY
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uploaded_by_user_id")
 	private User uploadedBy;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id")
-    private Business business;
-    
-    @OneToOne(fetch = FetchType.LAZY)
-    private User user;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "item_id")
-    private Item item;
 
-    // =========================CREATED AT AND UPDATED AT=================================
-    @Column(updatable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createdAt;
-    
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date updatedAt;
-    
-// =======================AUTO CREATED UPDATED AT=========================================
-    
-    @PrePersist
-    protected void onCreate() {
-    	this.createdAt = new Date();
-    }
-    
-    @PreUpdate
-    protected void onUpdate() {
-    	this.updatedAt = new Date();
-    }
-    
-//====================================CONSTRUCTOR======================================
-    public Photo() {}
-    
-    
-//=================================GETTERS AND SETTERS======================================
+	// BUSINESS PHOTOS
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "business_id")
+	private Business business;
+
+	// PHOTOS OF ITEMS
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "item_id")
+	private Item item;
+	
+	// USER PROFILE PHOTO ADD LATER
+//	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//  @JoinColumn(name = "photo_id")
+//  private Photo profilePhoto;
+
+	// ---------------CREATED AT--------------------
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
+
+
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+	
+//==============================CONSTRUCTOR==============================
+	public Photo() {}
+
+//==========================GETTERS AND SETTERS=========================	
 	public Long getId() {
 		return id;
 	}
@@ -96,6 +88,13 @@ public class Photo {
 		this.filePath = filePath;
 	}
 
+	public User getUploadedBy() {
+		return uploadedBy;
+	}
+
+	public void setUploadedBy(User uploadedBy) {
+		this.uploadedBy = uploadedBy;
+	}
 
 	public Business getBusiness() {
 		return business;
@@ -105,32 +104,12 @@ public class Photo {
 		this.business = business;
 	}
 
-
-	public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-
 	public Item getItem() {
 		return item;
 	}
 
-
 	public void setItem(Item item) {
 		this.item = item;
-	}
-
-	public User getUploadedBy() {
-		return uploadedBy;
-	}
-
-	public void setUploadedBy(User uploadedBy) {
-		this.uploadedBy = uploadedBy;
 	}
 
 	public Date getCreatedAt() {
@@ -140,16 +119,4 @@ public class Photo {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	
-    
-    
 }

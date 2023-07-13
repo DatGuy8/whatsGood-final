@@ -13,8 +13,10 @@
   --jumbotron-padding-y: 3rem;
 }
 
-.navColor{
-	background-color: green;
+
+.navBar{
+	width:90%;
+	margin: 0 auto;
 }
 
 .logo-text{

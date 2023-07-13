@@ -12,24 +12,26 @@ import com.johntran.whatsgoodfinal.repositories.BusinessRepository;
 
 @Service
 public class BusinessService {
+
 	@Autowired
 	private BusinessRepository businessRepo;
 
-//====================FIND ALL BUSINESSES======================
+	// FIND ALL BUSINESSES
 	public List<Business> findAll() {
 		return businessRepo.findAll();
 	}
 
+	// FIND ALL APPROVED BUSINESSES
 	public List<Business> findAllApproved(Boolean isApproved) {
 		return businessRepo.findAllByIsApproved(isApproved);
 	}
 
-//=====================ADD BUSINESS=============================
+	// ADD BUSINESS
 	public Business addBusiness(Business business) {
 		return businessRepo.save(business);
 	}
-
-//====================GET ONE BUSINESS============================
+	
+	// GET ONE BUSINESS
 	public Business getOne(Long id) {
 		Optional<Business> oneBusiness = businessRepo.findById(id);
 		if (oneBusiness.isPresent()) {
@@ -38,8 +40,8 @@ public class BusinessService {
 			return null;
 		}
 	}
-
-//========================ADD ITEM TO BUSINESS===========================
+	
+	// ADD ITEM TO BUSINESS
 	public void addItem(Long businessId, Item item) {
 		Business business = this.getOne(businessId);
 		if (business != null) {
@@ -51,35 +53,17 @@ public class BusinessService {
 			System.out.println("Didnt work");
 		}
 	}
-
-//========================DELETE A BUSINESS==============================
+	
+	// DELETE
 	public void deleteByBusinessId(Long id) {
 		if (businessRepo.existsById(id)) {
-//			Business business = businessRepo.findById(id).orElse(null);
-//			if (business != null) {
-//				String photoPath = business.getPhotosImagePath();
-//				String rootDirectory = "C:\\Users\\names\\OneDrive\\Desktop\\Java\\May2023\\whatsGood-final";
-//				if (photoPath != null) {
-//					try {
-//						Path path = Paths.get(rootDirectory, photoPath);
-//						Path photoFolder = path.getParent();
-//						
-//						Files.deleteIfExists(path);
-//						if(photoFolder != null) {
-//							Files.deleteIfExists(photoFolder);
-//						}
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
 			businessRepo.deleteById(id);
 		} else {
 			throw new IllegalArgumentException("Business not found with ID: " + id);
 		}
 	}
 
-//======================APPROVE A BUSINESS=======================
+	// APPROVE A BUSINESS
 	public void approveBusinessById(Long id) {
 		Optional<Business> oneBusiness = businessRepo.findById(id);
 		if (oneBusiness.isPresent()) {
@@ -90,4 +74,6 @@ public class BusinessService {
 			throw new IllegalArgumentException("Business not found with ID: " + id);
 		}
 	}
+	
+	// =================== FEATURE A BUSINESS======================TO ADD
 }

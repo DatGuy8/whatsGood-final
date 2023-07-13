@@ -1,0 +1,25 @@
+@charset "ISO-8859-1";
+
+.section-home{
+	min-height:70vh;
+	width: 100%;
+	background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('/images/Buisness.jpg');
+	background-position:center;
+	background-size:cover;
+	position:relative;
+	
+}
+
+.text-box{
+	width:50%;
+	color:#fff;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	text-align:center;
+}
+
+body{
+	background-color: grey;
+}

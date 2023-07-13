@@ -82,23 +82,6 @@
 								<form:errors path="user.*" />
 							</p>
 							<form:form action="/register" method="post" modelAttribute="user">
-								<!-- 2 column grid layout with text inputs for the first and last names --> 
-								<div class="row">
-									<div class="col-md-6 mb-4">
-										<div class="form-outline">
-											<form:input type="text" path="firstName" class="form-control" />
-											<form:label class="form-label" path="firstName">First name</form:label>
-											
-										</div>
-									</div>
-									<div class="col-md-6 mb-4">
-										<div class="form-outline">
-											<form:input type="text" path="lastName" class="form-control" />
-											<form:label class="form-label" path="lastName">Last name</form:label>
-											
-										</div>
-									</div>
-								</div>
 								<!-- User Name -->
 								<div class="form-outline mb-4">
 									<form:input type="text" path="userName" class="form-control" />

@@ -13,25 +13,25 @@ public class ItemRatingService {
 
 	@Autowired
 	ItemRatingRepository itemRatingRepo;
-	
-//===================ADD ITEM RATING=========================
+
+	// ADD ITEM RATING
 	public ItemRating addRating(ItemRating rating) {
 		return itemRatingRepo.save(rating);
 	}
-	
-//===================GET AVERAGE RATING=======================
+
+	// GET AVERAGE RATING
 	public Double getAverageRatingForItem(Item item) {
 		return itemRatingRepo.calculateAverageRatingForItem(item);
 	}
 
-//=================CHECK TO SEE IF USER RATED AN ITEM ALREADY=======================
+	// CHECK TO SEE IF USER RATED AN ITEM ALREADY
 	public boolean hasUserRatedItem(Long userId, Long itemId) {
 		Item item = new Item();
 		item.setId(itemId);
 
 		User user = new User();
 		user.setId(userId);
-		
+
 		return itemRatingRepo.existsByUserAndItem(user, item);
 	}
 }

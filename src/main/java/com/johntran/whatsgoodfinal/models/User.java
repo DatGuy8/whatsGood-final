@@ -2,11 +2,9 @@ package com.johntran.whatsgoodfinal.models;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,80 +14,59 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
+@Table(name="users")
 public class User {
-// ========================MEMBER VARIABLES=================================
+//===========================MEMBER VARIABLES=================================
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotNull
-	@Size(min = 3, max = 50)
+	
+	@NotEmpty(message="User name must not be empty")
+	@Size(min=3, max=50)
 	private String userName;
-
-	@NotNull
-	@Size(min = 3, max = 40)
-	private String firstName;
-
-	@NotNull
-	@Size(min = 2, max = 40)
-	private String lastName;
-
-	@NotNull
-	@Email
+	
+	@NotEmpty(message="Email must not be empty")
+	@Size(min=5, max=255)
 	private String email;
 	
-	@NotNull
-	@Size(min=5)
+	@Size(min=5, max=60)
 	private String password;
-
+	
 	@Transient
 	private String confirm;
-
-// ========================RELATIONSHIPS===================================
-
-	// ----------ADMIN/USER--------------
+	
+	//------------------RELATIONSHIPS----------------------
+	
+	// ADMIN/USER ROLES
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;
-
-	// -----------FAVORITE BUSINESSES------------
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "favorite_businesses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "business_id"))
-	private List<Business> favoriteBusinesses;
-
-	// ------------USER RATED ITEMS------------
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<ItemRating> ratings;
 	
-	//-------------------USER UPLOADED PHOTOS-------------------
-	@OneToOne(mappedBy="user", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="photo_id")
-	private Photo userPhoto;
+//	// FAVORITE BUSINESSES OF USER
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(name = "favorite_businesses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "business_id"))
+//	private List<Business> favoriteBusinesses;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
-	private List<Photo> userUploadedPhotos;
+//	// ALL UPLOADED PHOTOS OF USER
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
+//	private List<Photo> userUploadedPhotos;
 	
-// =========================CREATED AT AND UPDATED AT=================================
+	//---------------CREATED AT UPDATED AT--------------------
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-
-// =======================AUTO CREATED UPDATED AT=========================================
+	
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
@@ -99,13 +76,11 @@ public class User {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-
-// ==========================CONSTRUCTOR========================================
-
-	public User() {
-	}
 	
-// ==========================GETTERS AND SETTERS===================================
+//================================CONSTRUCTOR======================================
+	public User() {}
+
+//=================================GETTERS AND SETTERS===============================		
 	public Long getId() {
 		return id;
 	}
@@ -121,23 +96,6 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 
 	public String getEmail() {
 		return email;
@@ -163,6 +121,30 @@ public class User {
 		this.confirm = confirm;
 	}
 
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+//	public List<Business> getFavoriteBusinesses() {
+//		return favoriteBusinesses;
+//	}
+//
+//	public void setFavoriteBusinesses(List<Business> favoriteBusinesses) {
+//		this.favoriteBusinesses = favoriteBusinesses;
+//	}
+
+//	public List<Photo> getUserUploadedPhotos() {
+//		return userUploadedPhotos;
+//	}
+//
+//	public void setUserUploadedPhotos(List<Photo> userUploadedPhotos) {
+//		this.userUploadedPhotos = userUploadedPhotos;
+//	}
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -178,38 +160,8 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 
-	public List<Business> getFavoriteBusinesses() {
-		return favoriteBusinesses;
-	}
-
-	public void setFavoriteBusinesses(List<Business> favoriteBusinesses) {
-		this.favoriteBusinesses = favoriteBusinesses;
-	}
-
-	public Set<ItemRating> getRatings() {
-		return ratings;
-	}
-
-	public void setRatings(Set<ItemRating> ratings) {
-		this.ratings = ratings;
-	}
-
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-	public Photo getUserPhoto() {
-		return userPhoto;
-	}
-
-	public void setUserPhoto(Photo userPhoto) {
-		this.userPhoto = userPhoto;
-	}
-
-
+	
 }
+

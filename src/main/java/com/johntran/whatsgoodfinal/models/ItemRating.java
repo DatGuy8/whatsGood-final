@@ -37,7 +37,7 @@ public class ItemRating {
 	@Size(max = 255, message = "Comment must not exceed 255 characters")
 	private String comment;
 
-// ==============================RELATIONSHIPS======================================
+	//--------------------------RELATIONSHIPS----------------------------------
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -46,7 +46,7 @@ public class ItemRating {
 	@JoinColumn(name = "item_id")
 	private Item item;
 
-// =========================CREATED AT AND UPDATED AT=================================
+	// ---------------------CREATED AT AND UPDATED AT-------------------------
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -54,7 +54,6 @@ public class ItemRating {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 
-// =======================AUTO CREATED UPDATED AT=========================================
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();

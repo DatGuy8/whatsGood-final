@@ -8,11 +8,11 @@ import com.johntran.whatsgoodfinal.repositories.PhotoRepository;
 
 @Service
 public class PhotoService {
-	
+
 	@Autowired
 	private PhotoRepository photoRepo;
 	
-//===============ADD PHOTO===================
+	// ADD PHOTO
 	public Photo savePhoto(Photo photo) {
 		return photoRepo.save(photo);
 	}

@@ -35,7 +35,7 @@ public class SearchController {
 		User currentUser = userService.findByEmail(email);
 		model.addAttribute("currentUser", currentUser);
 		
-		List<Business> businesses = searchService.searchBusiness(searchWord, searchWord, searchWord);
+		List<Business> businesses = searchService.searchBusiness(searchWord, searchWord);
 		List<Item> items = searchService.searchItems(searchWord, searchWord);
 		List<User> users = searchService.searchUsers(searchWord);
 		model.addAttribute("businesses", businesses);
