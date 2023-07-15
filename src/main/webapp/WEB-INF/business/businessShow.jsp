@@ -22,34 +22,71 @@
 
 </head>
 <body>
+	<div class="w-100 bg-dark navContainer">
+		<header class="navBar">
+			<!-- Navbar -->
 
-	<div class="navbar navbar-dark box-shadow">
-		<div class="container d-flex justify-content-between">
-			<a href="/" class="d-flex align-items-center logo-text navbar-brand text-dark"> <strong>What's
-					Good</strong>
-			</a>
-			<form action="action_page.php">
-				<div class="input-group">
-					<input type="text" class="form-control"
-						placeholder="Search What's Good" aria-label="Recipient's username"
-						aria-describedby="basic-addon2">
-					<div class="input-group-append">
-						<button class="btn btn-outline-secondary bg-danger" type="submit">Search</button>
+			<nav class="navbar navbar-expand-lg">
+				<a class="navbar-brand offcanvas-header text-white" href="/"> <img
+					src="/images/icon-whats-good.png" alt="whats good logo"
+					class="logo-whats-good" width="30" height="30"> <strong>What's
+						Good</strong>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<div class="d-flex justify-content-between w-100">
+						<ul class="navbar-nav mr-auto">
+
+
+							<li class="nav-item dropDown"><a class="nav-link dropBtn"
+								href="/profile"> Profile </a>
+								<div class="dropDownContent">
+									<a class="dropdown-item" href="#">Profile Page</a>
+									<form id="logoutForm" method="POST" action="/logout"
+										class="dropdown-item form-logout-button">
+										<input type="hidden" name="${_csrf.parameterName}"
+											value="${_csrf.token}" />
+										<button type="submit" class="logout-link">Logout</button>
+									</form>
+								</div></li>
+							<li class="nav-item dropDown"><a class="nav-link dropBtn"
+								href="/businesses"> Businesses </a>
+								<div class="dropDownContent">
+									<a class="dropdown-item" href="#">View Businesses</a> <a
+										class="dropdown-item" href="#">Add a Business</a>
+								</div></li>
+							<li class="nav-item dropDown"><a class="nav-link dropBtn"
+								href="/items"> Items </a>
+								<div class="dropDownContent">
+									<a class="dropdown-item" href="#">View Highest Rated Items</a>
+									<a class="dropdown-item" href="#">Add a Item</a>
+								</div></li>
+						</ul>
+						<form class="d-flex">
+							<input class="form-control me-2" type="search"
+								placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
 					</div>
 				</div>
-			</form>
-			<form id="logoutForm" method="POST" action="/logout">
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" /> <input type="submit" value="Logout!" />
-			</form>
-		</div>
+
+			</nav>
+
+
+		</header>
 	</div>
-	
-	</header>
+	<!--=================================END NAV BAR ========================================-->
+
 	<main role="main">
 
 		<!--================================CAROUSEL======================================  -->
-	<div id="myCarousel" class="carousel slide mb-6"
+		<div id="myCarousel" class="carousel slide mb-6"
 			data-bs-ride="carousel" data-bs-theme="light">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#myCarousel"
@@ -61,25 +98,30 @@
 					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
-				<c:forEach var="photo" items="${business.photos }" varStatus="status">
-				<div class="carousel-item${status.first ? ' active': '' }">
-					<div class="d-flex justify-content-center">
-						<img
-							src="<c:out value="${photo.filePath }"/>"
-							height="500px" class="mx-auto">
-					</div>
-					<div class="container">
-						<div class="carousel-caption text-end">
-							<h1><c:out value="${business.name }"/></h1>
-							<p class="opacity-75"><c:out value="${business.website }"/></p>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#">Add a photo to ${business.name }</a>
-							</p>
+				<c:forEach var="photo" items="${business.photos }"
+					varStatus="status">
+					<div class="carousel-item${status.first ? ' active': '' }">
+						<div class="d-flex justify-content-center">
+							<img src="<c:out value="${photo.filePath }"/>" height="500px"
+								class="mx-auto">
+						</div>
+						<div class="container">
+							<div class="carousel-caption text-end">
+								<h1>
+									<c:out value="${business.name }" />
+								</h1>
+								<p class="opacity-75">
+									<c:out value="${business.website }" />
+								</p>
+								<p>
+									<a class="btn btn-lg btn-primary" href="#">Add a photo to
+										${business.name }</a>
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
 				</c:forEach>
-				
+
 			</div>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -88,27 +130,27 @@
 			</button>
 			<button class="carousel-control-next" type="button"
 				data-bs-target="#myCarousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon  bg-black" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
+				<span class="carousel-control-next-icon  bg-black"
+					aria-hidden="true"></span> <span class="visually-hidden">Next</span>
 			</button>
 		</div>
-	<!--================================END CAROUSEL======================================  -->
-			<h1 class="text-center">
-				<c:out value="${business.name }" />
-			</h1>
-			<!--------------GOOGLE MAP--------------------  -->
-			<div id="map"></div>
-			<p class="text-center">
-				<a href="#" id="getDirections">Get Directions from Google</a>
-			</p>
-			<h4 class="text-center">
-				<a href="#" style="color: blue;"><c:out
-						value="${business.address }" /></a>
-			</h4>
+		<!--================================END CAROUSEL======================================  -->
+		<h1 class="text-center">
+			<c:out value="${business.name }" />
+		</h1>
+		<!--------------GOOGLE MAP--------------------  -->
+		<div id="map"></div>
+		<p class="text-center">
+			<a href="#" id="getDirections">Get Directions from Google</a>
+		</p>
+		<h4 class="text-center">
+			<a href="#" style="color: blue;"><c:out
+					value="${business.address }" /></a>
+		</h4>
 
-			<p class="text-center">
-				<a href="/business/${business.id }/item/new">Add to Menu</a>
-			</p>
+		<p class="text-center">
+			<a href="/business/${business.id }/item/new">Add to Menu</a>
+		</p>
 		</div>
 		<div class="album py-3 backgroundColor">
 			<h1 class="text-center">Menu</h1>
@@ -162,12 +204,18 @@
 
 
 	</main>
-	
+
 	<script type="module" src="/js/businessShow/index.js"></script>
 	<script>
-  // Define the latitude and longitude variables
-  		var latitude = ${business.latitude};
-  		var longitude = ${business.longitude};
+		// Define the latitude and longitude variables
+		var latitude = $
+		{
+			business.latitude
+		};
+		var longitude = $
+		{
+			business.longitude
+		};
 	</script>
 </body>
 </html>

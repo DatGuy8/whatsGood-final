@@ -3,7 +3,7 @@
 .section-home{
 	min-height:70vh;
 	width: 100%;
-	background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url('/images/Buisness.jpg');
+	background-image: linear-gradient(rgba(4,9,30,0.4),rgba(4,9,30,0.4)),url('/images/Buisness.jpg');
 	background-position:center;
 	background-size:cover;
 	position:relative;
@@ -20,6 +20,3 @@
 	text-align:center;
 }
 
-body{
-	background-color: grey;
-}

@@ -1,117 +1,187 @@
 @charset "ISO-8859-1";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rubik:wght@400;500;700&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Roboto&family=Rubik:wght@400;500;700&display=swap')
+	;
 
-*{
+* {
 	margin: 0;
-	padding:0;
+	padding: 0;
 	font-family: 'Roboto', sans-serif;
 	font-family: 'Rubik', sans-serif;
 }
 
-:root {
-  --jumbotron-padding-y: 3rem;
+:root { -
+	-jumbotron-padding-y: 3rem;
 }
 
+.navContainer {
+	padding: 15px 0;
+}
 
-.navBar{
-	width:90%;
+.whatsGoodLogo {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.navBar {
+	width: 90%;
 	margin: 0 auto;
 }
 
-.logo-text{
-	font-size:26px;
+/* Dropdown Button */
+.dropBtn {
+	color: white;
+	font-size: 18px;
+	border: none;
+	border-radius: 3px;
 }
 
-.logout-link{
-	background: none;
-  border: none;
-  padding: 0;
-  text-decoration: none;
-  color: blue;
-  cursor: pointer;
+/* The container <div> - needed to position the dropdown content */
+.dropDown {
+	position: relative;
+	display: inline-block;
 }
 
-.textNone{
+/* Dropdown Content (Hidden by Default) */
+.dropDownContent {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropDownContent a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropDownContent a:hover {
+	background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropDown:hover .dropDownContent {
+	display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropDown:hover .dropBtn {
+	background-color: #3e8e41;
+}
+
+.logo-text {
+	font-size: 26px;
+}
+
+.logout-link {
+	border: none;
+	padding: 12px 16px;
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+	display: block;
+}
+
+.form-logout-button:hover {
+	background-color: #ddd;
+}
+
+.logout-link:hover {
+	background-color: #ddd;
+}
+
+.textNone {
 	text-decoration: none;
 }
 
-.search-btn-color{
-	background-color:#284b63;
+.search-btn-color {
+	background-color: #284b63;
 }
 
-.logo-whats-good{
+.logo-whats-good {
 	filter: invert(100%);
-	margin-right: 5px
+	margin-right: 5px;
+	/* https://codepen.io/sosuke/pen/Pjoqqp    used this site to change image to different color */
+	filter: invert(72%) sepia(31%) saturate(628%) hue-rotate(102deg)
+		brightness(93%) contrast(89%);
 }
-.visible{
-	color:white;
+
+.visible {
+	color: white;
 }
 
 .jumbotron {
-  padding-top: var(--jumbotron-padding-y);
-  padding-bottom: var(--jumbotron-padding-y);
-  margin-bottom: 0;
-  background-color: #fff;
-}
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: calc(var(--jumbotron-padding-y) * 2);
-    padding-bottom: calc(var(--jumbotron-padding-y) * 2);
-  }
+	padding-top: var(- -jumbotron-padding-y);
+	padding-bottom: var(- -jumbotron-padding-y);
+	margin-bottom: 0;
+	background-color: #fff;
 }
 
+@media ( min-width : 768px) {
+	.jumbotron {
+		padding-top: calc(var(- -jumbotron-padding-y)* 2);
+		padding-bottom: calc(var(- -jumbotron-padding-y)* 2);
+	}
+}
 
 .jumbotron p:last-child {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .jumbotron-heading {
-  font-weight: 300;
+	font-weight: 300;
 }
 
 .jumbotron .container {
-  max-width: 40rem;
+	max-width: 40rem;
 }
 
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 }
 
 footer p {
-  margin-bottom: .25rem;
+	margin-bottom: .25rem;
 }
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.box-shadow {
+	box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
 
 /* SHOW ITEM JSP STAR RATING */
 .rating {
-  display: inline-block;
+	display: inline-block;
 }
 
 .star {
-  font-size: 24px;
-  color: #cccccc;
-  cursor: pointer;
+	font-size: 24px;
+	color: #cccccc;
+	cursor: pointer;
 }
 
-.star:hover,
-.star:hover ~ .star {
-  color: #ffcc00;
+.star:hover, .star:hover ~ .star {
+	color: #ffcc00;
 }
 
 input[type="radio"] {
-  display: none;
+	display: none;
 }
 
 input[type="radio"]:checked ~ label {
-  color: #ffcc00;
+	color: #ffcc00;
 }
 
 /* Star Average business SHOW */
 .starAverage {
-  color: gold; /* Set the color of the filled star */
+	color: gold; /* Set the color of the filled star */
 }
 /* MAP BUISNESS SHOW */
 /* 
@@ -119,9 +189,7 @@ input[type="radio"]:checked ~ label {
  * that contains the map. 
  */
 #map {
-  height: 400px;
-  width:400px;
-  margin:0 auto;
+	height: 400px;
+	width: 400px;
+	margin: 0 auto;
 }
-
-

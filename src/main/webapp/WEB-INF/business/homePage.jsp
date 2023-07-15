@@ -8,87 +8,100 @@
 <meta charset="ISO-8859-1">
 <title>What's Good</title>
 <!-- for Bootstrap CSS -->
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous">
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/business/homePage.css" />
 <!-- For any Bootstrap that uses JS or jQuery-->
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/script.js"></script>
 </head>
 <body>
 	<section class="section-home">
-	<header>
-		<!--================================= NAV BAR ========================================-->
-		
-			<div class="d-flex justify-content-between pt-3 navBar">
-				
-				<div>
-				<!---------------------WHATS GOOD LOGO-------------------- -->
-				<a href="/" class="navbar-brand d-flex align-items-center text-white logo-text"><img src="/images/icon-whats-good.png" alt="whats good logo" class="logo-whats-good"> <strong>What's
-						Good</strong></a>
-				</div>
-				
+		<div class="w-100 navContainer">
+			<header class="navBar">
+				<!-- Navbar -->
 
-				<!------------------------SEARCH BAR----------------------  -->
-				<form action="/search" method="GET"
-					onsubmit="return validateSearchForm()">
-					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="Search What's Good" name="searchParams">
-						<div class="input-group-append">
-							<button class="btn btn-primary" type="submit">Search</button>
+				<nav class="navbar navbar-expand-lg">
+					<a class="navbar-brand text-white offcanvas-header whatsGoodLogo" href="/"> <img
+						src="/images/icon-whats-good.png" alt="whats good logo"
+						class="logo-whats-good" width="40" height="40">What's Good
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<div class="d-flex justify-content-between w-100">
+							<ul class="navbar-nav mr-auto">
+
+
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/profile"> Profile </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">Profile Page</a>
+										<form id="logoutForm" method="POST" action="/logout"
+											class="dropdown-item form-logout-button">
+											<input type="hidden" name="${_csrf.parameterName}"
+												value="${_csrf.token}" />
+											<button type="submit" class="logout-link">Logout</button>
+										</form>
+									</div></li>
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/businesses"> Businesses </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">View Businesses</a> <a
+											class="dropdown-item" href="#">Add a Business</a>
+									</div></li>
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/items"> Items </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">View Highest Rated Items</a>
+										<a class="dropdown-item" href="#">Add a Item</a>
+									</div></li>
+							</ul>
+							<form class="d-flex">
+								<input class="form-control me-2" type="search"
+									placeholder="Search What's Good" aria-label="Search">
+								<button class="btn btn-outline-success" type="submit">Search</button>
+							</form>
 						</div>
 					</div>
-				</form>
 
-				<!----------------------DROP DOWN MENU WITH LOGOUT AND PROFILE PAGE LINK---------------  -->
-				<div class="dropdown">
-				<button class="btn"
-						onclick="toggleDropdown()" aria-expanded="false">
-					<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" class="bi bi-list" viewBox="0 0 16 16">
-					  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-					</svg>
-				</button>
-					<ul class="dropdown-menu" id="dropdownMenu" style="display: none;">
-						<li><p><a href="/user/${currentUser.id }" class="textNone">
-									My Profile</a></p></li>
-						<li>
-							<form id="logoutForm" method="POST" action="/logout">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> 
-									<button type="submit" class="logout-link">Logout!</button>
-							</form>
-						</li>
-					</ul>
-				</div>
-			
-			</div>
-		
-	</header>
-	<!--=================================END NAV BAR ========================================-->
+				</nav>
+
+
+			</header>
+		</div>
+		<!--=================================END NAV BAR ========================================-->
 
 
 		<div class="container text-box">
-			
+
 			<h2>
 				<!-- style="font-weight: 800; color: #F9F5FF; border-radius: 5px;" -->
-				Look for food ratings that businesses/restaurants have to offer and what Users are
-				rating those items!
+				Look for food ratings that businesses/restaurants have to offer and
+				what Users are rating those items!
 			</h2>
 			<p>
-				<a href="/business/add" class="btn btn-primary my-2"> Add a
-					Business to What's Good </a>
+				<a href="/business/add" class="btn btn-success my-2"> Add a
+					Business</a>
 			</p>
 			<!-- Content to show for Admin users -->
 			<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
-				<p><a href="/admin" class="btn btn-primary">Admin Page</a></p>
+				<p>
+					<a href="/admin" class="btn btn-primary">Admin Page</a>
+				</p>
 			</c:if>
 		</div>
 	</section>
 
-	<!--================================CAROUSEL======================================  -->
+	<!--CAROUSEL -->
 	<h2 class="text-center">Featured Businesses</h2>
 	<div id="myCarousel" class="carousel slide mb-6"
 		data-bs-ride="carousel" data-bs-theme="light">
@@ -129,7 +142,7 @@
 			<span class="visually-hidden">Next</span>
 		</button>
 	</div>
-	<!--================================END CAROUSEL======================================  -->
+	<!--END CAROUSEL-->
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
@@ -265,5 +278,10 @@
 		</div>
 	</div>
 
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>
