@@ -153,9 +153,14 @@ public class BusinessController {
 
 //=====================BUSINESS SHOW PAGE===========================
 	@GetMapping("/business/{businessId}")
-	public String showBusiness(@PathVariable("businessId") Long businessId, Model model) {
-		
+	public String showBusiness(@PathVariable("businessId") Long businessId, Model model,Principal principal) {
 		Business business = businessService.getOne(businessId);
+		if(business.getIsApproved() == false) {
+			return "redirect:/";
+		}
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("business", business);
 		model.addAttribute("googleApiKey",googleApiKey);
 		return "business/businessShow.jsp";

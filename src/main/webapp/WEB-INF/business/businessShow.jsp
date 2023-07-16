@@ -25,58 +25,96 @@
 	<div class="w-100 bg-dark navContainer">
 		<header class="navBar">
 			<!-- Navbar -->
+				<nav class="navbar navbar-expand-lg">
+					<a class="navbar-brand text-white offcanvas-header whatsGoodLogo" href="/"> 
+						<img 
+							src="/images/icon-whats-good.png"
+							alt="whats good logo" 
+							class="logo-whats-good" 
+							width="40"
+							height="40">
+							What's Good
+					</a>
+					<button 
+						class="navbar-toggler" 
+						type="button" 
+						data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" 
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-			<nav class="navbar navbar-expand-lg">
-				<a class="navbar-brand offcanvas-header text-white" href="/"> <img
-					src="/images/icon-whats-good.png" alt="whats good logo"
-					class="logo-whats-good" width="30" height="30"> <strong>What's
-						Good</strong>
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<div class="d-flex justify-content-between w-100">
+							
+							<div class="marginLeft30">
+							<!----------- Nav Links ----------->
+							<ul class="navbar-nav mr-auto">
+							
 
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex justify-content-between w-100">
-						<ul class="navbar-nav mr-auto">
-
-
-							<li class="nav-item dropDown"><a class="nav-link dropBtn"
-								href="/profile"> Profile </a>
-								<div class="dropDownContent">
-									<a class="dropdown-item" href="#">Profile Page</a>
-									<form id="logoutForm" method="POST" action="/logout"
-										class="dropdown-item form-logout-button">
-										<input type="hidden" name="${_csrf.parameterName}"
-											value="${_csrf.token}" />
-										<button type="submit" class="logout-link">Logout</button>
-									</form>
-								</div></li>
-							<li class="nav-item dropDown"><a class="nav-link dropBtn"
-								href="/businesses"> Businesses </a>
-								<div class="dropDownContent">
-									<a class="dropdown-item" href="#">View Businesses</a> <a
-										class="dropdown-item" href="#">Add a Business</a>
-								</div></li>
-							<li class="nav-item dropDown"><a class="nav-link dropBtn"
-								href="/items"> Items </a>
-								<div class="dropDownContent">
-									<a class="dropdown-item" href="#">View Highest Rated Items</a>
-									<a class="dropdown-item" href="#">Add a Item</a>
-								</div></li>
-						</ul>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
+								<!-- Profile Tab -->
+								<li class="nav-item dropDown">
+									<a class="nav-link dropBtn" href="/profile">Profile</a>
+										<div class="dropDownContent">
+											<a class="dropdown-item" href="#">Profile Page</a>
+											<form 
+												id="logoutForm" 
+												method="POST" 
+												action="/logout"
+												class="dropdown-item form-logout-button"
+											>
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+												<button type="submit" class="logout-link">Logout</button>
+											</form>
+										</div>
+								</li>
+								
+								<!-- Admin Tab -->
+								<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
+									<li class="nav-item dropDown">
+										<a href="/admin" class="nav-link dropBtn">Admin</a>
+									</li>
+								</c:if>
+								
+								<!-- Business Tab -->
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/businesses"> Businesses </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">View Businesses</a> <a
+											class="dropdown-item" href="#">Add a Business</a>
+									</div>
+								</li>
+								
+								<!-- Items Tab -->	
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/items"> Items </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">View Highest Rated Items</a>
+										<a class="dropdown-item" href="#">Add a Item</a>
+									</div>
+								</li>
+									
+							</ul>
+							</div>
+							
+							<!-- Search Bar -->
+							<form class="d-flex" action="/search" method="get">
+								<input 
+									class="form-control me-2" 
+									type="text"
+									placeholder="Search What's Good" 
+									aria-label="Search"
+									name="searchParams"
+								>
+								<button class="btn btn-outline-success" type="submit">Search</button>
+							</form>
+						</div>
 					</div>
-				</div>
 
-			</nav>
+				</nav>
 
 
 		</header>
@@ -84,9 +122,9 @@
 	<!--=================================END NAV BAR ========================================-->
 
 	<main role="main">
-
+		<h1 class="text-center m-3">${business.name }</h1>
 		<!--================================CAROUSEL======================================  -->
-		<div id="myCarousel" class="carousel slide mb-6"
+		<div id="myCarousel" class="carousel slide"
 			data-bs-ride="carousel" data-bs-theme="light">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#myCarousel"
@@ -103,38 +141,59 @@
 					<div class="carousel-item${status.first ? ' active': '' }">
 						<div class="d-flex justify-content-center">
 							<img src="<c:out value="${photo.filePath }"/>" height="500px"
-								class="mx-auto">
+								class="mx-auto rounded">
 						</div>
-						<div class="container">
-							<div class="carousel-caption text-end">
-								<h1>
-									<c:out value="${business.name }" />
-								</h1>
-								<p class="opacity-75">
-									<c:out value="${business.website }" />
-								</p>
-								<p>
-									<a class="btn btn-lg btn-primary" href="#">Add a photo to
-										${business.name }</a>
-								</p>
-							</div>
-						</div>
+						
 					</div>
 				</c:forEach>
 
 			</div>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#myCarousel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon bg-black "
+				<span class="carousel-control-prev-icon filterInvert"
 					aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
 			</button>
 			<button class="carousel-control-next" type="button"
 				data-bs-target="#myCarousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon  bg-black"
+				<span class="carousel-control-next-icon filterInvert"
 					aria-hidden="true"></span> <span class="visually-hidden">Next</span>
 			</button>
 		</div>
 		<!--================================END CAROUSEL======================================  -->
+		
+		<div class="container d-flex mt-5">
+			<div class="leftBusinessShow w-75">
+				<div class="leftColumnShow">
+					<div class="p-3 border-bottom">
+						<button class="btn btn-success">Add Business Photo</button>
+						<button class="btn btn-outline-success">Write a review</button>
+						<button class="btn btn-outline-success">Add Menu Item</button>
+						<button class="btn btn-outline-success">Add to Favorites</button>
+					</div>
+					<div class="p-3 border-bottom">
+						<h3>Top 3 Items</h3>
+					</div>
+					<div class="p-3 border-bottom">
+						<h3>Location</h3>
+					</div>
+					<div class="p-3 border-bottom">
+						<h3>All Submitted Items</h3>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="rightColumnShow w-25 border border-dark p-3">
+				<p><a href="${business.website }">${business.website }</a></p>
+				<br>
+				<p>${business.address.street } ${business.address.city }, ${business.address.state } ${business.address.zipCode }</p>
+				
+			</div>
+		</div>
+		
+		
+		
+		
 		<h1 class="text-center">
 			<c:out value="${business.name }" />
 		</h1>
