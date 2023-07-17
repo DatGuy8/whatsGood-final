@@ -202,5 +202,20 @@ input[type="radio"]:checked ~ label {
 #map {
 	height: 400px;
 	width: 400px;
-	margin: 0 auto;
+	
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
 }

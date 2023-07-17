@@ -17,49 +17,103 @@
 <script type="text/javascript" src="/js/script.js"></script>
 </head>
 <body>
-	<header>
-		<!--================================= NAV BAR ========================================-->
-		<div class="navbar navbar-dark betterBlue box-shadow">
-			<div class="container d-flex justify-content-between">
+	<div class="w-100 bg-dark navContainer">
+		<header class="navBar">
+			<!-- Navbar -->
+				<nav class="navbar navbar-expand-lg">
+					<a class="navbar-brand text-white offcanvas-header whatsGoodLogo" href="/"> 
+						<img 
+							src="/images/icon-whats-good.png"
+							alt="whats good logo" 
+							class="logo-whats-good" 
+							width="40"
+							height="40">
+							What's Good
+					</a>
+					<button 
+						class="navbar-toggler" 
+						type="button" 
+						data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" 
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-				<!---------------------WHATS GOOD LOGO-------------------- -->
-				<a href="/" class="navbar-brand d-flex align-items-center"> <strong>What's
-						Good</strong>
-				</a>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<div class="d-flex justify-content-between w-100">
+							
+							<div class="marginLeft30">
+							<!----------- Nav Links ----------->
+							<ul class="navbar-nav mr-auto">
+							
 
-				<!------------------------SEARCH BAR----------------------  -->
-				<form action="/search" method="GET">
-					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="Search What's Good" name="searchParams">
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary bg-danger" type="submit">Search</button>
+								<!-- Profile Tab -->
+								<li class="nav-item dropDown">
+									<a class="nav-link dropBtn" href="/profile">Profile</a>
+										<div class="dropDownContent">
+											<a class="dropdown-item" href="#">Profile Page</a>
+											<form 
+												id="logoutForm" 
+												method="POST" 
+												action="/logout"
+												class="dropdown-item form-logout-button"
+											>
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+												<button type="submit" class="logout-link">Logout</button>
+											</form>
+										</div>
+								</li>
+								
+								<!-- Admin Tab -->
+								<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
+									<li class="nav-item dropDown">
+										<a href="/admin" class="nav-link dropBtn">Admin</a>
+									</li>
+								</c:if>
+								
+								<!-- Business Tab -->
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/businesses"> Businesses </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">View Businesses</a> <a
+											class="dropdown-item" href="#">Add a Business</a>
+									</div>
+								</li>
+								
+								<!-- Items Tab -->	
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/items"> Items </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">View Highest Rated Items</a>
+										<a class="dropdown-item" href="#">Add a Item</a>
+									</div>
+								</li>
+									
+							</ul>
+							</div>
+							
+							<!-- Search Bar -->
+							<form class="d-flex" action="/search" method="get">
+								<input 
+									class="form-control me-2" 
+									type="text"
+									placeholder="Search What's Good" 
+									aria-label="Search"
+									name="searchParams"
+								>
+								<button class="btn btn-outline-success" type="submit">Search</button>
+							</form>
 						</div>
 					</div>
-				</form>
 
-				<!----------------------DROP DOWN MENU WITH LOGOUT AND PROFILE PAGE LINK---------------  -->
-				<div class="dropdown">
-					<button class="dropdown-toggle btn btn-info"
-						onclick="toggleDropdown()" aria-expanded="false">
-						<c:out value="${currentUser.userName }" />
-					</button>
-					<ul class="dropdown-menu" id="dropdownMenu" style="display: none;">
-						<li><a href="/user/${currentUser.id }"><button
-									class="btn btn-info">My Profile</button></a></li>
-						<li>
-							<form id="logoutForm" method="POST" action="/logout">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <input type="submit" value="Logout!"
-									class="btn btn-info" />
-							</form>
-						</li>
-					</ul>
-				</div>
+				</nav>
 
-			</div>
-		</div>
-	</header>
+
+		</header>
+	</div>
 	<!--=================================END NAV BAR ========================================-->
 	<div class="container">
 		<h1>Search Results for ${param.searchParams }</h1>

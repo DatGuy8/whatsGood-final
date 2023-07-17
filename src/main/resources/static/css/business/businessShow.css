@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+
+
+.rightColumnShow{
+	height: fit-content;
+	position:sticky;
+	top:20px;
+}
+
+p {
+	margin-bottom:0;
+}

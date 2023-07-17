@@ -5,6 +5,7 @@
 // Initialize and add the map
 let map, infoWindow, directionsService, directionsRenderer;
 
+
 async function initMap() {
 	// The location of Business
 	const position = { lat: latitude, lng: longitude };
@@ -109,3 +110,5 @@ $(document).ready(function() {
 		window.open(url);
 	});
 });
+
+

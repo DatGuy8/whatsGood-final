@@ -19,3 +19,12 @@ function validateSearchForm() {
     }
     return true; // Allow form submission
 }
+
+function addPhotoForm() {
+	let form  = document.getElementById("addPhotoInput");
+	if (form.style.display === "none") {
+		form.style.display = "block";
+	} else {
+		form.style.display = " none";
+	}
+}

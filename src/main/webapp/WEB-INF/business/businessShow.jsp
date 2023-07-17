@@ -10,16 +10,29 @@
 <title>What's Good at ${business.name }</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey }&libraries=places"></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
-<!-- For any Bootstrap that uses JS or jQuery-->
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/business/businessShow.css" />
 
+<!-- For any Bootstrap that uses JS or jQuery-->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script type="module" src="/js/businessShow/index.js"></script>
+	<script type="module" src="/js/script.js"></script>
+	<script>
+		// Define the latitude and longitude variables
+		var latitude = ${business.latitude};
+		var longitude = ${business.longitude};
+		function addPhotoForm() {
+			let form  = document.getElementById("addPhotoInput");
+			if (form.style.display === "none") {
+				form.style.display = "block";
+			} else {
+				form.style.display = " none";
+			}
+		}
+	</script>
 </head>
 <body>
 	<div class="w-100 bg-dark navContainer">
@@ -161,31 +174,57 @@
 		</div>
 		<!--================================END CAROUSEL======================================  -->
 		
+		
+		<!-- LEFT COLUMN -->
 		<div class="container d-flex mt-5">
 			<div class="leftBusinessShow w-75">
 				<div class="leftColumnShow">
 					<div class="p-3 border-bottom">
-						<button class="btn btn-success">Add Business Photo</button>
-						<button class="btn btn-outline-success">Write a review</button>
-						<button class="btn btn-outline-success">Add Menu Item</button>
+						<button 
+							class="btn btn-success" 
+							onclick="addPhotoForm()"  
+							aria-expanded="false"
+						>
+							Add Business Photo
+						</button>
+						<a href="/business/${business.id }/item/new"><button class="btn btn-outline-success">Add Menu Item</button></a>
 						<button class="btn btn-outline-success">Add to Favorites</button>
 					</div>
+					 <div id="addPhotoInput" style="display: none;">
+					 	<form>
+					    	<input type="file" name="photo" accept="image/*">
+					    	<button>Submit Photo</button>
+					 	</form>
+					    
+					  </div>
 					<div class="p-3 border-bottom">
-						<h3>Top 3 Items</h3>
+						<h3>Top Items</h3>
 					</div>
 					<div class="p-3 border-bottom">
 						<h3>Location</h3>
+						<!-- BUSINESS GOOGLE MAP  -->
+						<img src="http://maps.googleapis.com/maps/api/staticmap?
+						center=${business.latitude },${business.longitude}
+						&zoom=13
+						&size=600x300
+						&maptype=roadmap
+						&markers=color:green%7Clabel:G%7C${business.latitude },${business.longitude}&key=${googleApiKey}">
+						<p class="text-primary">${business.address.street }</p>
+						<p>${business.address.city }, ${business.address.state } ${business.address.zipCode }</p>
 					</div>
 					<div class="p-3 border-bottom">
 						<h3>All Submitted Items</h3>
 					</div>
-				</div>
+				</div> 
 				
 				
 			</div>
+			
+			<!-- RIGHT COLUMN -->
 			<div class="rightColumnShow w-25 border border-dark p-3">
-				<p><a href="${business.website }">${business.website }</a></p>
+				<p><a href="${business.website }" target="_blank">${business.website }</a></p>
 				<br>
+				<p><a href="/business/${business.id }/directions">Get Directions</a></p>
 				<p>${business.address.street } ${business.address.city }, ${business.address.state } ${business.address.zipCode }</p>
 				
 			</div>
@@ -198,7 +237,7 @@
 			<c:out value="${business.name }" />
 		</h1>
 		<!--------------GOOGLE MAP--------------------  -->
-		<div id="map"></div>
+		
 		<p class="text-center">
 			<a href="#" id="getDirections">Get Directions from Google</a>
 		</p>
@@ -210,11 +249,11 @@
 		<p class="text-center">
 			<a href="/business/${business.id }/item/new">Add to Menu</a>
 		</p>
-		</div>
+		
 		<div class="album py-3 backgroundColor">
 			<h1 class="text-center">Menu</h1>
 		</div>
-		<div class="container">
+		<div class="container" style="height:1000px">
 			<div class="row">
 				<h3>
 					<c:out value="${business.name }" />
@@ -246,9 +285,11 @@
 									</c:otherwise>
 								</c:choose>
 								<div class="btn-group">
+										<a href="/item/${item.id }">
 									<button type="button" class="btn btn-sm btn-outline-secondary">
-										<a href="/item/${item.id }">View Dish</a>
+										View Dish
 									</button>
+										</a>
 								</div>
 							</div>
 						</div>
@@ -264,17 +305,6 @@
 
 	</main>
 
-	<script type="module" src="/js/businessShow/index.js"></script>
-	<script>
-		// Define the latitude and longitude variables
-		var latitude = $
-		{
-			business.latitude
-		};
-		var longitude = $
-		{
-			business.longitude
-		};
-	</script>
+	
 </body>
 </html>
