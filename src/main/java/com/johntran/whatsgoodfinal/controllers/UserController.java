@@ -57,4 +57,12 @@ public class UserController {
 		return "test.jsp";
 	}
 	
+	@PostMapping("/user/addFavoriteBusiness")
+	public String addFavoriteBusiness() {
+		System.out.println("here");
+		
+		
+		return "redirect:/";
+	}
+	
 }

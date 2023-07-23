@@ -143,13 +143,12 @@
 
 
 			<div class="form-group">
-				<img id="imagePreview" src="#" alt="Image Preview"
-					style="max-width: 200px; max-height: 200px; display: none;">
 				<%-- <form:errors path="photos" class="text-danger" /> --%>
 				<label for="imageFile">Item Photo: </label>
-				<input type="file" name="imageFile"
-					accept="image/png, image/jpeg" name="imageFile"
-					onchange="previewImage(event)" />
+				<input type="file" name="imageFiles"
+					accept="image/png, image/jpeg"
+					onchange="previewImages(event)" multiple/>
+				<div id="imagePreviewContainer"></div>
 			</div>
 			<br />
 

@@ -37,19 +37,20 @@ public class ItemController {
 
 	@Autowired
 	BusinessService businessService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	ItemRatingService itemRatingService;
-	
+
 	@Autowired
 	PhotoService photoService;
 
 //==================ADD ITEM SHOW PAGE=========================
 	@GetMapping("business/{businessId}/item/new")
-	public String addItem(@ModelAttribute("newItem")Item newItem,@PathVariable("businessId") Long businessId, Model model) {
+	public String addItem(@ModelAttribute("newItem") Item newItem, @PathVariable("businessId") Long businessId,
+			Model model) {
 
 		Business business = businessService.getOne(businessId);
 		model.addAttribute("business", business);
@@ -59,8 +60,10 @@ public class ItemController {
 
 //==================POST ADD ITEM ROUTE=========================
 	@PostMapping("/business/{businessId}/item/new")
-	public String saveItem(@Valid @ModelAttribute("newItem")Item newItem, BindingResult result,@PathVariable("businessId") Long businessId,@RequestParam("imageFile")MultipartFile multipartFile,Principal principal) throws IOException {
-		if(result.hasErrors()) {
+	public String saveItem(@Valid @ModelAttribute("newItem") Item newItem, BindingResult result,
+			@PathVariable("businessId") Long businessId, @RequestParam("imageFiles") MultipartFile[] imageFiles,
+			Principal principal) throws IOException {
+		if (result.hasErrors()) {
 			return "item/addItem.jsp";
 		}
 		String email = principal.getName();
@@ -68,30 +71,30 @@ public class ItemController {
 		Business business = businessService.getOne(businessId);
 		newItem.setBusiness(business);
 		Item savedItem = itemService.addItem(newItem);
-		if(!multipartFile.isEmpty()) {
-			try {
-				String uploadDir = "/uploadedImages/items/";
-				String fileName = UUID.randomUUID().toString() + "_" + multipartFile.getOriginalFilename();
-				FileUploadUtil.saveFile("uploadedImages/items/", fileName, multipartFile);
-				
-				Photo photo = new Photo();//===================fix constructor and add in the items in parathesis
-				photo.setFileName(multipartFile.getOriginalFilename());
-				photo.setFilePath(uploadDir + fileName);
-				
-				photo.setUploadedBy(currentUser);
-				photo.setItem(savedItem);
-				
-				photoService.savePhoto(photo);
-				System.out.println("did it save?");
-			}
-			catch(Exception e){
-				e.printStackTrace();
+		for (MultipartFile multipartFile : imageFiles) {
+			if (!multipartFile.isEmpty()) {
+				try {
+					String uploadDir = "/images/items/";
+					String fileName = UUID.randomUUID().toString() + "_" + multipartFile.getOriginalFilename();
+					FileUploadUtil.saveFile("images/items/", fileName, multipartFile);
+
+					Photo photo = new Photo();// ===================fix constructor and add in the items in parathesis
+					photo.setFileName(multipartFile.getOriginalFilename());
+					photo.setFilePath(uploadDir + fileName);
+
+					photo.setUploadedBy(currentUser);
+					photo.setItem(savedItem);
+
+					photoService.savePhoto(photo);
+					System.out.println("did it save?");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
-	
+
 		return "redirect:/item/" + savedItem.getId();
-		
+
 //		if(fileName.isBlank()) {
 //			System.out.println("no image saved");
 //			return "redirect:/business/{businessId}";
@@ -103,45 +106,44 @@ public class ItemController {
 //		}
 //		
 	}
-	
+
 //=======================SINGLE ITEM PAGE WITH REVIEWS===========//ADD FORM TOO?==================
 	@GetMapping("/item/{itemId}")
-	public String itemShowPage(
-			@ModelAttribute("itemRating")ItemRating itemRating,
-			@PathVariable("itemId")Long itemId,
-			Model model
-			) {
-		
+	public String itemShowPage(@ModelAttribute("itemRating") ItemRating itemRating, @PathVariable("itemId") Long itemId,
+			Model model) {
+
 		Item item = itemService.getOneItem(itemId);
 		Double averageRating = itemRatingService.getAverageRatingForItem(item);
-		model.addAttribute("averageRating",averageRating);
-		model.addAttribute("item",item);
+		model.addAttribute("averageRating", averageRating);
+		model.addAttribute("item", item);
 		return "item/showItem.jsp";
 	}
+
 //======================POST ADD ITEM RATING ROUTE==================================
 	@PostMapping("/item/{itemId}")
-	public String itemRatingSave(@Valid @ModelAttribute("itemRating")ItemRating itemRating, BindingResult result,@PathVariable("itemId")Long itemId,Principal pricipal) throws IOException {
-		
-		if(result.hasErrors()) {
+	public String itemRatingSave(@Valid @ModelAttribute("itemRating") ItemRating itemRating, BindingResult result,
+			@PathVariable("itemId") Long itemId, Principal pricipal) throws IOException {
+
+		if (result.hasErrors()) {
 			System.out.println(result);
 			return "redirect:/item/{itemId}";
 		}
-		
+
 		String email = pricipal.getName();
 		User currentUser = userService.findByEmail(email);
-		
+
 		Item currentItem = itemService.getOneItem(itemId);
-		
-		if(itemRatingService.hasUserRatedItem(currentUser.getId(), itemId)) {
-			result.rejectValue("rating", "duplicate","You have already rated the item");
-			return "redirect:/item/{itemId}"; 
+
+		if (itemRatingService.hasUserRatedItem(currentUser.getId(), itemId)) {
+			result.rejectValue("rating", "duplicate", "You have already rated the item");
+			return "redirect:/item/{itemId}";
 		}
-		
+
 		itemRating.setItem(currentItem);
 		itemRating.setUser(currentUser);
-		
+
 		itemRatingService.addRating(itemRating);
-		
+
 		return "redirect:/item/{itemId}";
 	}
 }

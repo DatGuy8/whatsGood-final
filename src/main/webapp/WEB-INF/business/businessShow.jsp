@@ -16,118 +16,95 @@
 <link rel="stylesheet" href="/css/business/businessShow.css" />
 
 <!-- For any Bootstrap that uses JS or jQuery-->
-	<script src="/webjars/jquery/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-	<script type="module" src="/js/businessShow/index.js"></script>
-	<script type="module" src="/js/script.js"></script>
-	<script>
-		// Define the latitude and longitude variables
-		var latitude = ${business.latitude};
-		var longitude = ${business.longitude};
-		function addPhotoForm() {
-			let form  = document.getElementById("addPhotoInput");
-			if (form.style.display === "none") {
-				form.style.display = "block";
-			} else {
-				form.style.display = " none";
-			}
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script type="module" src="/js/businessShow/index.js"></script>
+<script type="module" src="/js/script.js"></script>
+<script>
+	function addPhotoForm() {
+		let form = document.getElementById("addPhotoInput");
+		if (form.style.display === "none") {
+			form.style.display = "block";
+		} else {
+			form.style.display = " none";
 		}
-	</script>
+	};
+</script>
 </head>
 <body>
 	<div class="w-100 bg-dark navContainer">
 		<header class="navBar">
 			<!-- Navbar -->
-				<nav class="navbar navbar-expand-lg">
-					<a class="navbar-brand text-white offcanvas-header whatsGoodLogo" href="/"> 
-						<img 
-							src="/images/icon-whats-good.png"
-							alt="whats good logo" 
-							class="logo-whats-good" 
-							width="40"
-							height="40">
-							What's Good
-					</a>
-					<button 
-						class="navbar-toggler" 
-						type="button" 
-						data-toggle="collapse"
-						data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" 
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<span class="navbar-toggler-icon"></span>
-					</button>
+			<nav class="navbar navbar-expand-lg">
+				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
+					href="/"> <img src="/images/icon-whats-good.png"
+					alt="whats good logo" class="logo-whats-good" width="40"
+					height="40"> What's Good
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<div class="d-flex justify-content-between w-100">
-							
-							<div class="marginLeft30">
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<div class="d-flex justify-content-between w-100">
+
+						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
 							<ul class="navbar-nav mr-auto">
-							
+
 
 								<!-- Profile Tab -->
-								<li class="nav-item dropDown">
-									<a class="nav-link dropBtn" href="/profile">Profile</a>
-										<div class="dropDownContent">
-											<a class="dropdown-item" href="#">Profile Page</a>
-											<form 
-												id="logoutForm" 
-												method="POST" 
-												action="/logout"
-												class="dropdown-item form-logout-button"
-											>
-												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-												<button type="submit" class="logout-link">Logout</button>
-											</form>
-										</div>
-								</li>
-								
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/profile">Profile</a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="#">Profile Page</a>
+										<form id="logoutForm" method="POST" action="/logout"
+											class="dropdown-item form-logout-button">
+											<input type="hidden" name="${_csrf.parameterName}"
+												value="${_csrf.token}" />
+											<button type="submit" class="logout-link">Logout</button>
+										</form>
+									</div></li>
+
 								<!-- Admin Tab -->
 								<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
-									<li class="nav-item dropDown">
-										<a href="/admin" class="nav-link dropBtn">Admin</a>
-									</li>
+									<li class="nav-item dropDown"><a href="/admin"
+										class="nav-link dropBtn">Admin</a></li>
 								</c:if>
-								
+
 								<!-- Business Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/businesses"> Businesses </a>
 									<div class="dropDownContent">
 										<a class="dropdown-item" href="#">View Businesses</a> <a
 											class="dropdown-item" href="#">Add a Business</a>
-									</div>
-								</li>
-								
-								<!-- Items Tab -->	
+									</div></li>
+
+								<!-- Items Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/items"> Items </a>
 									<div class="dropDownContent">
 										<a class="dropdown-item" href="#">View Highest Rated Items</a>
 										<a class="dropdown-item" href="#">Add a Item</a>
-									</div>
-								</li>
-									
-							</ul>
-							</div>
-							
-							<!-- Search Bar -->
-							<form class="d-flex" action="/search" method="get">
-								<input 
-									class="form-control me-2" 
-									type="text"
-									placeholder="Search What's Good" 
-									aria-label="Search"
-									name="searchParams"
-								>
-								<button class="btn btn-outline-success" type="submit">Search</button>
-							</form>
-						</div>
-					</div>
+									</div></li>
 
-				</nav>
+							</ul>
+						</div>
+
+						<!-- Search Bar -->
+						<form class="d-flex" action="/search" method="get">
+							<input class="form-control me-2" type="text"
+								placeholder="Search What's Good" aria-label="Search"
+								name="searchParams">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
+					</div>
+				</div>
+
+			</nav>
 
 
 		</header>
@@ -135,10 +112,11 @@
 	<!--=================================END NAV BAR ========================================-->
 
 	<main role="main">
-		<h1 class="text-center m-3">${business.name }</h1>
+		<h1 class="text-center m-3">${business.name }addaverage rating
+			after</h1>
 		<!--================================CAROUSEL======================================  -->
-		<div id="myCarousel" class="carousel slide"
-			data-bs-ride="carousel" data-bs-theme="light">
+		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel"
+			data-bs-theme="light">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#myCarousel"
 					data-bs-slide-to="0" class="active" aria-current="true"
@@ -156,7 +134,7 @@
 							<img src="<c:out value="${photo.filePath }"/>" height="500px"
 								class="mx-auto rounded">
 						</div>
-						
+
 					</div>
 				</c:forEach>
 
@@ -173,138 +151,185 @@
 			</button>
 		</div>
 		<!--================================END CAROUSEL======================================  -->
-		
-		
+
+
 		<!-- LEFT COLUMN -->
 		<div class="container d-flex mt-5">
+
+			<!-- BUTTONS -->
 			<div class="leftBusinessShow w-75">
 				<div class="leftColumnShow">
-					<div class="p-3 border-bottom">
-						<button 
-							class="btn btn-success" 
-							onclick="addPhotoForm()"  
-							aria-expanded="false"
-						>
-							Add Business Photo
-						</button>
-						<a href="/business/${business.id }/item/new"><button class="btn btn-outline-success">Add Menu Item</button></a>
-						<button class="btn btn-outline-success">Add to Favorites</button>
+					<div class="p-3 border-bottom d-flex gap-1">
+					
+						<button class="btn btn-success" onclick="addPhotoForm()"
+							aria-expanded="false">Add Business Photo</button>
+							
+						<a href="/business/${business.id }/item/new"><button
+								class="btn btn-outline-success">Add Menu Item</button></a>
+						<%-- <c:if test="${business in currentUser.favorites }"> --%>
+						
+						<form action="/user/addFavoriteBusiness" method="post">
+							<input type="hidden" name="businessId" value="${business.id }" />
+							<button class="btn btn-outline-success">Add to Favorites</button>
+						</form>
+						
+						<%-- <c:if test="${business not in currentUser.favorites}">
+							<form action="/user/addFavoriteBusiness" method="post">
+								<input type="hidden" name="businessId" value="${business.id }" />
+								<button class="btn btn-outline-success">Remove from Favorites</button>
+							</form>
+						</c:if> --%>
 					</div>
-					 <div id="addPhotoInput" style="display: none;">
-					 	<form>
-					    	<input type="file" name="photo" accept="image/*">
-					    	<button>Submit Photo</button>
-					 	</form>
-					    
-					  </div>
+					<div id="addPhotoInput" style="display: none;">
+						<form action="/business/${business.id }/add/photo" method="POST"
+							enctype="multipart/form-data">
+							<div class="form-group">
+								<input type="file" name="photo" accept="image/*">
+								<button>Submit Photo</button>
+							</div>
+						</form>
+
+					</div>
 					<div class="p-3 border-bottom">
 						<h3>Top Items</h3>
+						<div class="album">
+							<div class="row">
+								<c:forEach var="item" items="${business.items }"
+									varStatus="status">
+									<c:if test="${status.index < 4}">
+										<div class="col-md-3">
+											<div class="card mb-3">
+												<c:if test="${item.photos[0].filePath != null }">
+												<img class="card-img-top" src="${item.photos[0].filePath }"
+													alt="table food" />
+												</c:if>	
+													
+												<div class="card-body">
+													<p class="card-text">
+														<c:out value="${item.name }" />
+													</p>
+													<p>
+														$
+														<c:out value="${item.price }" />
+													</p>
+													<c:choose>
+														<c:when test="${fn:length(item.ratings) > 0}">
+															<c:forEach var="i" begin="1" end="${item.averageRating}">
+																<i class="fa fa-star starAverage"></i>
+																<!-- Replace with your star icon class -->
+															</c:forEach>
+															<p>Number of Ratings: ${fn:length(item.ratings)}</p>
+														</c:when>
+														<c:otherwise>
+															<p>No ratings yet</p>
+														</c:otherwise>
+													</c:choose>
+													<div class="btn-group">
+														<a href="/item/${item.id }">
+															<button type="button"
+																class="btn btn-sm btn-outline-secondary">See
+																Ratings/More Pictures</button>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+						</div>
 					</div>
 					<div class="p-3 border-bottom">
 						<h3>Location</h3>
 						<!-- BUSINESS GOOGLE MAP  -->
-						<img src="http://maps.googleapis.com/maps/api/staticmap?
+						<a href="/business/${business.id }/directions"><img
+							src="http://maps.googleapis.com/maps/api/staticmap?
 						center=${business.latitude },${business.longitude}
 						&zoom=13
 						&size=600x300
 						&maptype=roadmap
-						&markers=color:green%7Clabel:G%7C${business.latitude },${business.longitude}&key=${googleApiKey}">
+						&markers=color:green%7Clabel:A%7C${business.latitude },${business.longitude}&key=${googleApiKey}"></a>
 						<p class="text-primary">${business.address.street }</p>
-						<p>${business.address.city }, ${business.address.state } ${business.address.zipCode }</p>
+						<p>${business.address.city },${business.address.state }
+							${business.address.zipCode }</p>
 					</div>
-					<div class="p-3 border-bottom">
-						<h3>All Submitted Items</h3>
-					</div>
-				</div> 
-				
-				
-			</div>
-			
-			<!-- RIGHT COLUMN -->
-			<div class="rightColumnShow w-25 border border-dark p-3">
-				<p><a href="${business.website }" target="_blank">${business.website }</a></p>
-				<br>
-				<p><a href="/business/${business.id }/directions">Get Directions</a></p>
-				<p>${business.address.street } ${business.address.city }, ${business.address.state } ${business.address.zipCode }</p>
-				
-			</div>
-		</div>
-		
-		
-		
-		
-		<h1 class="text-center">
-			<c:out value="${business.name }" />
-		</h1>
-		<!--------------GOOGLE MAP--------------------  -->
-		
-		<p class="text-center">
-			<a href="#" id="getDirections">Get Directions from Google</a>
-		</p>
-		<h4 class="text-center">
-			<a href="#" style="color: blue;"><c:out
-					value="${business.address }" /></a>
-		</h4>
 
-		<p class="text-center">
-			<a href="/business/${business.id }/item/new">Add to Menu</a>
-		</p>
-		
-		<div class="album py-3 backgroundColor">
-			<h1 class="text-center">Menu</h1>
-		</div>
-		<div class="container" style="height:1000px">
-			<div class="row">
-				<h3>
-					<c:out value="${business.name }" />
-				</h3>
-				<hr />
-				<c:forEach var="item" items="${business.items }">
-					<div class="col-md-2">
-						<div class="card">
-							<img class="card-img-top" src="${item.photos[0].filePath }"
-								alt="table food" height="125px" width="125px" />
-							<div class="card-body">
-								<p class="card-text">
-									<c:out value="${item.name }" />
-								</p>
-								<p>
-									$
-									<c:out value="${item.price }" />
-								</p>
-								<c:choose>
-									<c:when test="${fn:length(item.ratings) > 0}">
-										<c:forEach var="i" begin="1" end="${item.averageRating}">
-											<i class="fa fa-star starAverage"></i>
-											<!-- Replace with your star icon class -->
-										</c:forEach>
-										<p>Number of Ratings: ${fn:length(item.ratings)}</p>
-									</c:when>
-									<c:otherwise>
-										<p>No ratings yet</p>
-									</c:otherwise>
-								</c:choose>
-								<div class="btn-group">
-										<a href="/item/${item.id }">
-									<button type="button" class="btn btn-sm btn-outline-secondary">
-										View Dish
-									</button>
-										</a>
-								</div>
+
+					<!-- ALL ITEMS -->
+					<div class="p-3 border-bottom">
+						<h3 class="text-center">All Submitted Items</h3>
+						<div class="form-group d-flex flex-row-reverse">
+							<input type="text" id="filterInput" placeholder="Search Items..."
+								class="form-control mb-3" style="width: 300px;">
+						</div>
+						<div class="album">
+							<div class="row">
+								<c:forEach var="item" items="${sortedItems }">
+									<div class="col-md-3 item-card">
+										<div class="card mb-3">
+											<c:if test="${item.photos[0].filePath != null }">
+												<img class="card-img-top" src="${item.photos[0].filePath }"
+													alt="table food" />
+												</c:if>	
+											<div class="card-body">
+												<p class="card-text">
+													<c:out value="${item.name }" />
+												</p>
+												<p>
+													$
+													<c:out value="${item.price }" />
+												</p>
+												<c:choose>
+													<c:when test="${fn:length(item.ratings) > 0}">
+														<c:forEach var="i" begin="1" end="${item.averageRating}">
+															<i class="fa fa-star starAverage"></i>
+															<!-- Replace with your star icon class -->
+														</c:forEach>
+														<p>Number of Ratings: ${fn:length(item.ratings)}</p>
+													</c:when>
+													<c:otherwise>
+														<p>No ratings yet</p>
+													</c:otherwise>
+												</c:choose>
+												<div class="btn-group">
+													<a href="/item/${item.id }">
+														<button type="button"
+															class="btn btn-sm btn-outline-secondary">See
+															Ratings/More Pictures</button>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-
+				</div>
 
 
 			</div>
 
+			<!-- RIGHT COLUMN -->
+			<div class="rightColumnShow w-25 border border-dark p-3">
+				<p>
+					<a href="${business.website }" target="_blank">${business.website }</a>
+				</p>
+				<br>
+				<p>
+					<a href="/business/${business.id }/directions">Get Directions</a>
+				</p>
+				<p>${business.address.street }${business.address.city },
+					${business.address.state } ${business.address.zipCode }</p>
+
+			</div>
 		</div>
+
+
 
 
 	</main>
 
-	
+
 </body>
 </html>

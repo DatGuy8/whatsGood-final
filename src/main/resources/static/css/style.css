@@ -219,3 +219,11 @@ input[type="radio"]:checked ~ label {
 .custom-file-upload:hover {
   background-color: #e0e0e0;
 }
+
+.preview-image {
+    max-width: 100%;
+    max-height: 200px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }

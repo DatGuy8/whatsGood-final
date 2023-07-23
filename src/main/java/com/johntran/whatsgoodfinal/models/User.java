@@ -50,10 +50,10 @@ public class User {
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;
 	
-//	// FAVORITE BUSINESSES OF USER
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinTable(name = "favorite_businesses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "business_id"))
-//	private List<Business> favoriteBusinesses;
+	// FAVORITE BUSINESSES OF USER
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "favorite_businesses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "business_id"))
+	private List<Business> favoriteBusinesses;
 	
 //	// ALL UPLOADED PHOTOS OF USER
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy="user")
@@ -159,6 +159,14 @@ public class User {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public List<Business> getFavoriteBusinesses() {
+		return favoriteBusinesses;
+	}
+
+	public void setFavoriteBusinesses(List<Business> favoriteBusinesses) {
+		this.favoriteBusinesses = favoriteBusinesses;
 	}
 	
 

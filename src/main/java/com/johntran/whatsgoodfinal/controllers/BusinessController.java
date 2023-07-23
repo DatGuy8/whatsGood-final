@@ -2,6 +2,8 @@ package com.johntran.whatsgoodfinal.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,8 +69,8 @@ public class BusinessController {
 		List<Business> businesses = businessService.findAllApproved(true);
 		model.addAttribute("businesses", businesses);
 		
-		List<Item> sortedItems = itemService.getHighestRated();
-		model.addAttribute("sortedItems",sortedItems);
+//		List<Item> sortedItems = itemService.getHighestRated();
+//		model.addAttribute("sortedItems",sortedItems);
 		return "business/homePage.jsp";
 	}
 
@@ -160,6 +162,9 @@ public class BusinessController {
 		}
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
+		List<Item> sortedItems = itemService.findBusinessItems(businessId);
+		Collections.sort(sortedItems, Comparator.comparing(Item::getName));
+		model.addAttribute("sortedItems",sortedItems);
 		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("business", business);
 		model.addAttribute("googleApiKey",googleApiKey);

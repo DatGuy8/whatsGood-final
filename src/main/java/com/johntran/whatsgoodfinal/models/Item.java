@@ -1,4 +1,4 @@
-package com.johntran.whatsgoodfinal.models;
+ package com.johntran.whatsgoodfinal.models;
 
 import java.math.BigDecimal;
 import java.util.Date;

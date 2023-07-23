@@ -1,6 +1,6 @@
 /**
  * 
- */
+
 
 // Initialize and add the map
 let map, infoWindow, directionsService, directionsRenderer;
@@ -110,5 +110,25 @@ $(document).ready(function() {
 		window.open(url);
 	});
 });
+ */
+ 
+ const filterInput = document.getElementById('filterInput');
+    const itemCards = document.querySelectorAll('.item-card');
+
+    filterInput.addEventListener('input', function(event) {
+		event.preventDefault(); // Prevent page scroll
+        const filterText = this.value.toLowerCase().trim();
+
+        itemCards.forEach(card => {
+            const itemName = card.querySelector('.card-text').textContent.toLowerCase();
+            if (itemName.includes(filterText)) {
+                card.style.display = 'block'; // Show the card
+            } else {
+                card.style.display = 'none'; // Hide the card
+            }
+        });
+    });
+ 
+
 
 
