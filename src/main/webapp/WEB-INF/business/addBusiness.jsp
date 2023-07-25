@@ -15,12 +15,11 @@
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <!-- YOUR own local CSS -->
 <link rel="stylesheet" href="/css/style.css" />
-<!-- For any Bootstrap that uses JS or jQuery-->
-<script src="/webjars/jquery/jquery.min.js"></script>
-<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- GOOGLE PLACES API FOR ADDRESSES -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3iO0mybHe0fk4VyIIKqIidMl9HSd_xkk&libraries=places&callback=initAutocomplete" async defer></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3iO0mybHe0fk4VyIIKqIidMl9HSd_xkk&libraries=places&callback=initAutocomplete"
+	async defer></script>
 
 </head>
 <body>
@@ -103,83 +102,83 @@
 	</div>
 
 
-	<div class="mt-3">
+	<div class="mt-3 w-50 mx-auto">
 		<h3 class="text-center">Submit a Business to be added to What's
 			Good</h3>
 
-		<div class="container">
+		<div>
 			<form:form action="/business/new" method="POST"
-				modelAttribute="business" enctype="multipart/form-data">
-				
-				<div>
-					<input id="autocomplete" type="text" class="form-control" placeholder="Search a Business through Google">
+				modelAttribute="business" enctype="multipart/form-data"  class=" d-flex flex-column gap-3">
+				<div class="form-group">
+					<form:errors path="name" class="text-danger" />
+					<form:label path="name">Business Name:</form:label>
+					<form:input type="text" class="form-control" path="name"
+						id="businessName" placeholder="Search/enter a Business" />
 				</div>
-					
 
-					<div class="form-group">
-						<form:errors path="name" class="text-danger" />
-						<form:label path="name">Business Name:</form:label>
-						<form:input type="text" class="form-control" path="name" id="businessName"/>
-					</div>
-					
-				<div class="form-row">
-					<div class="form-group col-md-3">
+				<div class="d-flex justify-content-between">
+					<div class="form-group col-md-5">
 						<form:errors path="address" class="text-danger" />
 						<form:label path="address.street">Address:</form:label>
 						<form:input type="text" class="form-control" path="address.street"
-							 placeholder="Enter Address" id="street"/>
+							placeholder="Enter Address" id="street" />
 					</div>
-					
 
-					<div class="form-group col-md-3">
+
+					<div class="form-group col-md-5">
 						<form:errors path="address" class="text-danger" />
 						<form:label path="address.city">City:</form:label>
 						<form:input type="text" class="form-control" path="address.city"
-							placeholder="Enter City" id="city"/>
+							placeholder="Enter City" id="city" />
 					</div>
 				</div>
-					
-					<div class="form-group">
+
+				<div class="d-flex justify-content-between">
+					<div class="form-group col-md-5">
 						<form:errors path="address.state" class="text-danger" />
 						<form:label path="address.state">State:</form:label>
 						<form:input type="text" class="form-control" path="address.state"
-							placeholder="Enter State" id="state"/>
+							placeholder="Enter State" id="state" />
 					</div>
-					
-					<div class="form-group">
+
+					<div class="form-group col-md-5">
 						<form:errors path="address.zipCode" class="text-danger" />
 						<form:label path="address.zipCode">Zip Code:</form:label>
 						<form:input type="text" class="form-control"
-							path="address.zipCode" placeholder="Enter Zip Code" id="zipCode"/>
+							path="address.zipCode" placeholder="Enter Zip Code" id="zipCode" />
 					</div>
-					
+				</div>
 
 
-					<div class="form-group">
-						<form:errors path="website" class="text-danger" />
-						<form:label path="website">Website:</form:label>
-						<form:input type="text" class="form-control" path="website"
-							placeholder="ex. www.businesswebsite.com" id="website"/>
-					</div>
-					
-					<div class="form-group">
-						<img id="imagePreview" src="#" alt="Image Preview"
-							style="max-width: 200px; max-height: 200px; display: none;">
-						<%-- <form:errors path="photos" class="text-danger" /> --%>
-						<label for="imageFile" class="custom-file-upload">Business
-							Photo: <input type="file" name="imageFile"
-							accept="image/png, image/jpeg" name="imageFile"
-							onchange="previewImage(event)" />
-						</label>
-					</div>
-					
 
-					<button type="submit" class="btn btn-primary">Submit</button>
+				<div class="form-group">
+					<form:errors path="website" class="text-danger" />
+					<form:label path="website">Website:</form:label>
+					<form:input type="text" class="form-control" path="website"
+						placeholder="ex. www.businesswebsite.com" id="website" />
+				</div>
+
+				<div class="form-group">
+					<img id="imagePreview" src="#" alt="Image Preview"
+						style="max-width: 200px; max-height: 200px; display: none;">
+					<%-- <form:errors path="photos" class="text-danger" /> --%>
+					<label for="imageFile" class="custom-file-upload">Business
+						Photo: <input type="file" name="imageFile"
+						accept="image/png, image/jpeg" name="imageFile"
+						onchange="previewImage(event)" />
+					</label>
+				</div>
+
+
+				<button type="submit" class="btn btn-success">Submit</button>
 			</form:form>
 		</div>
 
 	</div>
 
+	<!-- For any Bootstrap that uses JS or jQuery-->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/addBusiness/index.js"></script>
 
 </body>

@@ -112,8 +112,7 @@
 	<!--=================================END NAV BAR ========================================-->
 
 	<main role="main">
-		<h1 class="text-center m-3">${business.name }addaverage rating
-			after</h1>
+		<h1 class="text-center m-3">${business.name }</h1>
 		<!--================================CAROUSEL======================================  -->
 		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel"
 			data-bs-theme="light">
@@ -131,7 +130,7 @@
 					varStatus="status">
 					<div class="carousel-item${status.first ? ' active': '' }">
 						<div class="d-flex justify-content-center">
-							<img src="<c:out value="${photo.filePath }"/>" height="500px"
+							<img src="${photo.filePath }" height="500px"
 								class="mx-auto rounded">
 						</div>
 
@@ -201,7 +200,7 @@
 											<div class="card mb-3">
 												<c:if test="${item.photos[0].filePath != null }">
 												<img class="card-img-top" src="${item.photos[0].filePath }"
-													alt="table food" />
+													alt="table food" height="150px"/>
 												</c:if>	
 													
 												<div class="card-body">
@@ -269,7 +268,7 @@
 										<div class="card mb-3">
 											<c:if test="${item.photos[0].filePath != null }">
 												<img class="card-img-top" src="${item.photos[0].filePath }"
-													alt="table food" />
+													alt="table food" height="150px"/>
 												</c:if>	
 											<div class="card-body">
 												<p class="card-text">

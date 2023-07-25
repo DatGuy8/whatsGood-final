@@ -90,7 +90,7 @@
 					<div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
 						<ul class="nav flex-column">
 							<li class="nav-item">
-								<a href="/admin/businesses" class="nav-link align-items-center gap-2 active">
+								<a href="/admin" class="nav-link align-items-center gap-2 active">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-buildings-fill" viewBox="0 0 16 16">
   									<path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V.5ZM2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-1 2v1H2v-1h1Zm1 0h1v1H4v-1Zm9-10v1h-1V3h1ZM8 5h1v1H8V5Zm1 2v1H8V7h1ZM8 9h1v1H8V9Zm2 0h1v1h-1V9Zm-1 2v1H8v-1h1Zm1 0h1v1h-1v-1Zm3-2v1h-1V9h1Zm-1 2h1v1h-1v-1Zm-2-4h1v1h-1V7Zm3 0v1h-1V7h1Zm-2-2v1h-1V5h1Zm1 0h1v1h-1V5Z"/>
 								</svg>
@@ -114,15 +114,7 @@
 								Items
 								</a>
 							</li>
-							<li class="nav-item">
-								<a href="/admin/complaints" class="nav-link align-items-center gap-2" type="submit">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-card-text" viewBox="0 0 16 16">
-  									<path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-  									<path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
-								</svg>
-								Complaints
-								</a>
-							</li>
+							
 						</ul>
 						
 						
@@ -163,9 +155,12 @@
 	      <h1 class="h3 text-center">Businesses</h1>
 	    </div>
 	    <div class="btn-group" role="group" aria-label="Filter">
-		  <button type="button" class="btn btn-primary filter-btn" data-filter="all">All</button>
-		  <button type="button" class="btn btn-secondary filter-btn" data-filter="true">Approved</button>
+		  <button type="button" class="btn btn-success filter-btn" data-filter="all">All</button>
+		  <button type="button" class="btn btn-primary filter-btn" data-filter="true">Approved</button>
 		  <button type="button" class="btn btn-secondary filter-btn" data-filter="false">Not Approved</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="true">Featured</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="false">Not Featured</button>
+		  
 		</div>
 	    <div class="table-responsive small">
 	    	 <table class="table table-striped table-sm" id="businessTable">
@@ -173,8 +168,8 @@
 		          <tr>
 		            <th scope="col">ID</th>
 		            <th scope="col">Name</th>
-		            <th scope="col">Address</th>
-		            <th scope="col">Website</th>
+		            <th scope="col">Location</th>
+		            <th scope="col">Featured?</th>
 		            <th scope="col">Approved?</th>
 		          </tr>
 		        </thead>
@@ -183,8 +178,8 @@
 		          <tr>
 		            <td>${business.id }</td>
 		            <td><a href="/admin/editbusiness/${business.id }">${business.name }</a></td>
-		            <td>${business.address }</td>
-		            <td>${business.website }</td>
+		            <td>${business.address.city }, ${business.address.state }</td>
+		            <td>${business.isFeatured }</td>
 		            <td>${business.isApproved}</td>
 		          </tr>
 		          </c:forEach>
@@ -192,59 +187,7 @@
 		     </table>
 	    </div>
 	    
-	
-	
-	
-	
-		
-		<%-- <div class="album backgroundColor">
-			<div class="container mt-3">
-				<div class="row">
-					<c:forEach var="business" items="${businesses }">
-						<div class="col-md-4">
-							<div class="card mb-4 box-shadow">
-								<img class="card-img-top" src="${business.photos[0].filePath }" alt="pic of food" height="300px">
-								<div class="card-body">
-									<p class="card-text">
-										Business Name:
-										<c:out value="${business.name }" />
-									</p>
-									<p>
-										Website:
-										<c:out value="${business.website}" />
-									</p>
-									<p>
-										Address:
-										<c:out value="${business.address}" />
-									</p>
-									<a href="/admin/edit/business/${business.id }">
-										<button class="btn btn-dark">Edit</button>
-									</a>
-									<div
-										class="d-flex justify-content-between align-items-center mt-2">
-										<form action="/admin/approve/business/${business.id }"
-											method="post">
-											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" /> <input type="hidden"
-												name="_method" value="put" />
-											<button class="btn btn-primary">Approve</button>
-										</form>
-										<form action="/admin/delete/business/${business.id }"
-											method="POST">
-											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" /> <input type="hidden"
-												name="_method" value="delete" />
-											<button class="btn btn-danger">Deny</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
 
-				</div>
-			</div>
-		</div> --%>
 		
 	</main>
 </div>

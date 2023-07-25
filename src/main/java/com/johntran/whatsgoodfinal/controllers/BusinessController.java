@@ -129,9 +129,9 @@ public class BusinessController {
 		
 		if (!photoFile.isEmpty()) {
 			try {
-				String uploadDir = "/uploadedImages/businesses/";
+				String uploadDir = "/images/businesses/";
 				String fileName = UUID.randomUUID().toString() + "_" + photoFile.getOriginalFilename();
-				FileUploadUtil.saveFile("uploadedImages/businesses/", fileName, photoFile);
+				FileUploadUtil.saveFile("images/businesses/", fileName, photoFile);
 				
 				Photo photo = new Photo();//===================fix constructor and add in the items in parathesis
 				photo.setFileName(photoFile.getOriginalFilename());

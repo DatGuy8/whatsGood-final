@@ -79,8 +79,8 @@
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/businesses"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Businesses</a> <a
-											class="dropdown-item" href="#">Add a Business</a>
+										<a class="dropdown-item" href="/businesses">View Businesses</a> <a
+											class="dropdown-item" href="/business/add">Add a Business</a>
 									</div>
 								</li>
 								
@@ -88,7 +88,7 @@
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/items"> Items </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Highest Rated Items</a>
+										<a class="dropdown-item" href="/items">View Highest Rated Items</a>
 										<a class="dropdown-item" href="#">Add a Item</a>
 									</div>
 								</li>
@@ -120,7 +120,7 @@
 
 		<div class="container text-box">
 
-			<h2 style="font-weight: 400; color: #ebf2fa; border-radius: 5px;">
+			<h2 style="font-weight: 900; color: #ebf2fa; border-radius: 5px;">
 				Look for Items Users have reviewed from Businesses in San Jose, or help the community by adding business or items reviews to What's Good
 			</h2>
 			<p>

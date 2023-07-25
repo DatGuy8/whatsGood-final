@@ -43,7 +43,7 @@ public class AdminController {
 
 		model.addAttribute("businesses", businesses);
 
-		return "admin/adminPage.jsp";
+		return "admin/adminBusiness.jsp";
 
 	}
 
@@ -56,7 +56,7 @@ public class AdminController {
 		List<User> allUsers = userService.allUsers();
 		model.addAttribute("allUsers", allUsers);
 
-		return "admin/business.jsp";
+		return "admin/adminUsers.jsp";
 
 	}
 
