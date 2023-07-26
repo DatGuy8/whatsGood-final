@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- New line below to use the JSP Standard Tag Library -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -163,9 +163,9 @@
 	      <h1 class="h3 text-center">Users</h1>
 	    </div>
 	    <div class="btn-group" role="group" aria-label="Filter">
-		  <button type="button" class="btn btn-primary filter-btn" data-filter="all">All</button>
-		  <button type="button" class="btn btn-secondary filter-btn" data-filter="true">Admins</button>
-		  <button type="button" class="btn btn-secondary filter-btn" data-filter="false">Users</button>
+		  <button type="button" class="btn btn-primary filter-btn-users" data-filter="all">All</button>
+		  <button type="button" class="btn btn-secondary filter-btn-users" data-filter="ROLE_ADMIN">Admins</button>
+		  <button type="button" class="btn btn-secondary filter-btn-users" data-filter="ROLE_USER">Users</button>
 		</div>
 	    <div class="table-responsive small">
 	    	 <table class="table table-striped table-sm" id="businessTable">

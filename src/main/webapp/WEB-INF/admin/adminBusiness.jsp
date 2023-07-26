@@ -158,8 +158,8 @@
 		  <button type="button" class="btn btn-success filter-btn" data-filter="all">All</button>
 		  <button type="button" class="btn btn-primary filter-btn" data-filter="true">Approved</button>
 		  <button type="button" class="btn btn-secondary filter-btn" data-filter="false">Not Approved</button>
-		  <button type="button" class="btn btn-secondary filter-btn" data-filter="true">Featured</button>
-		  <button type="button" class="btn btn-secondary filter-btn" data-filter="false">Not Featured</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="featured">Featured</button>
+		  <button type="button" class="btn btn-secondary filter-btn" data-filter="notFeatured">Not Featured</button>
 		  
 		</div>
 	    <div class="table-responsive small">
