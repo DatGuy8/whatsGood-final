@@ -121,7 +121,7 @@
 		<div class="container text-box">
 
 			<h2 style="font-weight: 900; color: #ebf2fa; border-radius: 5px;">
-				Look for Items Users have reviewed from Businesses in San Jose, or help the community by adding business or items reviews to What's Good
+				Look for Items Users have reviewed from Businesses, or help the community by adding business or items reviews to What's Good!
 			</h2>
 			<p>
 				<a href="/business/add" class="btn btn-success my-2"> 
@@ -137,7 +137,7 @@
 		data-bs-ride="carousel" data-bs-theme="light">
 
 		<div class="carousel-inner">
-			<c:forEach var="business" items="${businesses }" varStatus="status">
+			<c:forEach var="business" items="${featuredBusinesses }" varStatus="status">
 				<div class="carousel-item${status.first ? ' active': '' }">
 					<div class="d-flex justify-content-center">
 						<a href="/business/${business.id }"> <img
@@ -181,7 +181,7 @@
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
-		<h1 class="text-center">Businesses Near You?</h1>
+		<h1 class="text-center">All Businesses</h1>
 		<div class="container mt-3">
 			<div class="row">
 				<!--------------------LOOPING THROUGH THE LIST OF BUSINESSES--------------------- -->

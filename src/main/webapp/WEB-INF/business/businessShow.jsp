@@ -159,31 +159,28 @@
 			<div class="leftBusinessShow w-75">
 				<div class="leftColumnShow">
 					<div class="p-3 border-bottom d-flex gap-1">
-					
+						<!-- SHOW BUSINESS PHOTO FORM BUTTON -->
 						<button class="btn btn-success" onclick="addPhotoForm()"
 							aria-expanded="false">Add Business Photo</button>
-							
+						
+						<!-- ADD MENU ITEM BUTTON -->
 						<a href="/business/${business.id }/item/new"><button
 								class="btn btn-outline-success">Add Menu Item</button></a>
-						<%-- <c:if test="${business in currentUser.favorites }"> --%>
-						
+			
+						<!-- ADD TO FAVORITES BUTTON -->
 						<form action="/user/addFavoriteBusiness" method="post">
 							<input type="hidden" name="businessId" value="${business.id }" />
 							<button class="btn btn-outline-success">Add to Favorites</button>
 						</form>
-						
-						<%-- <c:if test="${business not in currentUser.favorites}">
-							<form action="/user/addFavoriteBusiness" method="post">
-								<input type="hidden" name="businessId" value="${business.id }" />
-								<button class="btn btn-outline-success">Remove from Favorites</button>
-							</form>
-						</c:if> --%>
 					</div>
+					
+					<!-- PHOTO INPUT FORM -->
 					<div id="addPhotoInput" style="display: none;">
-						<form action="/business/${business.id }/add/photo" method="POST"
+						<form action="/business/add/${business.id }" method="POST"
 							enctype="multipart/form-data">
 							<div class="form-group">
-								<input type="file" name="photo" accept="image/*">
+								<label for="imageFile">Add Photo: </label>
+								<input type="file" name="imageFile" accept="image/png, image/jpeg">
 								<button>Submit Photo</button>
 							</div>
 						</form>
@@ -193,7 +190,7 @@
 						<h3>Top Items</h3>
 						<div class="album">
 							<div class="row">
-								<c:forEach var="item" items="${business.items }"
+								<c:forEach var="item" items="${highestRatedItems }"
 									varStatus="status">
 									<c:if test="${status.index < 4}">
 										<div class="col-md-3">

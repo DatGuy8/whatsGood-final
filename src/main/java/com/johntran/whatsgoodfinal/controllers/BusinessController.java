@@ -25,11 +25,13 @@ import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
 import com.johntran.whatsgoodfinal.config.GoogleMapsApiConfig;
+import com.johntran.whatsgoodfinal.config.ItemRatingComparator;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.Photo;
 import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.services.BusinessService;
+import com.johntran.whatsgoodfinal.services.ItemRatingService;
 import com.johntran.whatsgoodfinal.services.ItemService;
 import com.johntran.whatsgoodfinal.services.PhotoService;
 import com.johntran.whatsgoodfinal.services.UserService;
@@ -44,21 +46,23 @@ public class BusinessController {
 
 	@Autowired
 	private BusinessService businessService;
-	
+
 	@Autowired
 	private ItemService itemService;
 	
 	@Autowired
+	private ItemRatingService itemRatingService;
+
+	@Autowired
 	private PhotoService photoService;
 
-	//-----------hidden API key for GoogleMaps----------
+	// -----------hidden API key for GoogleMaps----------
 	private final String googleApiKey;
-	
+
 	@Autowired
 	public BusinessController(GoogleMapsApiConfig apiConfig) {
 		this.googleApiKey = apiConfig.getApiKey();
 	}
-	
 
 //==================HOMEPAGE/LANDING PAGE===========================	
 	@GetMapping({ "/", "/home" })
@@ -67,110 +71,134 @@ public class BusinessController {
 		User currentUser = userService.findByEmail(email);
 		model.addAttribute("currentUser", currentUser);
 		List<Business> businesses = businessService.findAllApproved(true);
+		List<Business> featuredBusinesses = businessService.findFeaturedBusinesses(true);
 		model.addAttribute("businesses", businesses);
-		
+		model.addAttribute("featuredBusinesses", featuredBusinesses);
+
 //		List<Item> sortedItems = itemService.getHighestRated();
 //		model.addAttribute("sortedItems",sortedItems);
 		return "business/homePage.jsp";
 	}
 
 //=================ADD BUSINESS PAGE=======================
-	@GetMapping("/business/add") 
-	public String addBusiness(@ModelAttribute("business") Business business, Model model) {
-		model.addAttribute("googleApiKey",googleApiKey);
+	@GetMapping("/business/add")
+	public String addBusiness(@ModelAttribute("business") Business business, Model model, Principal principal) {
+		model.addAttribute("googleApiKey", googleApiKey);
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		model.addAttribute("currentUser", currentUser);
 		return "business/addBusiness.jsp";
 	}
 
 //=================POST ROUTE ADD BUSINESS=================
 	@PostMapping("/business/new")
-	public String saveBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result, Model model,@RequestParam("imageFile")MultipartFile photoFile,Principal principal)
-			throws IOException {
+	public String saveBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result, Model model,
+			@RequestParam("imageFile") MultipartFile photoFile, Principal principal) throws IOException {
 		if (result.hasErrors()) {
 			return "business/addBusiness.jsp";
 		}
-		GeoApiContext context = new GeoApiContext.Builder()
-				.apiKey(googleApiKey)
-				.build();
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(googleApiKey).build();
 		String address = business.getAddress().getStreet();
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
-		
-		
-		 GeocodingResult[] results;
-		    try {
-		        results = GeocodingApi.geocode(context, address).await();
-		        
-		        if (results.length > 0) {
-		            // Retrieve the first result
-		            GeocodingResult apiResult = results[0];
-		            
-		            // Extract the latitude and longitude
-		            LatLng location = apiResult.geometry.location;
-		            double latitude = location.lat;
-		            double longitude = location.lng;
-		            
-		            // Pass the latitude and longitude to the model
-		            business.setLatitude(latitude);
-		            business.setLongitude(longitude);
-		            System.out.println("latitude" + latitude);
-		            System.out.println("longitude" + longitude);
 
-		        } else {
-		            // Handle case where no results are found
-		        	System.out.println("No geocoding results found.");
-		        }
-		    } catch (ApiException | InterruptedException | IOException e) {
-		        // Handle exceptions
-		    	System.out.println(e.getMessage());
+		GeocodingResult[] results;
+		try {
+			results = GeocodingApi.geocode(context, address).await();
+
+			if (results.length > 0) {
+				// Retrieve the first result
+				GeocodingResult apiResult = results[0];
+
+				// Extract the latitude and longitude
+				LatLng location = apiResult.geometry.location;
+				double latitude = location.lat;
+				double longitude = location.lng;
+
+				// Pass the latitude and longitude to the model
+				business.setLatitude(latitude);
+				business.setLongitude(longitude);
+				System.out.println("latitude" + latitude);
+				System.out.println("longitude" + longitude);
+
+			} else {
+				// Handle case where no results are found
+				System.out.println("No geocoding results found.");
+			}
+		} catch (ApiException | InterruptedException | IOException e) {
+			// Handle exceptions
+			System.out.println(e.getMessage());
 //		        model.addAttribute("error", "Geocoding error: " + e.getMessage());
-		    }
-		    
-		    
-		
+		}
+
 		if (!photoFile.isEmpty()) {
 			try {
 				String uploadDir = "/images/businesses/";
 				String fileName = UUID.randomUUID().toString() + "_" + photoFile.getOriginalFilename();
 				FileUploadUtil.saveFile("images/businesses/", fileName, photoFile);
-				
-				Photo photo = new Photo();//===================fix constructor and add in the items in parathesis
+
+				Photo photo = new Photo();// ===================fix constructor and add in the items in parathesis
 				photo.setFileName(photoFile.getOriginalFilename());
 				photo.setFilePath(uploadDir + fileName);
-				
+
 				Business savedBusiness = businessService.addBusiness(business);
 				photo.setBusiness(savedBusiness);
 				photo.setUploadedBy(currentUser);
-				
+
 				photoService.savePhoto(photo);
-		
-			}catch (Exception e){
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 
 		System.out.println("Business controller photofile area");
-		   
+
 		return "redirect:/";
 	}
 
 //=====================BUSINESS SHOW PAGE===========================
 	@GetMapping("/business/{businessId}")
-	public String showBusiness(@PathVariable("businessId") Long businessId, Model model,Principal principal) {
+	public String showBusiness(@PathVariable("businessId") Long businessId, Model model, Principal principal) {
 		Business business = businessService.getOne(businessId);
-		if(business.getIsApproved() == false) {
+		if (business.getIsApproved() == false) {
 			return "redirect:/";
 		}
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
+		
+		// Sort By Highest Rated
+		List<Item> highestRatedItems = itemService.findBusinessItems(businessId);
+		ItemRatingComparator itemRatingComparator = new ItemRatingComparator(itemRatingService);
+		Collections.sort(highestRatedItems, itemRatingComparator);
+		System.out.print(highestRatedItems);
+		
 		List<Item> sortedItems = itemService.findBusinessItems(businessId);
+		//  SORT ITEMS BY ALPHABETICAL ORDER
 		Collections.sort(sortedItems, Comparator.comparing(Item::getName));
-		model.addAttribute("sortedItems",sortedItems);
+		
+		model.addAttribute("sortedItems", sortedItems);
+		model.addAttribute("highestRatedItems", highestRatedItems);
 		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("business", business);
-		model.addAttribute("googleApiKey",googleApiKey);
+		model.addAttribute("googleApiKey", googleApiKey);
+		
+		
+		
+		
+		
 		return "business/businessShow.jsp";
 	}
-	
-	
+
+//======================ADD BUSINESS PHOTO ROUTE
+	@PostMapping("/photo/add")
+	public String addBusinessPhoto(@PathVariable("businessId") Long businessId, Principal principal,
+			@RequestParam("imageFile") MultipartFile photoFile, BindingResult result) throws IOException {
+		if (result.hasErrors()) {
+			return "business/businessShow.jsp";
+		}
+		System.out.println("here");
+		return "redirect:/business/{businessId}";
+	}
 
 }

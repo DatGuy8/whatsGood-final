@@ -12,6 +12,8 @@ public interface BusinessRepository extends JpaRepository<Business, Long> {
 	List<Business> findAll();
 
 	List<Business> findAllByIsApproved(Boolean isApproved);
+	
+	List<Business> findAllByIsFeatured(Boolean isFeatured);
 
 	// FOR SEARCHING
 	List<Business> findByIsApprovedTrueAndNameContainingIgnoreCaseOrIsApprovedTrueAndWebsiteContainingIgnoreCaseOrIsApprovedTrue(String name, String website);

@@ -26,6 +26,11 @@ public class BusinessService {
 		return businessRepo.findAllByIsApproved(isApproved);
 	}
 
+	// FIND FEATURED BUSINESSES
+	public List<Business> findFeaturedBusinesses(Boolean isFeatured){
+		return businessRepo.findAllByIsFeatured(isFeatured);
+	}
+	
 	// ADD BUSINESS
 	public Business addBusiness(Business business) {
 		return businessRepo.save(business);

@@ -108,7 +108,7 @@
 
 		<div>
 			<form:form action="/business/new" method="POST"
-				modelAttribute="business" enctype="multipart/form-data"  class=" d-flex flex-column gap-3">
+				modelAttribute="business" enctype="multipart/form-data"  class="d-flex flex-column gap-3">
 				<div class="form-group">
 					<form:errors path="name" class="text-danger" />
 					<form:label path="name">Business Name:</form:label>
@@ -163,14 +163,15 @@
 						style="max-width: 200px; max-height: 200px; display: none;">
 					<%-- <form:errors path="photos" class="text-danger" /> --%>
 					<label for="imageFile" class="custom-file-upload">Business
-						Photo: <input type="file" name="imageFile"
+						Photo: 
+						<input type="file" name="imageFile"
 						accept="image/png, image/jpeg" name="imageFile"
 						onchange="previewImage(event)" />
 					</label>
 				</div>
 
 
-				<button type="submit" class="btn btn-success">Submit</button>
+				<button class="btn btn-success">Submit</button>
 			</form:form>
 		</div>
 

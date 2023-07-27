@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <!-- New line below to use the JSP Standard Tag Library -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page isErrorPage="true" %>    
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>   
+<%@ page isErrorPage="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +72,7 @@
 			</form>
 		</div>
 	</header>
-		<!----------------------------SIDE BAR----------------------------------->
+	<!----------------------------SIDE BAR----------------------------------->
 	<div class="container-fluid">
 		<div class="row">
 			<div class="sidebar border border-right col-md-3 col-lg-2 p-0">
@@ -88,7 +88,7 @@
 					<div
 						class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
 						<ul class="nav flex-column">
-							<li class="nav-item"><a href="/admin/businesses"
+							<li class="nav-item"><a href="/admin"
 								class="nav-link align-items-center gap-2 active"> <svg
 										xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="black" class="bi bi-buildings-fill" viewBox="0 0 16 16">
@@ -114,16 +114,7 @@
 											d="m4.4.8-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 3.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8Zm3 0-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 6.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8Zm3 0-.003.004-.014.019a4.077 4.077 0 0 0-.204.31 2.337 2.337 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.198 3.198 0 0 1-.202.388 5.385 5.385 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 9.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8Z" />
 								</svg> Items
 							</a></li>
-							<li class="nav-item"><a href="/admin/complaints"
-								class="nav-link align-items-center gap-2" type="submit"> <svg
-										xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-										fill="black" class="bi bi-card-text" viewBox="0 0 16 16">
-  									<path
-											d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-  									<path
-											d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
-								</svg> Complaints
-							</a></li>
+
 						</ul>
 
 						<hr class="my-3">
@@ -155,57 +146,91 @@
 						</ul>
 					</div>
 				</div>
-				
+
 			</div>
 
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				
-					<img src="${business.photos[0].filePath }"
-						alt="pic of food" height="300px">
-						
-						<form:form action="/admin/editbusiness/${business.id }" method="post" modelAttribute="business"  class="form-control">
+				<div class="w-75 d-flex">
+					<img src="${business.photos[0].filePath }" alt="pic of food"
+						height="300px">
+
+					<form:form action="/admin/editbusiness/${business.id }"
+						method="post" modelAttribute="business" class="form-control">
 						<input type="hidden" name="_method" value="put">
-   						
-   						<div>
-   							<form:label path="name" class="form-label">Business Name: </form:label>
-   							<form:errors path="name"/>
-   							<form:input path="name" class="form-control"/>
-   						</div>
-   						<div>
-   							<form:label path="website" class="form-label">Website: </form:label>
-   							<form:errors path="website"/>
-   							<form:input path="website" class="form-control"/>
-   						</div>
-   						<div>
-   							<form:label path="address" class="form-label">Address: </form:label>
-   							<form:errors path="address"/>
-   							<form:input path="address" class="form-control"/>
-   						</div>
-   						<form:input path="photos" type="hidden"/>
-   						<div class="mt-3">
-   							<button class="btn btn-dark">Update Business</button>
-   						</div>
-   						
-						</form:form>
-						<div
-							class="d-flex justify-content-between align-items-center mt-2">
-							<form action="/admin/approve/business/${business.id }"
-								method="post">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <input type="hidden" name="_method"
-									value="put" />
-								<button class="btn btn-primary">Approve</button>
-							</form>
-							<form action="/admin/delete/business/${business.id }"
-								method="POST">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <input type="hidden" name="_method"
-									value="delete" />
-								<button class="btn btn-danger">Deny</button>
-							</form>
+
+						<div>
+							<form:label path="name" class="form-label">Business Name: </form:label>
+							<form:errors path="name" />
+							<form:input path="name" class="form-control" />
 						</div>
-					
-				
+						<div>
+							<form:label path="website" class="form-label">Website: </form:label>
+							<form:errors path="website" />
+							<form:input path="website" class="form-control" />
+						</div>
+						<div>
+							<form:label path="address.street" class="form-label">Address: </form:label>
+							<form:errors path="address.street" />
+							<form:input path="address.street" class="form-control" />
+						</div>
+						<div class="form-group col-md-5">
+							<form:errors path="address" class="text-danger" />
+							<form:label path="address.city">City:</form:label>
+							<form:input type="text" class="form-control" path="address.city"
+								placeholder="Enter City" id="city" />
+						</div>
+						<div class="form-group col-md-5">
+							<form:errors path="address.state" class="text-danger" />
+							<form:label path="address.state">State:</form:label>
+							<form:input type="text" class="form-control" path="address.state"
+								placeholder="Enter State" id="state" />
+						</div>
+						<div class="form-group col-md-5">
+							<form:errors path="address.zipCode" class="text-danger" />
+							<form:label path="address.zipCode">Zip Code:</form:label>
+							<form:input type="text" class="form-control"
+								path="address.zipCode" placeholder="Enter Zip Code" id="zipCode" />
+						</div>
+						<div class="form-group col-md-5">
+							<form:errors path="isFeatured" class="text-danger" />
+							<form:label path="isFeatured">Featured Business?</form:label>
+							<div class="form-check">
+								<form:checkbox path="isFeatured" class="form-check-input" />
+							</div>
+						</div>
+						<div class="form-group col-md-5">
+							<form:errors path="isApproved" class="text-danger" />
+							<form:label path="isApproved">Approved?</form:label>
+							<form:input type="text" class="form-control" path="isApproved" readonly="true"/>
+						</div>
+
+						<form:input path="photos" type="hidden" />
+						<div class="mt-3">
+							<button class="btn btn-dark">Update Business</button>
+						</div>
+
+					</form:form>
+
+
+				</div>
+				<div class="mt-2 d-flex gap-2">
+					<c:if test="${business.isApproved == false }">
+
+						<form action="/admin/approve/business/${business.id }"
+							method="post">
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" /> <input type="hidden" name="_method"
+								value="put" />
+							<button class="btn btn-primary">Approve</button>
+						</form>
+					</c:if>
+					<form action="/admin/delete/business/${business.id }" method="POST">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" /> <input type="hidden" name="_method"
+							value="delete" />
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</div>
 			</main>
 		</div>
 	</div>

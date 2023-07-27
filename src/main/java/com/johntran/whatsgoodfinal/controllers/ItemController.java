@@ -122,22 +122,26 @@ public class ItemController {
 //======================POST ADD ITEM RATING ROUTE==================================
 	@PostMapping("/item/{itemId}")
 	public String itemRatingSave(@Valid @ModelAttribute("itemRating") ItemRating itemRating, BindingResult result,
-			@PathVariable("itemId") Long itemId, Principal pricipal) throws IOException {
-
+			@PathVariable("itemId") Long itemId, Principal principal, Model model) throws IOException {
+		
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		
+		if (itemRatingService.hasUserRatedItem(currentUser.getId(), itemId)) {
+			result.rejectValue("rating", "duplicate", "You have already rated the item");
+		}
 		if (result.hasErrors()) {
-			System.out.println(result);
-			return "redirect:/item/{itemId}";
+			
+			Item item = itemService.getOneItem(itemId);
+			Double averageRating = itemRatingService.getAverageRatingForItem(item);
+			model.addAttribute("averageRating", averageRating);
+			model.addAttribute("item", item);
+			return "item/showItem.jsp";
 		}
 
-		String email = pricipal.getName();
-		User currentUser = userService.findByEmail(email);
 
 		Item currentItem = itemService.getOneItem(itemId);
 
-		if (itemRatingService.hasUserRatedItem(currentUser.getId(), itemId)) {
-			result.rejectValue("rating", "duplicate", "You have already rated the item");
-			return "redirect:/item/{itemId}";
-		}
 
 		itemRating.setItem(currentItem);
 		itemRating.setUser(currentUser);

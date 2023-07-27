@@ -106,10 +106,9 @@
 	<main role="main">
 		<section class="text-center">
 			<div class="container">
-			<c:forEach var="item" items="${ item.photos}">
-				<img src="${item.filePath }" alt="stock photo"
-					height="150px" />
-			</c:forEach>
+				<c:forEach var="item" items="${ item.photos}">
+					<img src="${item.filePath }" alt="stock photo" height="150px" />
+				</c:forEach>
 				<h1>
 					<c:out value="${item.name }" />
 				</h1>
@@ -147,11 +146,14 @@
 							for="star2" class="star">&#9733;</label> <input type="radio"
 							id="star1" name="rating" value="1" /> <label for="star1"
 							class="star">&#9733;</label>
-
 						<form:textarea path="comment" placeholder="Add a comment"></form:textarea>
 						<form:errors path="comment" class="text-danger" />
 						<button type="submit">Add rating</button>
 					</div>
+					
+					<form:errors path="rating" class="text-danger" />
+					<form:errors path="comment" class="text-danger" />
+					
 				</form:form>
 			</div>
 
