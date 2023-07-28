@@ -23,6 +23,7 @@ public class ItemRatingComparator implements Comparator<Item>{
         // Note: You need to implement the method getAverageRatingForItem() in your itemRatingService
         Double averageRating1 = itemRatingService.getAverageRatingForItem(item1);
         Double averageRating2 = itemRatingService.getAverageRatingForItem(item2);
+        
         // Handle null average ratings
         if (averageRating1 == null && averageRating2 == null) {
             return 0; // Both items have no average rating, consider them equal

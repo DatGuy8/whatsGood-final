@@ -49,7 +49,7 @@ public class BusinessController {
 
 	@Autowired
 	private ItemService itemService;
-	
+
 	@Autowired
 	private ItemRatingService itemRatingService;
 
@@ -71,6 +71,12 @@ public class BusinessController {
 		User currentUser = userService.findByEmail(email);
 		model.addAttribute("currentUser", currentUser);
 		List<Business> businesses = businessService.findAllApproved(true);
+
+		for (Business business : businesses) {
+			Double averageRating = itemService.getAverageRatingForBusinessItems(business);
+			business.setAverageRating(averageRating);
+		}
+
 		List<Business> featuredBusinesses = businessService.findFeaturedBusinesses(true);
 		model.addAttribute("businesses", businesses);
 		model.addAttribute("featuredBusinesses", featuredBusinesses);
@@ -160,45 +166,70 @@ public class BusinessController {
 //=====================BUSINESS SHOW PAGE===========================
 	@GetMapping("/business/{businessId}")
 	public String showBusiness(@PathVariable("businessId") Long businessId, Model model, Principal principal) {
+		
 		Business business = businessService.getOne(businessId);
 		if (business.getIsApproved() == false) {
 			return "redirect:/";
 		}
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
+
+		// GET AVERAGE RATING OF ALL ITEMS FOR THIS BUSINESS
+		Double averageRating = itemService.getAverageRatingForBusinessItems(business);
+		business.setAverageRating(averageRating);
 		
 		// Sort By Highest Rated
-		List<Item> highestRatedItems = itemService.findBusinessItems(businessId);
+		List<Item> highestRatedItems = itemService.findBusinessItems(business);
 		ItemRatingComparator itemRatingComparator = new ItemRatingComparator(itemRatingService);
 		Collections.sort(highestRatedItems, itemRatingComparator);
-		System.out.print(highestRatedItems);
-		
-		List<Item> sortedItems = itemService.findBusinessItems(businessId);
-		//  SORT ITEMS BY ALPHABETICAL ORDER
+
+		List<Item> sortedItems = itemService.findBusinessItems(business);
+		// SORT ITEMS BY ALPHABETICAL ORDER
 		Collections.sort(sortedItems, Comparator.comparing(Item::getName));
-		
+
 		model.addAttribute("sortedItems", sortedItems);
 		model.addAttribute("highestRatedItems", highestRatedItems);
 		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("business", business);
 		model.addAttribute("googleApiKey", googleApiKey);
-		
-		
-		
-		
-		
+
 		return "business/businessShow.jsp";
 	}
 
 //======================ADD BUSINESS PHOTO ROUTE
-	@PostMapping("/photo/add")
+	@PostMapping("/business/photo/{businessId}")
 	public String addBusinessPhoto(@PathVariable("businessId") Long businessId, Principal principal,
-			@RequestParam("imageFile") MultipartFile photoFile, BindingResult result) throws IOException {
-		if (result.hasErrors()) {
-			return "business/businessShow.jsp";
+			@RequestParam("imageFile") MultipartFile photoFile
+
+	) {
+
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		
+		Business business = businessService.getOne(businessId);
+		
+		if (!photoFile.isEmpty()) {
+			try {
+				String uploadDir = "/images/businesses/";
+				String fileName = UUID.randomUUID().toString() + "_" + photoFile.getOriginalFilename();
+				FileUploadUtil.saveFile("images/businesses/", fileName, photoFile);
+
+				Photo photo = new Photo();
+				photo.setFileName(photoFile.getOriginalFilename());
+				photo.setFilePath(uploadDir + fileName);
+
+				
+				photo.setBusiness(business);
+				photo.setUploadedBy(currentUser);
+
+				photoService.savePhoto(photo);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		System.out.println("here");
+		
+		System.out.println("business controller add new photo route");
 		return "redirect:/business/{businessId}";
 	}
-
 }

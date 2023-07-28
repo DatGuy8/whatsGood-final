@@ -13,6 +13,8 @@ public class ItemRatingService {
 
 	@Autowired
 	ItemRatingRepository itemRatingRepo;
+	
+	
 
 	// ADD ITEM RATING
 	public ItemRating addRating(ItemRating rating) {
@@ -34,4 +36,6 @@ public class ItemRatingService {
 
 		return itemRatingRepo.existsByUserAndItem(user, item);
 	}
+	
+	
 }

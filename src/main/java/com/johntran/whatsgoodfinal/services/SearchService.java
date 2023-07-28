@@ -25,9 +25,7 @@ public class SearchService {
 
 	
 	public List<Business> searchBusiness(String name, String website) {
-		return businessRepo
-				.findByIsApprovedTrueAndNameContainingIgnoreCaseOrIsApprovedTrueAndWebsiteContainingIgnoreCaseOrIsApprovedTrue(
-						name, website);
+		return businessRepo.findByIsApprovedTrueAndNameContainingIgnoreCaseOrIsApprovedTrueAndWebsiteContainingIgnoreCase(name, website);
 	}
 
 	

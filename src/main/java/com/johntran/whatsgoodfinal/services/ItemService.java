@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.repositories.ItemRepository;
 
@@ -30,8 +31,9 @@ public class ItemService {
 	}
 
 	// GET ITEMS FROM ONE BUSINESS
-	public List<Item> findBusinessItems(Long businessId) {
-		List<Item> items = itemRepository.findByBusinessId(businessId);
+	public List<Item> findBusinessItems(Business business) {
+		List<Item> items = itemRepository.findByBusiness(business);
+		
 		for (Item item : items) {
 			Double averageRating = itemRatingService.getAverageRatingForItem(item);
 			item.setAverageRating(averageRating);
@@ -62,4 +64,28 @@ public class ItemService {
 		return allItems;
 
 	}
+	
+	// GET AVERAGE RATINGS FOR ALL ITEMS IN BUSINESS
+		public Double getAverageRatingForBusinessItems(Business business) {
+			List<Item> items = findBusinessItems(business);
+			
+			if (items.isEmpty()) {
+				return null;
+			}
+			double totalRating = 0;
+	        int itemCount = 0;
+	        for (Item item : items) {
+	            Double averageRating = itemRatingService.getAverageRatingForItem(item);
+	            if (averageRating != null) {
+	                totalRating += averageRating;
+	                itemCount++;
+	            }
+	        }
+
+	        if (itemCount == 0) {
+	            return null;
+	        }
+
+	        return totalRating / itemCount;
+	    }
 }

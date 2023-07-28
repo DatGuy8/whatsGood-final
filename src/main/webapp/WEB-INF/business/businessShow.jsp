@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,18 +112,22 @@
 	<!--=================================END NAV BAR ========================================-->
 
 	<main role="main">
+		<c:set var="formatRating" value="${business.averageRating }" />
 		<h1 class="text-center m-3">${business.name }</h1>
+
+
 		<!--================================CAROUSEL======================================  -->
 		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel"
 			data-bs-theme="light">
 			<div class="carousel-indicators">
-				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="0" class="active" aria-current="true"
-					aria-label="Slide 1"></button>
-				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="1" aria-label="Slide 2"></button>
-				<button type="button" data-bs-target="#myCarousel"
-					data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<c:forEach var="photo" items="${business.photos}" varStatus="status">
+					<button type="button" data-bs-target="#myCarousel"
+						data-bs-slide-to="${status.index}"
+						class="${status.first ? 'active' : ''}"
+						aria-current="${status.first}"
+						aria-label="Slide ${status.index + 1}"></button>
+				</c:forEach>
+
 			</div>
 			<div class="carousel-inner">
 				<c:forEach var="photo" items="${business.photos }"
@@ -162,29 +166,47 @@
 						<!-- SHOW BUSINESS PHOTO FORM BUTTON -->
 						<button class="btn btn-success" onclick="addPhotoForm()"
 							aria-expanded="false">Add Business Photo</button>
-						
+
 						<!-- ADD MENU ITEM BUTTON -->
 						<a href="/business/${business.id }/item/new"><button
 								class="btn btn-outline-success">Add Menu Item</button></a>
-			
+
 						<!-- ADD TO FAVORITES BUTTON -->
 						<form action="/user/addFavoriteBusiness" method="post">
 							<input type="hidden" name="businessId" value="${business.id }" />
 							<button class="btn btn-outline-success">Add to Favorites</button>
 						</form>
 					</div>
-					
+
 					<!-- PHOTO INPUT FORM -->
 					<div id="addPhotoInput" style="display: none;">
-						<form action="/business/add/${business.id }" method="POST"
+						<form action="/business/photo/${business.id }" method="POST"
 							enctype="multipart/form-data">
 							<div class="form-group">
-								<label for="imageFile">Add Photo: </label>
-								<input type="file" name="imageFile" accept="image/png, image/jpeg">
+								<label for="imageFile">Add Photo: </label> <input type="file"
+									name="imageFile" accept="image/png, image/jpeg"> <input
+									type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
 								<button>Submit Photo</button>
 							</div>
 						</form>
 
+					</div>
+					<div class="p-3 border-bottom">
+					<!-- CHECK HERE LATER WHEN AND OTHERWISE FOR FN:length was working -->
+						<c:choose>
+							<c:when test="${true}">
+								<h3>
+									Overall Rating:
+									<fmt:formatNumber type="number" maxFractionDigits="2"
+										value="${formatRating}" />
+									stars
+								</h3>
+							</c:when>
+							<c:otherwise>
+								<h3>Overall Rating: No Reviews Yet</h3>
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="p-3 border-bottom">
 						<h3>Top Items</h3>
@@ -192,14 +214,16 @@
 							<div class="row">
 								<c:forEach var="item" items="${highestRatedItems }"
 									varStatus="status">
+									<!--SET TO FORMAT RATING -->
+									<c:set var="formatRating" value="${item.averageRating }" />
 									<c:if test="${status.index < 4}">
 										<div class="col-md-3">
 											<div class="card mb-3">
 												<c:if test="${item.photos[0].filePath != null }">
-												<img class="card-img-top" src="${item.photos[0].filePath }"
-													alt="table food" height="150px"/>
-												</c:if>	
-													
+													<img class="card-img-top" src="${item.photos[0].filePath }"
+														alt="table food" height="150px" />
+												</c:if>
+
 												<div class="card-body">
 													<p class="card-text">
 														<c:out value="${item.name }" />
@@ -208,12 +232,22 @@
 														$
 														<c:out value="${item.price }" />
 													</p>
+													<!-- STAR ICON RATINGS -->
+													<!-- figure out half stars later -->
 													<c:choose>
 														<c:when test="${fn:length(item.ratings) > 0}">
 															<c:forEach var="i" begin="1" end="${item.averageRating}">
+
 																<i class="fa fa-star starAverage"></i>
-																<!-- Replace with your star icon class -->
+
 															</c:forEach>
+
+
+															<p>
+																<fmt:formatNumber type="number" maxFractionDigits="2"
+																	value="${formatRating}" />
+																stars
+															</p>
 															<p>Number of Ratings: ${fn:length(item.ratings)}</p>
 														</c:when>
 														<c:otherwise>
@@ -265,8 +299,8 @@
 										<div class="card mb-3">
 											<c:if test="${item.photos[0].filePath != null }">
 												<img class="card-img-top" src="${item.photos[0].filePath }"
-													alt="table food" height="150px"/>
-												</c:if>	
+													alt="table food" height="150px" />
+											</c:if>
 											<div class="card-body">
 												<p class="card-text">
 													<c:out value="${item.name }" />
@@ -277,11 +311,16 @@
 												</p>
 												<c:choose>
 													<c:when test="${fn:length(item.ratings) > 0}">
-														<c:forEach var="i" begin="1" end="${item.averageRating}">
-															<i class="fa fa-star starAverage"></i>
-															<!-- Replace with your star icon class -->
-														</c:forEach>
-														<p>Number of Ratings: ${fn:length(item.ratings)}</p>
+														<div class="d-flex gap-1">
+															<div>
+																<c:forEach var="i" begin="1" end="${item.averageRating}">
+																	<i class="fa fa-star starAverage"></i>
+																	<!-- Replace with your star icon class -->
+																</c:forEach>
+															</div>
+															<p>(${fn:length(item.ratings)} Ratings)</p>
+														</div>
+
 													</c:when>
 													<c:otherwise>
 														<p>No ratings yet</p>

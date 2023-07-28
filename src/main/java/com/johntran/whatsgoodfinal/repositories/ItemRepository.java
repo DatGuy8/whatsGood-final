@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 
 @Repository
@@ -13,6 +14,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	List<Item> findAll();
 
 	List<Item> findByBusinessId(Long BusinessId);
+	
+	List<Item> findByBusiness(Business business);
 
 	List<Item> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description);
 
