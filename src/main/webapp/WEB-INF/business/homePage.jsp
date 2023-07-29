@@ -9,7 +9,6 @@
 <meta charset="ISO-8859-1">
 <title>What's Good</title>
 <!-- for Bootstrap CSS -->
-<!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -163,17 +162,23 @@
 		</button>
 	</div>
 	<!--END CAROUSEL-->
+	<hr/>
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
-		<h1 class="text-center">All Businesses</h1>
-		<div class="w-75 mt-3 mx-auto">
-			<div class="row">
+		<h1 class="text-center">What's Good Businesses</h1>
+		<div class="w-75 mt-2 mx-auto">
+			<div class="mt-2 my-2 d-flex justify-content-between">
+				<button id="sortHigh" onclick="sortHighestBusiness()" class="btn btn-success">Sort By Highest Average</button>
+				<input type="text" id="filterInput" placeholder="What's Good At..."
+								class="form-control mb-3" style="width: 300px;">
+			</div>
+			<div class="row" id="businessContainer">
 				<!--------------------LOOPING THROUGH THE LIST OF BUSINESSES--------------------- -->
 				<c:forEach var="business" items="${businesses }">
 					<!--SET TO FORMAT RATING -->
 					<c:set var="formatRating" value="${business.averageRating }" />
-					<div class="col-md-3">
+					<div class="col-md-3 businessCards" data-rating="${business.averageRating }">
 						<!--  -->
 						<div class="card mb-4 box-shadow">
 
@@ -221,5 +226,6 @@
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/script.js"></script>
+	<script type="text/javascript" src="/js/business/homePage.js"></script>
 </body>
 </html>

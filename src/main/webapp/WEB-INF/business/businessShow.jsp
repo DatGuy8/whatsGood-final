@@ -209,7 +209,7 @@
 						</c:choose>
 					</div>
 					<div class="p-3 border-bottom">
-						<h3>Top Items</h3>
+						<h3>What's Good? (Top Items)</h3>
 						<div class="album">
 							<div class="row">
 								<c:forEach var="item" items="${highestRatedItems }"
