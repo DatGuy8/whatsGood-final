@@ -1,10 +1,12 @@
 package com.johntran.whatsgoodfinal.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.johntran.whatsgoodfinal.models.Role;
 import com.johntran.whatsgoodfinal.models.User;
 import com.johntran.whatsgoodfinal.repositories.RoleRepository;
 import com.johntran.whatsgoodfinal.repositories.UserRepository;
@@ -36,9 +38,37 @@ public class UserService {
         userRepository.save(user);
     }    
     
-    // 3
+    // FIND USER BY EMAIL
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    
+    // FIND USER BY ID
+    public User findById(Long userId) {
+    	Optional<User> oneUser = userRepository.findById(userId);
+    	if(oneUser.isPresent()){
+    		return oneUser.get();
+    	}
+    	return null;
+    }
+    
+    // CHANGE USER ROLE
+    public void changeRole(User user) {
+    	System.out.println("USER SERVICE");
+    	
+    	List<Role> currentRoles = user.getRoles();
+    	
+    	if (currentRoles.get(0).getName().equals("ROLE_ADMIN")) {
+            user.setRoles(roleRepository.findByName("ROLE_USER"));
+            System.out.println("set to user");
+        } else {
+            user.setRoles(roleRepository.findByName("ROLE_Admin"));
+            System.out.println("set to admin");
+        }
+    	
+    	userRepository.save(user);
+    	
+    	System.out.println("updated user");
     }
     
     public List<User> allUsers(){

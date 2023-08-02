@@ -195,15 +195,17 @@
 											Master
 											</c:when>
 											<c:when test="${user.roles[0].name == 'ROLE_USER'}">
-											<form action="/admin/role/${user.id }" method="post">
-											
-												<button class="btn btn-primary">Make Admin</button>
+											<form action="/admin/role/${user.id }" method="Post">
+												<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
+												<button>Make Admin</button>
 											</form>
 											</c:when>
 											<c:otherwise>
-											<form action="/admin/role/${user.id }" method="post">
-											
-												<button class="btn btn-primary">Remove Admin</button>
+											<form action="/admin/role/${user.id }" method="Post">
+												<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
+												<button>Remove Admin</button>
 											</form>
 											</c:otherwise>
 										</c:choose>

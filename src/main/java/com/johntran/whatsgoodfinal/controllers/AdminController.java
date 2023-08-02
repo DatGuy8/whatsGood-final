@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.google.maps.GeoApiContext;
@@ -161,5 +162,20 @@ public class AdminController {
 
 		return "admin/adminItems.jsp";
 	}
+	
+	//----------- CHANGE USER ROLE --------------
+	@PostMapping("/admin/role/{userId}")
+		public String changeRole(@PathVariable("userId")Long userId) {
+		User user = userService.findById(userId);
+		
+		if(user == null) {
+			System.out.println("user not found");
+			return "redirect:/admin/users";
+		}
+		userService.changeRole(user);
+		
+		return "redirect:/admin/users";
+	}
+	
 
 }
