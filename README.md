@@ -1,6 +1,8 @@
 # What's Good
-> Outline a brief description of your project.
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
+ A review platform inspired by Yelp, designed for foodies. This app centers around a simple idea: making it easy for food enthusiasts to share and discover reviews of individual dishes from various restaurants.
+
+ I built this app to address a frustration I have with sites like Yelp - the overwhelming amount of information. With a user-friendly interface, you can quickly find out which dishes are highly recommended at different eateries. 
+<!-- Live demo [_here_](https://www.example.com).  If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -25,16 +27,22 @@
 
 
 ## Technologies Used
-- Tech 1 - version 1.0
-- Tech 2 - version 2.0
-- Tech 3 - version 3.0
+- Java
+- Spring Boot
+- MySql
+- Bootstrap
+- Google Maps API
+- Spring Security
 
 
 ## Features
-List the ready features here:
-- Awesome feature 1
-- Awesome feature 2
-- Awesome feature 3
+- Full CRUD support
+- Admin/User roles and features
+- Users can recommend business to be added
+- Admins can edit/accept businesses
+- Users can add items to approved business
+- Users can add reviews to items
+- Admins can control what businesses and items are featured
 
 
 ## Screenshots
