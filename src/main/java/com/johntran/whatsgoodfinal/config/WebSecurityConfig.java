@@ -36,7 +36,11 @@ public class WebSecurityConfig {
 	                .defaultSuccessUrl("/home")
 	                .and()
 	            .logout()
-	                .permitAll();
+	                .permitAll()
+	                .and()
+	            .exceptionHandling()
+	                .accessDeniedPage("/access-denied");  
+	                ;
 		
 		return http.build();
 	}

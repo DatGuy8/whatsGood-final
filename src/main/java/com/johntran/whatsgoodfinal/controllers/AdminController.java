@@ -165,7 +165,7 @@ public class AdminController {
 	
 	//----------- CHANGE USER ROLE --------------
 	@PostMapping("/admin/role/{userId}")
-		public String changeRole(@PathVariable("userId")Long userId) {
+	public String changeRole(@PathVariable("userId")Long userId) {
 		User user = userService.findById(userId);
 		
 		if(user == null) {
@@ -175,6 +175,11 @@ public class AdminController {
 		userService.changeRole(user);
 		
 		return "redirect:/admin/users";
+	}
+	
+	@GetMapping("/access-denied")
+	public String accessDenied() {
+		return "admin/accessDenied.jsp";
 	}
 	
 

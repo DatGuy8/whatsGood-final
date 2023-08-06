@@ -172,8 +172,9 @@
 								class="btn btn-outline-success">Add Menu Item</button></a>
 
 						<!-- ADD TO FAVORITES BUTTON -->
-						<form action="/user/addFavoriteBusiness" method="post">
+						<form action="/user/addFavoriteBusiness/${business.id }" method="post">
 							<input type="hidden" name="businessId" value="${business.id }" />
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<button class="btn btn-outline-success">Add to Favorites</button>
 						</form>
 					</div>

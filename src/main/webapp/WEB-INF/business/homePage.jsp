@@ -46,9 +46,9 @@
 
 									<!-- Profile Tab -->
 									<li class="nav-item dropDown"><a class="nav-link dropBtn"
-										href="/profile">Profile</a>
+										href="/user/profile">Profile</a>
 										<div class="dropDownContent">
-											<a class="dropdown-item" href="#">Profile Page</a>
+											<a class="dropdown-item" href="/user/profile">Profile Page</a>
 											<form id="logoutForm" method="POST" action="/logout"
 												class="dropdown-item form-logout-button">
 												<input type="hidden" name="${_csrf.parameterName}"

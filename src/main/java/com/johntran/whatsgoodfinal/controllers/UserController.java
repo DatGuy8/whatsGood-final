@@ -1,14 +1,19 @@
 package com.johntran.whatsgoodfinal.controllers;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.User;
+import com.johntran.whatsgoodfinal.services.BusinessService;
 import com.johntran.whatsgoodfinal.services.UserService;
 import com.johntran.whatsgoodfinal.validator.UserValidator;
 
@@ -22,6 +27,9 @@ public class UserController {
 	
 	@Autowired
 	private UserValidator userValidator;
+	
+	@Autowired
+	private BusinessService businessService;
 
 	@GetMapping("/register")
 	public String registerForm(@ModelAttribute("user") User user) {
@@ -57,12 +65,21 @@ public class UserController {
 		return "test.jsp";
 	}
 	
-	@PostMapping("/user/addFavoriteBusiness")
-	public String addFavoriteBusiness() {
+	@PostMapping("/user/addFavoriteBusiness/{businessId}")
+	public String addFavoriteBusiness(@PathVariable("businessId")Long businessId, Principal principal) {
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		Business business = businessService.getOne(businessId);
+		
 		System.out.println("here");
 		
 		
 		return "redirect:/";
+	}
+	
+	@GetMapping("/user/profile")
+	public String profilePage() {
+		return "user/userProfile.jsp";
 	}
 	
 }
