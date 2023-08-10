@@ -77,7 +77,7 @@
 										href="/items"> Items </a>
 										<div class="dropDownContent">
 											<a class="dropdown-item" href="/items">View Highest Rated
-												Items</a> <a class="dropdown-item" href="#">Add a Item</a>
+												Items</a>
 										</div></li>
 
 								</ul>
@@ -174,6 +174,9 @@
 								class="form-control mb-3" style="width: 300px;">
 			</div>
 			<div class="row" id="businessContainer">
+				<div id="noResultsMessage" style="display:none; height:300px" >
+					<h4 class="text-center">No Matching Business</h4>
+				</div>
 				<!--------------------LOOPING THROUGH THE LIST OF BUSINESSES--------------------- -->
 				<c:forEach var="business" items="${businesses }">
 					<!--SET TO FORMAT RATING -->
@@ -221,7 +224,8 @@
 		</div>
 
 	</div>
-
+	
+	<div style="height:500px"></div>
 	<!-- For any Bootstrap that uses JS or jQuery-->
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>

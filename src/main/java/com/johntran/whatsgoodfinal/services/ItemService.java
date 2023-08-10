@@ -13,7 +13,7 @@ import com.johntran.whatsgoodfinal.repositories.ItemRepository;
 
 @Service
 public class ItemService {
-	
+
 	@Autowired
 	private ItemRepository itemRepository;
 
@@ -22,7 +22,22 @@ public class ItemService {
 
 	// ALL ITEMS
 	public List<Item> getAllItems() {
-		return itemRepository.findAll();
+		List<Item> items = itemRepository.findAll();
+
+		for (Item item : items) {
+			Double averageRating = itemRatingService.getAverageRatingForItem(item);
+			if (averageRating != null) {
+
+				// sets average rating to two decimal points
+				Double rating = Math.round(averageRating * 100.0) / 100.0;
+				item.setAverageRating(rating);
+			} else {
+				item.setAverageRating(0.00);
+			}
+
+		}
+
+		return items;
 	}
 
 	// ADD ITEM
@@ -33,10 +48,17 @@ public class ItemService {
 	// GET ITEMS FROM ONE BUSINESS
 	public List<Item> findBusinessItems(Business business) {
 		List<Item> items = itemRepository.findByBusiness(business);
-		
+
 		for (Item item : items) {
 			Double averageRating = itemRatingService.getAverageRatingForItem(item);
-			item.setAverageRating(averageRating);
+			if (averageRating != null) {
+
+				// sets average rating to two decimal points
+				Double rating = Math.round(averageRating * 100.0) / 100.0;
+				item.setAverageRating(rating);
+			}else {
+				item.setAverageRating(0.00);
+			}
 		}
 		return items;
 	}
@@ -57,35 +79,42 @@ public class ItemService {
 
 		for (Item item : allItems) {
 			Double averageRating = itemRatingService.getAverageRatingForItem(item);
-			item.setAverageRating(averageRating);
+			if (averageRating != null) {
+
+				// sets average rating to two decimal points
+				Double rating = Math.round(averageRating * 100.0) / 100.0;
+				item.setAverageRating(rating);
+			}else {
+				item.setAverageRating(0.00);
+			}
 		}
 
 		allItems.sort(Comparator.comparingDouble(Item::getAverageRating).reversed());
 		return allItems;
 
 	}
-	
+
 	// GET AVERAGE RATINGS FOR ALL ITEMS IN BUSINESS
-		public Double getAverageRatingForBusinessItems(Business business) {
-			List<Item> items = findBusinessItems(business);
-			
-			if (items.isEmpty()) {
-				return null;
+	public Double getAverageRatingForBusinessItems(Business business) {
+		List<Item> items = findBusinessItems(business);
+
+		if (items.isEmpty()) {
+			return null;
+		}
+		double totalRating = 0;
+		int itemCount = 0;
+		for (Item item : items) {
+			Double averageRating = itemRatingService.getAverageRatingForItem(item);
+			if (averageRating != null) {
+				totalRating += averageRating;
+				itemCount++;
 			}
-			double totalRating = 0;
-	        int itemCount = 0;
-	        for (Item item : items) {
-	            Double averageRating = itemRatingService.getAverageRatingForItem(item);
-	            if (averageRating != null) {
-	                totalRating += averageRating;
-	                itemCount++;
-	            }
-	        }
+		}
 
-	        if (itemCount == 0) {
-	            return null;
-	        }
+		if (itemCount == 0) {
+			return null;
+		}
 
-	        return totalRating / itemCount;
-	    }
+		return totalRating / itemCount;
+	}
 }

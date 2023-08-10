@@ -2,6 +2,8 @@ package com.johntran.whatsgoodfinal.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
+import com.johntran.whatsgoodfinal.config.ItemRatingComparator;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.ItemRating;
@@ -47,18 +50,44 @@ public class ItemController {
 	@Autowired
 	PhotoService photoService;
 
-//==================ADD ITEM SHOW PAGE=========================
+	
+	//	ADD ITEM SHOW PAGE
+	
 	@GetMapping("business/{businessId}/item/new")
 	public String addItem(@ModelAttribute("newItem") Item newItem, @PathVariable("businessId") Long businessId,
-			Model model) {
-
+			Model model,Principal principal) {
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		model.addAttribute("currentUser", currentUser);
 		Business business = businessService.getOne(businessId);
 		model.addAttribute("business", business);
 
 		return "item/addItem.jsp";
 	}
+	
+	
+	
+	//	ALL ITEMS PAGE
+	
+	@GetMapping("/items")
+	public String allItems(Principal principal, Model model) {
+		
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		model.addAttribute("currentUser", currentUser);
+		
+		
+		List<Item> items = itemService.getAllItems();
+		
+		model.addAttribute("items",items);
+		
+		
+		return "item/itemsPage.jsp";
+	}
+	
 
-//==================POST ADD ITEM ROUTE=========================
+	//	POST ADD ITEM ROUTE	
+	
 	@PostMapping("/business/{businessId}/item/new")
 	public String saveItem(@Valid @ModelAttribute("newItem") Item newItem, BindingResult result,
 			@PathVariable("businessId") Long businessId, @RequestParam("imageFiles") MultipartFile[] imageFiles,
@@ -92,26 +121,20 @@ public class ItemController {
 				}
 			}
 		}
-
-		return "redirect:/item/" + savedItem.getId();
-
-//		if(fileName.isBlank()) {
-//			System.out.println("no image saved");
-//			return "redirect:/business/{businessId}";
-//		}else {
-//			String uploadDir = "uploadedImages/business/" + newItem.getBusiness().getId() + "/items";
-//			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-//			System.out.println("imaged saved");
-//			
-//		}
-//		
+		return "redirect:/item/" + savedItem.getId();	
 	}
 
-//=======================SINGLE ITEM PAGE WITH REVIEWS===========//ADD FORM TOO?==================
+	
+	//	SINGLE ITEM PAGE WITH REVIEWS       ADD FORM TOO?
+	
 	@GetMapping("/item/{itemId}")
 	public String itemShowPage(@ModelAttribute("itemRating") ItemRating itemRating, @PathVariable("itemId") Long itemId,
-			Model model) {
-
+			Model model,Principal principal) {
+		
+		String email = principal.getName();
+		User currentUser = userService.findByEmail(email);
+		model.addAttribute("currentUser", currentUser);
+		
 		Item item = itemService.getOneItem(itemId);
 		Double averageRating = itemRatingService.getAverageRatingForItem(item);
 		model.addAttribute("averageRating", averageRating);
@@ -119,7 +142,9 @@ public class ItemController {
 		return "item/showItem.jsp";
 	}
 
-//======================POST ADD ITEM RATING ROUTE==================================
+	
+	//	POST ADD ITEM RATING ROUTE	
+	
 	@PostMapping("/item/{itemId}")
 	public String itemRatingSave(@Valid @ModelAttribute("itemRating") ItemRating itemRating, BindingResult result,
 			@PathVariable("itemId") Long itemId, Principal principal, Model model) throws IOException {

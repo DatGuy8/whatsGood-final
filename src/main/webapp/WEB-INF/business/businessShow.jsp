@@ -53,56 +53,57 @@
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
-							<ul class="navbar-nav mr-auto">
+								<ul class="navbar-nav mr-auto">
 
 
-								<!-- Profile Tab -->
-								<li class="nav-item dropDown"><a class="nav-link dropBtn"
-									href="/profile">Profile</a>
-									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">Profile Page</a>
-										<form id="logoutForm" method="POST" action="/logout"
-											class="dropdown-item form-logout-button">
-											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" />
-											<button type="submit" class="logout-link">Logout</button>
-										</form>
-									</div></li>
+									<!-- Profile Tab -->
+									<li class="nav-item dropDown"><a class="nav-link dropBtn"
+										href="/user/profile">Profile</a>
+										<div class="dropDownContent">
+											<a class="dropdown-item" href="/user/profile">Profile Page</a>
+											<form id="logoutForm" method="POST" action="/logout"
+												class="dropdown-item form-logout-button">
+												<input type="hidden" name="${_csrf.parameterName}"
+													value="${_csrf.token}" />
+												<button type="submit" class="logout-link">Logout</button>
+											</form>
+										</div></li>
 
-								<!-- Admin Tab -->
-								<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
-									<li class="nav-item dropDown"><a href="/admin"
-										class="nav-link dropBtn">Admin</a></li>
-								</c:if>
+									<!-- Admin Tab -->
+									<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
+										<li class="nav-item dropDown"><a href="/admin"
+											class="nav-link dropBtn">Admin</a></li>
+									</c:if>
 
-								<!-- Business Tab -->
-								<li class="nav-item dropDown"><a class="nav-link dropBtn"
-									href="/businesses"> Businesses </a>
-									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Businesses</a> <a
-											class="dropdown-item" href="#">Add a Business</a>
-									</div></li>
+									<!-- Business Tab -->
+									<li class="nav-item dropDown"><a class="nav-link dropBtn"
+										href="/businesses"> Businesses </a>
+										<div class="dropDownContent">
+											<a class="dropdown-item" href="/businesses">View
+												Businesses</a> <a class="dropdown-item" href="/business/add">Add
+												a Business</a>
+										</div></li>
 
-								<!-- Items Tab -->
-								<li class="nav-item dropDown"><a class="nav-link dropBtn"
-									href="/items"> Items </a>
-									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Highest Rated Items</a>
-										<a class="dropdown-item" href="#">Add a Item</a>
-									</div></li>
+									<!-- Items Tab -->
+									<li class="nav-item dropDown"><a class="nav-link dropBtn"
+										href="/items"> Items </a>
+										<div class="dropDownContent">
+											<a class="dropdown-item" href="/items">View Highest Rated
+												Items</a>
+										</div></li>
 
-							</ul>
+								</ul>
+							</div>
+
+							<!-- Search Bar -->
+							<form class="d-flex" action="/search" method="get">
+								<input class="form-control me-2" type="text"
+									placeholder="Search What's Good" aria-label="Search"
+									name="searchParams">
+								<button class="btn btn-outline-success" type="submit">Search</button>
+							</form>
 						</div>
-
-						<!-- Search Bar -->
-						<form class="d-flex" action="/search" method="get">
-							<input class="form-control me-2" type="text"
-								placeholder="Search What's Good" aria-label="Search"
-								name="searchParams">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
 					</div>
-				</div>
 
 			</nav>
 
@@ -196,7 +197,7 @@
 					<div class="p-3 border-bottom">
 					<!-- CHECK HERE LATER WHEN AND OTHERWISE FOR FN:length was working -->
 						<c:choose>
-							<c:when test="${true}">
+							<c:when test="${formatRating != null}">
 								<h3>
 									Overall Rating:
 									<fmt:formatNumber type="number" maxFractionDigits="2"
@@ -366,6 +367,6 @@
 
 	</main>
 
-
+<div style="height:500px"></div>
 </body>
 </html>
