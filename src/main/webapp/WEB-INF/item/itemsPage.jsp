@@ -120,10 +120,12 @@
 					<div class="col-md-3 itemCards" data-price="${item.price }"
 						data-rating="${item.averageRating }">
 						<div class="card mb-3">
+						<div class="w-100 d-flex justify-content-center">
 							<c:if test="${item.photos[0].filePath != null }">
 								<img class="card-img-top" src="${item.photos[0].filePath }"
-									alt="table food" height="150px" />
+									alt="table food" />
 							</c:if>
+						</div>
 							<div class="card-body">
 								<p class="card-text">
 									<c:out value="${item.name }" />

@@ -101,11 +101,11 @@
 		<!--=================================END NAV BAR ========================================-->
 
 
-		<div class="container text-box">
+		<div id="intro">
 
-			<h2 style="font-weight: 900; color: #ebf2fa; border-radius: 5px;">
+			<h1>
 				Look for Items Users have reviewed from Businesses, or help the
-				community by adding business or items reviews to What's Good!</h2>
+				community by adding business or items reviews to What's Good!</h1>
 			<p>
 				<a href="/business/add" class="btn btn-success my-2"> Recommend
 					a Business</a>
@@ -184,10 +184,10 @@
 					<div class="col-md-3 businessCards" data-rating="${business.averageRating }">
 						<!--  -->
 						<div class="card mb-4 box-shadow">
-
+							<div class="w-100 d-flex justify-content-center" style="height:300px;">
 							<img class="card-img-top" src="${business.photos[0].filePath }"
-								alt="pic of food" height="300px">
-
+								alt="pic of food">
+							</div>
 							<div class="card-body">
 
 								<p class="card-text">
