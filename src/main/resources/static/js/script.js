@@ -28,3 +28,4 @@ function addPhotoForm() {
 		form.style.display = " none";
 	}
 }
+

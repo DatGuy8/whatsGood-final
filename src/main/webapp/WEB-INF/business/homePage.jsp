@@ -8,6 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>What's Good</title>
+<link rel="icon" href="/images/icon-whats-good.png" class="logo-whats-good"/>
 <!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
@@ -100,10 +101,10 @@
 		</div>
 		<!--=================================END NAV BAR ========================================-->
 
-
+		<div id="wrapper" class="fade-in">
 		<div id="intro">
 
-			<h1>
+			<h1 style="width:60%;">
 				Look for Items Users have reviewed from Businesses, or help the
 				community by adding business or items reviews to What's Good!</h1>
 			<p>
@@ -112,10 +113,11 @@
 			</p>
 
 		</div>
+		</div>
 	</section>
 
 	<!--CAROUSEL -->
-	<h1 class="text-center mt-3 text-success">Featured Businesses</h1>
+	<h1 class="text-center mt-3 hoverText fontWeight900">FEATURED BUSINESSES</h1>
 	<div id="myCarousel" class="carousel slide mb-6"
 		data-bs-ride="carousel" data-bs-theme="light">
 		
@@ -166,7 +168,7 @@
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
-		<h1 class="text-center">What's Good Businesses</h1>
+		<h1 class="text-center fontWeight900">What's Good Businesses</h1>
 		<div class="w-75 mt-2 mx-auto">
 			<div class="mt-2 my-2 d-flex justify-content-between">
 				<button id="sortHigh" onclick="sortHighestBusiness()" class="btn btn-success">Sort By Highest Average</button>

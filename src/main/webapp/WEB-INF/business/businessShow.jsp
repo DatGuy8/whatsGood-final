@@ -53,57 +53,57 @@
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
-								<ul class="navbar-nav mr-auto">
+							<ul class="navbar-nav mr-auto">
 
 
-									<!-- Profile Tab -->
-									<li class="nav-item dropDown"><a class="nav-link dropBtn"
-										href="/user/profile">Profile</a>
-										<div class="dropDownContent">
-											<a class="dropdown-item" href="/user/profile">Profile Page</a>
-											<form id="logoutForm" method="POST" action="/logout"
-												class="dropdown-item form-logout-button">
-												<input type="hidden" name="${_csrf.parameterName}"
-													value="${_csrf.token}" />
-												<button type="submit" class="logout-link">Logout</button>
-											</form>
-										</div></li>
+								<!-- Profile Tab -->
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/user/profile">Profile</a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="/user/profile">Profile Page</a>
+										<form id="logoutForm" method="POST" action="/logout"
+											class="dropdown-item form-logout-button">
+											<input type="hidden" name="${_csrf.parameterName}"
+												value="${_csrf.token}" />
+											<button type="submit" class="logout-link">Logout</button>
+										</form>
+									</div></li>
 
-									<!-- Admin Tab -->
-									<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
-										<li class="nav-item dropDown"><a href="/admin"
-											class="nav-link dropBtn">Admin</a></li>
-									</c:if>
+								<!-- Admin Tab -->
+								<c:if test="${currentUser.roles[0].name == 'ROLE_ADMIN'}">
+									<li class="nav-item dropDown"><a href="/admin"
+										class="nav-link dropBtn">Admin</a></li>
+								</c:if>
 
-									<!-- Business Tab -->
-									<li class="nav-item dropDown"><a class="nav-link dropBtn"
-										href="/businesses"> Businesses </a>
-										<div class="dropDownContent">
-											<a class="dropdown-item" href="/businesses">View
-												Businesses</a> <a class="dropdown-item" href="/business/add">Add
-												a Business</a>
-										</div></li>
+								<!-- Business Tab -->
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/businesses"> Businesses </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="/businesses">View
+											Businesses</a> <a class="dropdown-item" href="/business/add">Add
+											a Business</a>
+									</div></li>
 
-									<!-- Items Tab -->
-									<li class="nav-item dropDown"><a class="nav-link dropBtn"
-										href="/items"> Items </a>
-										<div class="dropDownContent">
-											<a class="dropdown-item" href="/items">View Highest Rated
-												Items</a>
-										</div></li>
+								<!-- Items Tab -->
+								<li class="nav-item dropDown"><a class="nav-link dropBtn"
+									href="/items"> Items </a>
+									<div class="dropDownContent">
+										<a class="dropdown-item" href="/items">View Highest Rated
+											Items</a>
+									</div></li>
 
-								</ul>
-							</div>
-
-							<!-- Search Bar -->
-							<form class="d-flex" action="/search" method="get">
-								<input class="form-control me-2" type="text"
-									placeholder="Search What's Good" aria-label="Search"
-									name="searchParams">
-								<button class="btn btn-outline-success" type="submit">Search</button>
-							</form>
+							</ul>
 						</div>
+
+						<!-- Search Bar -->
+						<form class="d-flex" action="/search" method="get">
+							<input class="form-control me-2" type="text"
+								placeholder="Search What's Good" aria-label="Search"
+								name="searchParams">
+							<button class="btn btn-outline-success" type="submit">Search</button>
+						</form>
 					</div>
+				</div>
 
 			</nav>
 
@@ -173,9 +173,11 @@
 								class="btn btn-outline-success">Add Menu Item</button></a>
 
 						<!-- ADD TO FAVORITES BUTTON -->
-						<form action="/user/addFavoriteBusiness/${business.id }" method="post">
+						<form action="/user/addFavoriteBusiness/${business.id }"
+							method="post">
 							<input type="hidden" name="businessId" value="${business.id }" />
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
 							<button class="btn btn-outline-success">Add to Favorites</button>
 						</form>
 					</div>
@@ -195,7 +197,7 @@
 
 					</div>
 					<div class="p-3 border-bottom">
-					<!-- CHECK HERE LATER WHEN AND OTHERWISE FOR FN:length was working -->
+						<!-- CHECK HERE LATER WHEN AND OTHERWISE FOR FN:length was working -->
 						<c:choose>
 							<c:when test="${formatRating != null}">
 								<h3>
@@ -221,11 +223,13 @@
 									<c:if test="${status.index < 4}">
 										<div class="col-md-3">
 											<div class="card mb-3">
-												<c:if test="${item.photos[0].filePath != null }">
-													<img class="card-img-top" src="${item.photos[0].filePath }"
-														alt="table food" height="150px" />
-												</c:if>
-
+													<c:if test="${item.photos[0].filePath != null }">
+												<div class="w-100 d-flex justify-content-center"
+													style="height: 150px">
+														<img class="card-img-top"
+															src="${item.photos[0].filePath }" alt="table food" />
+												</div>
+													</c:if>
 												<div class="card-body">
 													<p class="card-text">
 														<c:out value="${item.name }" />
@@ -299,10 +303,13 @@
 								<c:forEach var="item" items="${sortedItems }">
 									<div class="col-md-3 item-card">
 										<div class="card mb-3">
-											<c:if test="${item.photos[0].filePath != null }">
-												<img class="card-img-top" src="${item.photos[0].filePath }"
-													alt="table food" height="150px" />
-											</c:if>
+												<c:if test="${item.photos[0].filePath != null }">
+											<div class="w-100 d-flex justify-content-center"
+												style="height: 150px">
+													<img class="card-img-top" src="${item.photos[0].filePath }"
+														alt="table food" />
+											</div>
+												</c:if>
 											<div class="card-body">
 												<p class="card-text">
 													<c:out value="${item.name }" />
@@ -367,6 +374,6 @@
 
 	</main>
 
-<div style="height:500px"></div>
+	<div style="height: 500px"></div>
 </body>
 </html>

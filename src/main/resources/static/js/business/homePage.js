@@ -2,6 +2,8 @@
  * 
  */
 
+let delayTime;
+
 //SORT BY HIGHEST AVERAGE RATING ON HOMEPAGE
 const sortHighestBusiness = () => {
 
@@ -10,10 +12,16 @@ const sortHighestBusiness = () => {
 	const businessElements = businessCard.children;
 
 	const businesses = Array.from(businessElements);
+	
 
 	businesses.sort((a, b) => b.getAttribute("data-rating") - a.getAttribute("data-rating"));
-
+	
+	// creates a little delay
+	clearTimeout(delayTime);
+	delayTime = setTimeout(()=>{
 	businesses.forEach(business => businessCard.appendChild(business));
+	
+	},500);
 }
 
 
@@ -27,6 +35,10 @@ filterInput.addEventListener('input', function(){
 	
 	let matchingResults = 0; // Initialize a counter for matching results
 	
+	
+	// creates a little delay
+	clearTimeout(delayTime);
+	delayTime = setTimeout(()=>{
 	businessCards.forEach(card=>{
 		const businessName = card.querySelector('.card-text').textContent.toLowerCase();
 		if(businessName.includes(filterText)){
@@ -43,5 +55,5 @@ filterInput.addEventListener('input', function(){
 	} else {
 		noResultsMessage.style.display = 'none'; // Hide the message
 	}
-	
+	},500);
 })
