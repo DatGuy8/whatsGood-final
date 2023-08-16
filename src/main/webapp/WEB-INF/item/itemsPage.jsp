@@ -98,21 +98,26 @@
 	<!--=================================END NAV BAR ========================================-->
 
 
-	<div class="container">
-		<h1>Items On What's Good</h1>
-		<div class="pagination-container">
-			<ul class="pagination"></ul>
+	<div class="container mt-3">
+		<h1 class="text-center">All Items on What's Good</h1>
+		<div class="pagination" id="paginationContainer">
+		    <a href="#">&laquo;</a>
+		    <a href="#">1</a>
+		    <a href="#">2</a>
+		    <a href="#">3</a>
+		    <a href="#">&raquo;</a>
 		</div>
-		<div class="filter-container">
-			<h3>Filter Items:</h3>
-			<label for="filter">Select Filter:</label> <select id="filter"
-				class="form-select">
-				<option value="none">Select...</option>
-				<option value="highestPrice">Highest Price</option>
-				<option value="lowestPrice">Lowest Price</option>
-				<option value="highestRated">Highest Rated</option>
-				<option value="lowestRated">Lowest Rated</option>
-			</select>
+		<div class="filter-container d-flex w-100 flex-row-reverse my-3">
+			<div>
+			<label for="filter">Select Filter:</label>
+				<select id="filter" class="form-select w-100">
+					<option value="none">Select...</option>
+					<option value="highestPrice">Highest Price</option>
+					<option value="lowestPrice">Lowest Price</option>
+					<option value="highestRated">Highest Rated</option>
+					<option value="lowestRated">Lowest Rated</option>
+				</select>
+			</div>
 		</div>
 		<div class="album">
 			<div class="row" id="itemsContainer">
@@ -121,10 +126,11 @@
 						data-rating="${item.averageRating }">
 						<div class="card mb-3">
 							<c:if test="${item.photos[0].filePath != null }">
-						<div class="w-100 d-flex justify-content-center" style="height:200px">
-								<img class="card-img-top" src="${item.photos[0].filePath }"
-									alt="table food" />
-						</div>
+								<div class="w-100 d-flex justify-content-center"
+									style="height: 200px">
+									<img class="card-img-top" src="${item.photos[0].filePath }"
+										alt="table food" />
+								</div>
 							</c:if>
 							<div class="card-body">
 								<p class="card-text">

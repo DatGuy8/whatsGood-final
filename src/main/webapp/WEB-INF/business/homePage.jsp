@@ -24,7 +24,7 @@
 			<header class="navBar">
 
 				<!-- Navbar -->
-				<nav class="navbar navbar-expand-lg">
+				<nav class="navbar navbar-expand-lg paddingBottom60px">
 					<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
 						href="/"> <img src="/images/icon-whats-good.png"
 						alt="whats good logo" class="logo-whats-good" width="40"

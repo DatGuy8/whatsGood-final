@@ -18,6 +18,10 @@
 	width: auto;
 }
 
+.paddingBottom60px{
+	padding-bottom:60px;
+}
+
 .fontWeight900{
 	font-weight:900;
 }

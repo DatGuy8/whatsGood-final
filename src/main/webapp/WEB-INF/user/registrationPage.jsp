@@ -61,8 +61,8 @@
 				<div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
 					<h1 class="my-5 display-5 fw-bold ls-tight"
 						style="color: hsl(218, 81%, 95%)">
-						Register to <br /> <span style="color: hsl(218, 81%, 75%)">What's
-							Good</span>
+						Register to <br /> <a href="/" class="text-decoration-none"><span style="color: hsl(218, 81%, 75%)">What's
+							Good</span></a>
 					</h1>
 					<p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
 						By signing up you are able to add a restaurant, review dishes, and

@@ -13,12 +13,9 @@ const itemCards = document.querySelectorAll('.itemCards'); // This is the contai
 let delayTime;
 
 filterDropdown.addEventListener('change', function() {
+	
 	const selectedFilter = this.value;
-
 	
-	
-	
-
 	// Sort and display items based on the selected filter
 	if (selectedFilter === 'highestPrice') {
 		sortAndDisplayItemsByPrice('desc');

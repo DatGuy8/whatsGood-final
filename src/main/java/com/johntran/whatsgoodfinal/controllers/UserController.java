@@ -40,7 +40,6 @@ public class UserController {
 	public String registration(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 
 		userValidator.validate(user, result);
-		System.out.println(result);
 
 		if (result.hasErrors()) {
 			return "user/registrationPage.jsp";
