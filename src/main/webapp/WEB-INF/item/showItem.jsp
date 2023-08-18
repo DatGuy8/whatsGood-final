@@ -32,15 +32,15 @@
 					alt="whats good logo" class="logo-whats-good" width="40"
 					height="40"> What's Good
 				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent"
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex justify-content-between w-100">
+					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -49,9 +49,9 @@
 
 								<!-- Profile Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
-									href="/profile">Profile</a>
+									href="/user/profile">Profile</a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">Profile Page</a>
+										<a class="dropdown-item" href="/user/profile">Profile Page</a>
 										<form id="logoutForm" method="POST" action="/logout"
 											class="dropdown-item form-logout-button">
 											<input type="hidden" name="${_csrf.parameterName}"
@@ -68,24 +68,26 @@
 
 								<!-- Business Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
-									href="/businesses"> Businesses </a>
+									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Businesses</a> <a
-											class="dropdown-item" href="#">Add a Business</a>
+										<a class="dropdown-item" href="/">View
+											Businesses</a> <a class="dropdown-item" href="/business/add">Add
+											a Business</a>
 									</div></li>
 
 								<!-- Items Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/items"> Items </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Highest Rated Items</a>
-										<a class="dropdown-item" href="#">Add a Item</a>
+										<a class="dropdown-item" href="/items">View Highest Rated
+											Items</a>
 									</div></li>
 
 							</ul>
 						</div>
 
 						<!-- Search Bar -->
+						
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"
@@ -105,11 +107,13 @@
 
 	<main role="main">
 		<section class="text-center">
-			<div class="container">
+			<div class="container mt-3">
+				<div class="d-flex justify-content-center gap-3">
 				<c:forEach var="item" items="${ item.photos}">
 					<img src="${item.filePath }" alt="stock photo" height="150px" />
 				</c:forEach>
-				<h1>
+				</div>
+				<h1 class="mt-3">
 					<c:out value="${item.name }" />
 				</h1>
 				<p>
@@ -135,25 +139,28 @@
 				</p>
 				<form:form action="/item/${item.id}" method="post"
 					modelAttribute="itemRating">
+					<h3 class="text-center">Add a Review?</h3>
 					<div class="rating">
-						<input type="radio" id="star5" name="rating" value="5" /> <label
-							for="star5" class="star">&#9733;</label> <input type="radio"
-							id="star4" name="rating" value="4" /> <label for="star4"
-							class="star">&#9733;</label> <input type="radio" id="star3"
-							name="rating" value="3" /> <label for="star3" class="star">&#9733;</label>
+						<div class="form-group">
+							<input type="radio" id="star5" name="rating" value="5" /> <label
+								for="star5" class="star">&#9733;</label> <input type="radio"
+								id="star4" name="rating" value="4" /> <label for="star4"
+								class="star">&#9733;</label> <input type="radio" id="star3"
+								name="rating" value="3" /> <label for="star3" class="star">&#9733;</label>
 
-						<input type="radio" id="star2" name="rating" value="2" /> <label
-							for="star2" class="star">&#9733;</label> <input type="radio"
-							id="star1" name="rating" value="1" /> <label for="star1"
-							class="star">&#9733;</label>
-						<form:textarea path="comment" placeholder="Add a comment"></form:textarea>
+							<input type="radio" id="star2" name="rating" value="2" /> <label
+								for="star2" class="star">&#9733;</label> <input type="radio"
+								id="star1" name="rating" value="1" /> <label for="star1"
+								class="star">&#9733;</label>
+						</div>
+						<form:textarea path="comment" placeholder="Add a comment" class="form-control"></form:textarea>
 						<form:errors path="comment" class="text-danger" />
-						<button type="submit">Add rating</button>
+						<button type="submit" class="btn btn-success">Submit Review</button>
 					</div>
-					
+
 					<form:errors path="rating" class="text-danger" />
 					<form:errors path="comment" class="text-danger" />
-					
+
 				</form:form>
 			</div>
 
@@ -173,12 +180,9 @@
 				<div class="row">
 					<c:forEach var="oneRating" items="${item.ratings }">
 						<div class="col-md-3">
+							
 							<p>
-								<img src="${item.photos[0].filePath }" alt="stock"
-									height="100px" width="100px" />
-							</p>
-							<p>
-								<c:out value="${oneRating.user.userName }" />
+								<a href="/user/${oneRating.user.id }"><c:out value="${oneRating.user.userName }" /></a>
 								rated it
 							</p>
 							<p>
@@ -187,6 +191,9 @@
 							</p>
 							<p>
 								<c:out value="${oneRating.comment }" />
+							</p>
+							<p>
+								reviewed on <fmt:formatDate value="${oneRating.createdAt}" pattern="MMMM dd, yyyy, h:mm a" />
 							</p>
 						</div>
 					</c:forEach>

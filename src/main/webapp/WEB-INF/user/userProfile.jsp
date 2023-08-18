@@ -23,15 +23,15 @@
 					alt="whats good logo" class="logo-whats-good" width="40"
 					height="40"> What's Good
 				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent"
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex justify-content-between w-100">
+					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -59,24 +59,26 @@
 
 								<!-- Business Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
-									href="/businesses"> Businesses </a>
+									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Businesses</a> <a
-											class="dropdown-item" href="#">Add a Business</a>
+										<a class="dropdown-item" href="/">View
+											Businesses</a> <a class="dropdown-item" href="/business/add">Add
+											a Business</a>
 									</div></li>
 
 								<!-- Items Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/items"> Items </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="#">View Highest Rated Items</a>
-										<a class="dropdown-item" href="#">Add a Item</a>
+										<a class="dropdown-item" href="/items">View Highest Rated
+											Items</a>
 									</div></li>
 
 							</ul>
 						</div>
 
 						<!-- Search Bar -->
+						
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"
@@ -91,6 +93,7 @@
 
 		</header>
 	</div>
+	<!--=================================END NAV BAR ========================================-->
 	<!-- For any Bootstrap that uses JS or jQuery-->
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>

@@ -26,15 +26,15 @@
 					alt="whats good logo" class="logo-whats-good" width="40"
 					height="40"> What's Good
 				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent"
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex justify-content-between w-100">
+					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -62,9 +62,9 @@
 
 								<!-- Business Tab -->
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
-									href="/businesses"> Businesses </a>
+									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="/businesses">View
+										<a class="dropdown-item" href="/">View
 											Businesses</a> <a class="dropdown-item" href="/business/add">Add
 											a Business</a>
 									</div></li>
@@ -81,6 +81,7 @@
 						</div>
 
 						<!-- Search Bar -->
+						
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"

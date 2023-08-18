@@ -185,7 +185,11 @@ footer p {
 
 /* SHOW ITEM JSP STAR RATING */
 .rating {
-	display: inline-block;
+	width:50%;
+	margin: 0 auto;
+	display:flex;
+	flex-direction:column;
+	gap:15px;
 }
 
 .star {

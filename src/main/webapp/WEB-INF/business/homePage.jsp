@@ -8,7 +8,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>What's Good</title>
-<link rel="icon" href="/images/icon-whats-good.png" class="logo-whats-good"/>
+<link rel="icon" href="/images/icon-whats-good.png"
+	class="logo-whats-good" />
 <!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet"
@@ -30,15 +31,15 @@
 						alt="whats good logo" class="logo-whats-good" width="40"
 						height="40"> What's Good
 					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarSupportedContent"
+					<button class="navbar-toggler" type="button"
+						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<div class="d-flex justify-content-between w-100">
+						<div class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 							<div class="marginLeft30">
 								<!----------- Nav Links ----------->
@@ -49,7 +50,8 @@
 									<li class="nav-item dropDown"><a class="nav-link dropBtn"
 										href="/user/profile">Profile</a>
 										<div class="dropDownContent">
-											<a class="dropdown-item" href="/user/profile">Profile Page</a>
+											<a class="dropdown-item" href="/user/profile">Profile
+												Page</a>
 											<form id="logoutForm" method="POST" action="/logout"
 												class="dropdown-item form-logout-button">
 												<input type="hidden" name="${_csrf.parameterName}"
@@ -66,9 +68,9 @@
 
 									<!-- Business Tab -->
 									<li class="nav-item dropDown"><a class="nav-link dropBtn"
-										href="/businesses"> Businesses </a>
+										href="/"> Businesses </a>
 										<div class="dropDownContent">
-											<a class="dropdown-item" href="/businesses">View
+											<a class="dropdown-item" href="/">View
 												Businesses</a> <a class="dropdown-item" href="/business/add">Add
 												a Business</a>
 										</div></li>
@@ -83,14 +85,15 @@
 
 								</ul>
 							</div>
-
-							<!-- Search Bar -->
-							<form class="d-flex" action="/search" method="get">
-								<input class="form-control me-2" type="text"
-									placeholder="Search What's Good" aria-label="Search"
-									name="searchParams">
-								<button class="btn btn-outline-success" type="submit">Search</button>
-							</form>
+							
+								<!-- Search Bar -->
+								<form class="d-flex" action="/search" method="get">
+									<input class="form-control me-2" type="text"
+										placeholder="Search What's Good" aria-label="Search"
+										name="searchParams">
+									<button class="btn btn-outline-success" type="submit">Search</button>
+								</form>
+							
 						</div>
 					</div>
 
@@ -102,25 +105,29 @@
 		<!--=================================END NAV BAR ========================================-->
 
 		<div id="wrapper" class="fade-in">
-		<div id="intro">
+			<div id="intro">
 
-			<h1 style="width:60%;">
-				Look for Items Users have reviewed from Businesses, or help the
-				community by adding business or items reviews to What's Good!</h1>
-			<p>
-				<a href="/business/add" class="btn btn-success my-2"> Recommend
-					a Business</a>
-			</p>
+				<h1 style="width: 60%;" class="d-none d-lg-block">Look for
+					Items Users have reviewed from Businesses, or help the community by
+					adding business or items reviews to What's Good!</h1>
+				<h2 class="d-lg-none">Look for Items Users have reviewed from
+					Businesses, or help the community by adding business or items
+					reviews to What's Good!</h2>
+				<p>
+					<a href="/business/add" class="btn btn-success my-2"> Recommend
+						a Business</a>
+				</p>
 
-		</div>
+			</div>
 		</div>
 	</section>
 
 	<!--CAROUSEL -->
-	<h1 class="text-center mt-3 hoverText fontWeight900">FEATURED BUSINESSES</h1>
+	<h1 class="text-center mt-3 hoverText fontWeight900">FEATURED
+		BUSINESSES</h1>
 	<div id="myCarousel" class="carousel slide mb-6"
 		data-bs-ride="carousel" data-bs-theme="light">
-		
+
 		<div class="carousel-inner">
 			<c:forEach var="business" items="${featuredBusinesses }"
 				varStatus="status">
@@ -164,31 +171,34 @@
 		</button>
 	</div>
 	<!--END CAROUSEL-->
-	<hr/>
+	<hr />
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
 		<h1 class="text-center fontWeight900">What's Good Businesses</h1>
 		<div class="w-75 mt-2 mx-auto">
 			<div class="mt-2 my-2 d-flex justify-content-between">
-				<button id="sortHigh" onclick="sortHighestBusiness()" class="btn btn-success">Sort By Highest Average</button>
+				<button id="sortHigh" onclick="sortHighestBusiness()"
+					class="btn btn-success">Sort By Highest Average</button>
 				<input type="text" id="filterInput" placeholder="What's Good At..."
-								class="form-control mb-3" style="width: 300px;">
+					class="form-control mb-3" style="width: 300px;">
 			</div>
 			<div class="row" id="businessContainer">
-				<div id="noResultsMessage" style="display:none; height:300px" >
+				<div id="noResultsMessage" style="display: none; height: 300px">
 					<h4 class="text-center">No Matching Business</h4>
 				</div>
 				<!--------------------LOOPING THROUGH THE LIST OF BUSINESSES--------------------- -->
 				<c:forEach var="business" items="${businesses }">
 					<!--SET TO FORMAT RATING -->
 					<c:set var="formatRating" value="${business.averageRating }" />
-					<div class="col-md-3 businessCards" data-rating="${business.averageRating }">
+					<div class="col-md-3 businessCards"
+						data-rating="${business.averageRating }">
 						<!--  -->
 						<div class="card mb-4 box-shadow">
-							<div class="w-100 d-flex justify-content-center" style="height:300px;">
-							<img class="card-img-top" src="${business.photos[0].filePath }"
-								alt="pic of food">
+							<div class="w-100 d-flex justify-content-center"
+								style="height: 300px;">
+								<img class="card-img-top" src="${business.photos[0].filePath }"
+									alt="pic of food">
 							</div>
 							<div class="card-body">
 
@@ -211,10 +221,12 @@
 											<small class="text-muted">No Ratings Yet</small>
 										</c:when>
 										<c:otherwise>
-											<small class="text-muted"><fmt:formatNumber type="number" maxFractionDigits="2" value="${formatRating}" /> Average Dish Rating</small>
+											<small class="text-muted"><fmt:formatNumber
+													type="number" maxFractionDigits="2" value="${formatRating}" />
+												Average Dish Rating</small>
 										</c:otherwise>
 									</c:choose>
-									
+
 								</div>
 							</div>
 						</div>
@@ -226,8 +238,8 @@
 		</div>
 
 	</div>
-	
-	<div style="height:500px"></div>
+
+	<div style="height: 500px"></div>
 	<!-- For any Bootstrap that uses JS or jQuery-->
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
