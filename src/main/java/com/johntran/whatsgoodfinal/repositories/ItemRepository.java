@@ -22,4 +22,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 	@Query("SELECT i FROM Item i JOIN FETCH i.ratings r GROUP BY i.id ORDER BY AVG(r.rating) ASC")
 	List<Item> findItemsByAverageRatingAscending();
 
+	
+	void deleteAllByBusinessId(Long id);
 }

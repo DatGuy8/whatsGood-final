@@ -9,12 +9,20 @@ import org.springframework.stereotype.Service;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.repositories.BusinessRepository;
+import com.johntran.whatsgoodfinal.repositories.ItemRatingRepository;
+import com.johntran.whatsgoodfinal.repositories.ItemRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class BusinessService {
 
 	@Autowired
 	private BusinessRepository businessRepo;
+	@Autowired
+	private ItemRepository itemRepo;
+	@Autowired
+	private ItemRatingRepository ratingRepo;
 
 	// FIND ALL BUSINESSES
 	public List<Business> findAll() {
@@ -60,8 +68,17 @@ public class BusinessService {
 	}
 	
 	// DELETE
+	@Transactional
 	public void deleteByBusinessId(Long id) {
 		if (businessRepo.existsById(id)) {
+			List<Item> items = itemRepo.findByBusinessId(id);
+			
+			for(Item item : items) {
+				ratingRepo.deleteAllByItem(item);
+			}
+			
+			
+			itemRepo.deleteAllByBusinessId(id);
 			businessRepo.deleteById(id);
 		} else {
 			throw new IllegalArgumentException("Business not found with ID: " + id);

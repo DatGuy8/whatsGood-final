@@ -19,4 +19,6 @@ public interface ItemRatingRepository extends JpaRepository<ItemRating, Long> {
 	Double calculateAverageRatingForItem(@Param("item") Item item);
 
 	boolean existsByUserAndItem(User user, Item item);
+	
+	void deleteAllByItem(Item item);
 }
