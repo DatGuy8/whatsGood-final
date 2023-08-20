@@ -54,7 +54,7 @@
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/ItemsPage.png)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/addReviewPage.png)
 
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/AdminAllBusiness.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/adminAllBusiness.png)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/AdminEditBusiness.png)
 
 
