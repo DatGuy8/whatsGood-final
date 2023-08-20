@@ -46,16 +46,16 @@
 
 
 ## Screenshots
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20102252.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20102308.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20102546.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20102604.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20102622.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20104020.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20102130.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage2.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage3.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/BusinessShowPage.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/BusinessShowPage1.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/ItemsPage.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/addReviewPage.png)
 
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20102111.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/Screenshot%202023-07-28%20105339.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/adminAllBusiness.png)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/AdminEditBusiness.png)
 
 
 <!-- If you have screenshots you'd like to share, include them here. -->
