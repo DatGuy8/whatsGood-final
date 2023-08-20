@@ -1,14 +1,12 @@
 @charset "ISO-8859-1";
 
-@import
-	url('https://fonts.googleapis.com/css2?family=Roboto&family=Rubik:wght@400;500;700&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Roboto:wght@500&display=swap');
 
 * {
 	margin: 0;
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
-	font-family: 'Rubik', sans-serif;
+
 }
 
 .card-img-top {
@@ -245,4 +243,15 @@ input[type="radio"]:checked ~ label {
 	margin: 5px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
+}
+
+.featureLogoDiv{
+	background-color: #7FC37E;
+	padding:1rem;
+	width: fit-content;
+}
+
+.diffFont{
+	font-family: 'Kaushan Script', cursive;
+	color:#FEFEE2;
 }

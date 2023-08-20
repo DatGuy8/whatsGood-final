@@ -22,9 +22,7 @@
 			<!-- Navbar -->
 			<nav class="navbar navbar-expand-lg">
 				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
-					href="/"> <img src="/images/icon-whats-good.png"
-					alt="whats good logo" class="logo-whats-good" width="40"
-					height="40"> What's Good
+					href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent"
@@ -101,13 +99,7 @@
 
 	<div class="container mt-3">
 		<h1 class="text-center">All Items on What's Good</h1>
-		<div class="pagination" id="paginationContainer">
-		    <a href="#">&laquo;</a>
-		    <a href="#">1</a>
-		    <a href="#">2</a>
-		    <a href="#">3</a>
-		    <a href="#">&raquo;</a>
-		</div>
+		
 		<div class="filter-container d-flex w-100 flex-row-reverse my-3">
 			<div>
 			<label for="filter">Select Filter:</label>

@@ -23,9 +23,7 @@
 			<!-- Navbar -->
 			<nav class="navbar navbar-expand-lg">
 				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
-					href="/"> <img src="/images/icon-whats-good.png"
-					alt="whats good logo" class="logo-whats-good" width="40"
-					height="40"> What's Good
+					href="/">  <img src="/images/whatsgoodlogo1.png" height="60"/>
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent"

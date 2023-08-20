@@ -27,9 +27,7 @@
 				<!-- Navbar -->
 				<nav class="navbar navbar-expand-lg paddingBottom60px">
 					<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
-						href="/"> <img src="/images/icon-whats-good.png"
-						alt="whats good logo" class="logo-whats-good" width="40"
-						height="40"> What's Good
+						href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
 					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -39,7 +37,8 @@
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<div class="d-flex flex-column flex-md-row justify-content-between w-100">
+						<div
+							class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 							<div class="marginLeft30">
 								<!----------- Nav Links ----------->
@@ -70,9 +69,9 @@
 									<li class="nav-item dropDown"><a class="nav-link dropBtn"
 										href="/"> Businesses </a>
 										<div class="dropDownContent">
-											<a class="dropdown-item" href="/">View
-												Businesses</a> <a class="dropdown-item" href="/business/add">Add
-												a Business</a>
+											<a class="dropdown-item" href="/">View Businesses</a> <a
+												class="dropdown-item" href="/business/add">Add a
+												Business</a>
 										</div></li>
 
 									<!-- Items Tab -->
@@ -85,15 +84,15 @@
 
 								</ul>
 							</div>
-							
-								<!-- Search Bar -->
-								<form class="d-flex" action="/search" method="get">
-									<input class="form-control me-2" type="text"
-										placeholder="Search What's Good" aria-label="Search"
-										name="searchParams">
-									<button class="btn btn-outline-success" type="submit">Search</button>
-								</form>
-							
+
+							<!-- Search Bar -->
+							<form class="d-flex" action="/search" method="get">
+								<input class="form-control me-2" type="text"
+									placeholder="Search What's Good" aria-label="Search"
+									name="searchParams">
+								<button class="btn btn-outline-success" type="submit">Search</button>
+							</form>
+
 						</div>
 					</div>
 
@@ -123,8 +122,14 @@
 	</section>
 
 	<!--CAROUSEL -->
-	<h1 class="text-center mt-3 hoverText fontWeight900">FEATURED
+	<div class="w-100">
+		<div class="featureLogoDiv mx-auto rounded m-3">
+		<h1 class="text-center fontWeight900 diffFont">FEATURED
 		BUSINESSES</h1>
+		</div>
+	
+	</div>
+	
 	<div id="myCarousel" class="carousel slide mb-6"
 		data-bs-ride="carousel" data-bs-theme="light">
 
@@ -175,7 +180,12 @@
 
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
-		<h1 class="text-center fontWeight900">What's Good Businesses</h1>
+		<div class="w-100">
+		<div class="featureLogoDiv mx-auto rounded m-3">
+		<h1 class="text-center fontWeight900 diffFont">What's Good Businesses</h1>
+		</div>
+	
+	</div>
 		<div class="w-75 mt-2 mx-auto">
 			<div class="mt-2 my-2 d-flex justify-content-between">
 				<button id="sortHigh" onclick="sortHighestBusiness()"

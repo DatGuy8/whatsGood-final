@@ -28,19 +28,18 @@
 			<!-- Navbar -->
 			<nav class="navbar navbar-expand-lg">
 				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
-					href="/"> <img src="/images/icon-whats-good.png"
-					alt="whats good logo" class="logo-whats-good" width="40"
-					height="40"> What's Good
+					href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
 				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent"
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
+					<div
+						class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -70,9 +69,8 @@
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="/">View
-											Businesses</a> <a class="dropdown-item" href="/business/add">Add
-											a Business</a>
+										<a class="dropdown-item" href="/">View Businesses</a> <a
+											class="dropdown-item" href="/business/add">Add a Business</a>
 									</div></li>
 
 								<!-- Items Tab -->
@@ -87,7 +85,7 @@
 						</div>
 
 						<!-- Search Bar -->
-						
+
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"
@@ -110,7 +108,8 @@
 
 		<div>
 			<form:form action="/business/new" method="POST"
-				modelAttribute="business" enctype="multipart/form-data"  class="d-flex flex-column gap-3">
+				modelAttribute="business" enctype="multipart/form-data"
+				class="d-flex flex-column gap-3">
 				<div class="form-group">
 					<form:errors path="name" class="text-danger" />
 					<form:label path="name">Business Name:</form:label>
@@ -165,8 +164,7 @@
 						style="max-width: 200px; max-height: 200px; display: none;">
 					<%-- <form:errors path="photos" class="text-danger" /> --%>
 					<label for="imageFile" class="custom-file-upload">Business
-						Photo: 
-						<input type="file" name="imageFile"
+						Photo: <input type="file" name="imageFile"
 						accept="image/png, image/jpeg" name="imageFile"
 						onchange="previewImage(event)" />
 					</label>
