@@ -37,17 +37,18 @@
 			<!-- Navbar -->
 			<nav class="navbar navbar-expand-lg">
 				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
-						href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
-					</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent"
+					href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
+				</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
+					<div
+						class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -77,9 +78,8 @@
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="/">View
-											Businesses</a> <a class="dropdown-item" href="/business/add">Add
-											a Business</a>
+										<a class="dropdown-item" href="/">View Businesses</a> <a
+											class="dropdown-item" href="/business/add">Add a Business</a>
 									</div></li>
 
 								<!-- Items Tab -->
@@ -94,7 +94,7 @@
 						</div>
 
 						<!-- Search Bar -->
-						
+
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"
@@ -222,13 +222,13 @@
 									<c:if test="${status.index < 4}">
 										<div class="col-md-3">
 											<div class="card mb-3">
-													<c:if test="${item.photos[0].filePath != null }">
-												<div class="w-100 d-flex justify-content-center"
-													style="height: 150px">
+												<c:if test="${item.photos[0].filePath != null }">
+													<div class="w-100 d-flex justify-content-center"
+														style="height: 150px">
 														<img class="card-img-top"
 															src="${item.photos[0].filePath }" alt="table food" />
-												</div>
-													</c:if>
+													</div>
+												</c:if>
 												<div class="card-body">
 													<p class="card-text">
 														<c:out value="${item.name }" />
@@ -302,13 +302,13 @@
 								<c:forEach var="item" items="${sortedItems }">
 									<div class="col-md-3 item-card">
 										<div class="card mb-3">
-												<c:if test="${item.photos[0].filePath != null }">
-											<div class="w-100 d-flex justify-content-center"
-												style="height: 150px">
+											<c:if test="${item.photos[0].filePath != null }">
+												<div class="w-100 d-flex justify-content-center"
+													style="height: 150px">
 													<img class="card-img-top" src="${item.photos[0].filePath }"
 														alt="table food" />
-											</div>
-												</c:if>
+												</div>
+											</c:if>
 											<div class="card-body">
 												<p class="card-text">
 													<c:out value="${item.name }" />
@@ -319,14 +319,18 @@
 												</p>
 												<c:choose>
 													<c:when test="${fn:length(item.ratings) > 0}">
-														<div class="d-flex gap-1">
+														<div>
+															<div class="d-flex justify-content-between">
 															<div>
 																<c:forEach var="i" begin="1" end="${item.averageRating}">
 																	<i class="fa fa-star starAverage"></i>
 																	<!-- Replace with your star icon class -->
 																</c:forEach>
 															</div>
-															<p>(${fn:length(item.ratings)} Ratings)</p>
+																<p>${item.averageRating } stars</p>
+															</div>
+															<p class="text-end">(${fn:length(item.ratings)}
+																Ratings)</p>
 														</div>
 
 													</c:when>

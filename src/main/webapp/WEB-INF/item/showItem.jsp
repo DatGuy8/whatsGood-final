@@ -30,15 +30,16 @@
 				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
 					href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
 				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent"
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
+					<div
+						class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -68,9 +69,8 @@
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="/">View
-											Businesses</a> <a class="dropdown-item" href="/business/add">Add
-											a Business</a>
+										<a class="dropdown-item" href="/">View Businesses</a> <a
+											class="dropdown-item" href="/business/add">Add a Business</a>
 									</div></li>
 
 								<!-- Items Tab -->
@@ -85,7 +85,7 @@
 						</div>
 
 						<!-- Search Bar -->
-						
+
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"
@@ -107,9 +107,9 @@
 		<section class="text-center">
 			<div class="container mt-3">
 				<div class="d-flex justify-content-center gap-3">
-				<c:forEach var="item" items="${ item.photos}">
-					<img src="${item.filePath }" alt="stock photo" height="150px" />
-				</c:forEach>
+					<c:forEach var="item" items="${ item.photos}">
+						<img src="${item.filePath }" alt="stock photo" height="150px" />
+					</c:forEach>
 				</div>
 				<h1 class="mt-3">
 					<c:out value="${item.name }" />
@@ -151,9 +151,11 @@
 								id="star1" name="rating" value="1" /> <label for="star1"
 								class="star">&#9733;</label>
 						</div>
-						<form:textarea path="comment" placeholder="Add a comment" class="form-control"></form:textarea>
+						<form:textarea path="comment" placeholder="Add a comment"
+							class="form-control"></form:textarea>
 						<form:errors path="comment" class="text-danger" />
-						<button type="submit" class="btn btn-success">Submit Review</button>
+						<button type="submit" class="btn btn-success">Submit
+							Review</button>
 					</div>
 
 					<form:errors path="rating" class="text-danger" />
@@ -162,41 +164,39 @@
 				</form:form>
 			</div>
 
-			<%-- <form:form action="/menuitem/${menuItem.id}/rate" method="post"
-				modelAttribute="newRating">
-				<form:errors path="rating" class="text-danger" />
-				<form:label path="rating">Rate this dish: </form:label>
-				<form:input type="number" path="rating" max="5" step=".5" min="0" />
-				<form:hidden path="menuItem" value="${menuItem.id}" />
-				<form:hidden path="user" value="${userId }" />
-				<button>Submit</button>
-			</form:form> --%>
+
 		</section>
 		<div class="album backgroundColor">
-			<h1 class="text-center mb-5">Reviews</h1>
+			<h1 class="text-center m-3">Reviews</h1>
 			<div class="container">
-				<div class="row">
+				<div>
 					<c:forEach var="oneRating" items="${item.ratings }">
-						<div class="col-md-3">
-							
+						<div>
+
 							<p>
-								<a href="/user/${oneRating.user.id }"><c:out value="${oneRating.user.userName }" /></a>
-								rated it
-							</p>
-							<p>
-								<c:out value="${oneRating.rating }" />
-								stars
+								<a href="/user/${oneRating.user.id }">${oneRating.user.userName }</a>
+
 							</p>
 							<p>
 								<c:out value="${oneRating.comment }" />
 							</p>
-							<p>
-								reviewed on <fmt:formatDate value="${oneRating.createdAt}" pattern="MMMM dd, yyyy, h:mm a" />
-							</p>
+
+							<c:forEach var="i" begin="1" end="${oneRating.rating}">
+
+								<i class="fa fa-star starAverage"></i>
+
+							</c:forEach>
+							reviewed on
+							<fmt:formatDate value="${oneRating.createdAt}"
+								pattern="MMMM dd, yyyy, h:mm a" />
+
 						</div>
+
+						<hr />
 					</c:forEach>
 
 				</div>
+
 
 			</div>
 		</div>
