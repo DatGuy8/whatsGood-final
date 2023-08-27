@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What's Good</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,7 +19,7 @@
 
 <!-- GOOGLE PLACES API FOR ADDRESSES -->
 <script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3iO0mybHe0fk4VyIIKqIidMl9HSd_xkk&libraries=places&callback=initAutocomplete"
+	src="https://maps.googleapis.com/maps/api/js?key=${googleApiKey }&libraries=places&callback=initAutocomplete"
 	async defer></script>
 
 </head>
@@ -105,16 +106,19 @@
 	<div class="mt-3 w-50 mx-auto">
 		<h3 class="text-center">Submit a Business to be added to What's
 			Good</h3>
-
+		<c:if test="${not empty successMessage}">
+			<div class="alert alert-success">${successMessage}</div>
+		</c:if>
 		<div>
 			<form:form action="/business/new" method="POST"
 				modelAttribute="business" enctype="multipart/form-data"
 				class="d-flex flex-column gap-3">
 				<div class="form-group">
-					<form:errors path="name" class="text-danger" />
 					<form:label path="name">Business Name:</form:label>
 					<form:input type="text" class="form-control" path="name"
 						id="businessName" placeholder="Search/enter a Business" />
+						
+					<form:errors path="name" class="text-danger" />
 				</div>
 
 				<div class="d-flex justify-content-between">
@@ -166,15 +170,37 @@
 					<label for="imageFile" class="custom-file-upload">Business
 						Photo: <input type="file" name="imageFile"
 						accept="image/png, image/jpeg" name="imageFile"
-						onchange="previewImage(event)" />
+						onchange="previewImage(event)" required />
 					</label>
 				</div>
 
 
-				<button class="btn btn-success">Submit</button>
+				<button class="btn btn-success" id="submitButton"
+					data-toggle="modal" data-target="#submissionModal">Submit</button>
 			</form:form>
 		</div>
 
+	</div>
+	<div class="modal fade" id="submissionModal" tabindex="-1"
+		role="dialog" aria-labelledby="submissionModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="submissionModalLabel">Thank You!</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">Your business submission has been sent
+					for review. Thank you!</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- For any Bootstrap that uses JS or jQuery-->

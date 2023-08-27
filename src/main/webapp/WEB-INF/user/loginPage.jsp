@@ -23,12 +23,11 @@
 <body>
 	<!-- Section: Design Block -->
 	<section class="text-center text-lg-start w-75 mx-auto mt-4">
-	
+
 		<div class="card mb-3">
 			<div class="row g-0 d-flex align-items-center">
 				<div class="col-lg-4 d-none d-lg-flex">
-					<img src="/images/stockDishPhoto.jpg"
-						alt="login photo"
+					<img src="/images/stockDishPhoto.jpg" alt="login photo"
 						class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
 				</div>
 				<div class="col-lg-8">
@@ -37,8 +36,13 @@
 						<form action="/login" method="post">
 							<!-- Email input -->
 							<h1 class="text-center">Login to What's Good</h1>
+							<c:if test="${logoutMessage != null}">
+								<div class="alert alert-success"><c:out value="${logoutMessage}"></c:out></div>
+							</c:if>
+							<c:if test="${errorMessage != null}">
+								<div class="alert alert-danger"><c:out value="${errorMessage}"></c:out></div>
+							</c:if>
 							<div class="form-outline mb-4 mt-5">
-
 								<input type="email" name="email" class="form-control" /> <label
 									class="form-label" for="email">Email address</label>
 							</div>

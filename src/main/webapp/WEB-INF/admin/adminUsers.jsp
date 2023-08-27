@@ -1,12 +1,14 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- New line below to use the JSP Standard Tag Library -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isErrorPage="true"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What's Good</title>
 <!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
@@ -15,10 +17,7 @@
 </head>
 <body>
 	<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow">
-
 		<!------------------------ NAV BAR------------------------>
-
-
 		<a href="/"
 			class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white"><strong>What's
 				Good</strong></a>
@@ -34,10 +33,8 @@
 				</div>
 			</form>
 		</div>
-
 		<!------------------------SEARCH AND LIST BUTTON ON MID OR LOWER SCREENS------------------------>
 		<ul class="navbar-nav flex-row d-md-none">
-
 			<li class="nav-item text-nowrap">
 				<button class="nav-link px-3 text-white bg-dark border-0"
 					type="button" data-bs-toggle="collapse"
@@ -75,14 +72,12 @@
 				</div>
 			</form>
 		</div>
-
-
-		<!----------------------------SIDE BAR----------------------------------->
 	</header>
+	<!----------------------------SIDE BAR----------------------------------->
 	<div class="container-fluid">
 		<div class="row">
 			<div class="sidebar border border-right col-md-3 col-lg-2 p-0">
-				<div class="offcanvas-lg offcanvas-end" tabindex="-1"
+				<div class="offcanvas-md offcanvas-end" tabindex="-1"
 					id="sidebarMenu">
 
 					<div class="offcanvas-header">
@@ -120,9 +115,8 @@
 											d="m4.4.8-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 3.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8Zm3 0-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 6.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8Zm3 0-.003.004-.014.019a4.077 4.077 0 0 0-.204.31 2.337 2.337 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.198 3.198 0 0 1-.202.388 5.385 5.385 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 9.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8Z" />
 								</svg> Items
 							</a></li>
-							
-						</ul>
 
+						</ul>
 
 						<hr class="my-3">
 
@@ -153,9 +147,8 @@
 						</ul>
 					</div>
 				</div>
+
 			</div>
-
-
 
 
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -163,15 +156,17 @@
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h3 text-center">Users</h1>
 				</div>
-				<div class="btn-group" role="group" aria-label="Filter">
-					<button type="button" class="btn btn-primary filter-btn-users"
-						data-filter="all">All</button>
-					<button type="button" class="btn btn-secondary filter-btn-users"
-						data-filter="ROLE_ADMIN">Admins</button>
-					<button type="button" class="btn btn-secondary filter-btn-users"
-						data-filter="ROLE_USER">Users</button>
+				
+				<div class="input-group mb-3 filterSelect">
+					<label class="input-group-text" for="filterSelect">Filter</label> <select
+						class="form-select" id="filterSelectUsers">
+						<option value="all">All</option>
+						<option value="ROLE_ADMIN">Admin</option>
+						<option value="ROLE_USER">Users</option>
+						
+					</select>
 				</div>
-				<div class="table-responsive small">
+				<div class="table-responsive small mt-3">
 					<table class="table table-striped table-sm" id="businessTable">
 						<thead>
 							<tr>

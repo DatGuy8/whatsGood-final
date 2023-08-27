@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What's Good</title>
 <!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
@@ -81,7 +82,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="sidebar border border-right col-md-3 col-lg-2 p-0">
-				<div class="offcanvas-lg offcanvas-end" tabindex="-1"
+				<div class="offcanvas-md offcanvas-end" tabindex="-1"
 					id="sidebarMenu">
 
 					<div class="offcanvas-header">

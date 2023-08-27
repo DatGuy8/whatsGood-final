@@ -91,13 +91,17 @@ public class ItemController {
 	@PostMapping("/business/{businessId}/item/new")
 	public String saveItem(@Valid @ModelAttribute("newItem") Item newItem, BindingResult result,
 			@PathVariable("businessId") Long businessId, @RequestParam("imageFiles") MultipartFile[] imageFiles,
-			Principal principal) throws IOException {
-		if (result.hasErrors()) {
-			return "item/addItem.jsp";
-		}
+			Principal principal,Model model) throws IOException {
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		Business business = businessService.getOne(businessId);
+		if (result.hasErrors()) {
+			model.addAttribute("business", business);
+			model.addAttribute("currentUser",currentUser);
+			System.out.println(result);
+			return "item/addItem.jsp";
+		}
+		
 		newItem.setBusiness(business);
 		Item savedItem = itemService.addItem(newItem);
 		for (MultipartFile multipartFile : imageFiles) {
@@ -160,6 +164,7 @@ public class ItemController {
 			Item item = itemService.getOneItem(itemId);
 			Double averageRating = itemRatingService.getAverageRatingForItem(item);
 			model.addAttribute("averageRating", averageRating);
+			model.addAttribute("currentUser",currentUser);
 			model.addAttribute("item", item);
 			return "item/showItem.jsp";
 		}

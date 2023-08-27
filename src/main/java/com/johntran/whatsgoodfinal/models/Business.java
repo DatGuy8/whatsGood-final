@@ -37,7 +37,6 @@ public class Business {
 	@Size(min = 3, max = 200)
 	private String name;
 
-	@Size(min = 5, max = 255)
 	private String website;
 
 	private Double latitude;

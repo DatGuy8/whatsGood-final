@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What's Good</title>
 <!-- for Bootstrap CSS -->
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
@@ -150,9 +151,19 @@
 			</div>
 
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<div class="w-75 d-flex">
-					<img src="${business.photos[0].filePath }" alt="pic of food"
-						height="300px">
+
+				<div class="mt-3">
+					<div class="row">
+						<c:forEach var="photo" items="${business.photos }">
+							<div class="col-md-4 mb-4">
+								<img src="${photo.filePath }" alt="pic of food" height="300px"
+									class="rounded">
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+				<div class="d-flex">
+
 
 					<form:form action="/admin/editbusiness/${business.id }"
 						method="post" modelAttribute="business" class="form-control">
@@ -201,7 +212,8 @@
 						<div class="form-group col-md-5">
 							<form:errors path="isApproved" class="text-danger" />
 							<form:label path="isApproved">Approved?</form:label>
-							<form:input type="text" class="form-control" path="isApproved" readonly="true"/>
+							<form:input type="text" class="form-control" path="isApproved"
+								readonly="true" />
 						</div>
 
 						<form:input path="photos" type="hidden" />

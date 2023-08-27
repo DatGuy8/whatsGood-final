@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.User;
@@ -21,13 +22,13 @@ import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private UserValidator userValidator;
-	
+
 	@Autowired
 	private BusinessService businessService;
 
@@ -54,31 +55,43 @@ public class UserController {
 	}
 
 	@GetMapping("/login")
-	public String login() {
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model) {
+		if(error != null) {
+            model.addAttribute("errorMessage", "Invalid Credentials, Please try again.");
+        }
+        if(logout != null) {
+            model.addAttribute("logoutMessage", "Logout Successful!");
+        }
+		
 		return "user/loginPage.jsp";
 	}
-	
-	
-	@GetMapping("/test")
-	public String test1() {
-		return "test.jsp";
-	}
-	
+
 	@PostMapping("/user/addFavoriteBusiness/{businessId}")
-	public String addFavoriteBusiness(@PathVariable("businessId")Long businessId, Principal principal) {
+	public String addFavoriteBusiness(@PathVariable("businessId") Long businessId, Principal principal) {
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		Business business = businessService.getOne(businessId);
-		
+
 		System.out.println("here");
 		
-		
-		return "redirect:/";
+		return "redirect:/comingsoon";
 	}
-	
+
 	@GetMapping("/user/profile")
 	public String profilePage() {
-		return "user/userProfile.jsp";
+		return "redirect:/comingsoon";
 	}
 	
+	@GetMapping("/user/{userId}")
+	public String userPage(@PathVariable("userId")Long userId) {
+		return "redirect:/comingsoon";
+	}
+	
+	
+
+	@GetMapping("/comingsoon")
+	public String comingSoon() {
+		return "comingSoon.jsp";
+	}
 }

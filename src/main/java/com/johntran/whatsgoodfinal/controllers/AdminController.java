@@ -103,6 +103,13 @@ public class AdminController {
 
 	}
 
+	//--------EDIT ITEM PAGE
+	@GetMapping("/admin/editItem/{itemId}")
+	public String editItemPage(@PathVariable("itemId")Long id, Model model) {
+		Item item = itemService.getOneItem(id);
+		model.addAttribute("item", item);
+		return "admin/editItem.jsp";
+	}
 	// ------------- UPDATE BUSINESS ROUTE
 	@PutMapping("/admin/editbusiness/{id}")
 	public String updateBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result,

@@ -1,9 +1,9 @@
 
 
-// Admin Business filter buttons
+// Admin Business filter select
 $(document).ready(function() {
-	$('.filter-btn').on('click', function() {
-		let filterValue = $(this).data('filter');
+	$('#filterSelect').change(function() {
+		let filterValue = $(this).val();
 
 
 		if (filterValue === 'all') {
@@ -14,7 +14,7 @@ $(document).ready(function() {
 			$('#businessTable tbody tr').each(function() {
 				let approvedValue = $(this).find('td:nth-child(5)').text().trim().toLowerCase();
 				let featuredValue = $(this).find('td:nth-child(4)').text().trim().toLowerCase();
-				if ((filterValue === true && approvedValue === 'true') || (filterValue === false && approvedValue === 'false') || (filterValue === "featured" && featuredValue === "true") || (filterValue === "notFeatured" && featuredValue === "false")) {
+				if ((filterValue === "true" && approvedValue === 'true') || (filterValue === "false" && approvedValue === 'false') || (filterValue === "featured" && featuredValue === "true") || (filterValue === "notFeatured" && featuredValue === "false")) {
 					$(this).show();
 				}
 				else {
@@ -25,10 +25,10 @@ $(document).ready(function() {
 	});
 });
 
-// Admin Users Button filters
+// Admin Users Button select
 $(document).ready(function() {
-	$('.filter-btn-users').on('click', function() {
-		let filterValue = $(this).data('filter');
+	$('#filterSelectUsers').change(function() {
+		let filterValue = $(this).val();
 
 
 		if (filterValue === 'all') {

@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What's Good</title>
 <link rel="icon" href="/images/icon-whats-good.png"
 	class="logo-whats-good" />
@@ -105,7 +106,7 @@
 
 		<div id="wrapper" class="fade-in">
 			<div id="intro">
-
+				
 				<h1 style="width: 60%;" class="d-none d-lg-block">Look for
 					Items Users have reviewed from Businesses, or help the community by
 					adding business or items reviews to What's Good!</h1>
@@ -124,12 +125,12 @@
 	<!--CAROUSEL -->
 	<div class="w-100">
 		<div class="featureLogoDiv mx-auto rounded m-3">
-		<h1 class="text-center fontWeight900 diffFont">FEATURED
-		BUSINESSES</h1>
+			<h1 class="text-center fontWeight900 diffFont">FEATURED
+				BUSINESSES</h1>
 		</div>
-	
+
 	</div>
-	
+
 	<div id="myCarousel" class="carousel slide mb-6"
 		data-bs-ride="carousel" data-bs-theme="light">
 
@@ -181,11 +182,12 @@
 	<!-- ==================================LISTING OF BUSINESSES=================================== -->
 	<div class="album py-5 backgroundColor">
 		<div class="w-100">
-		<div class="featureLogoDiv mx-auto rounded m-3">
-		<h1 class="text-center fontWeight900 diffFont">What's Good Businesses</h1>
+			<div class="featureLogoDiv mx-auto rounded m-3">
+				<h1 class="text-center fontWeight900 diffFont">What's Good
+					Businesses</h1>
+			</div>
+
 		</div>
-	
-	</div>
 		<div class="w-75 mt-2 mx-auto">
 			<div class="mt-2 my-2 d-flex justify-content-between">
 				<button id="sortHigh" onclick="sortHighestBusiness()"

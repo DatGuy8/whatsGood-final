@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
 <title>Add an item to ${business.name }</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,15 +27,16 @@
 				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
 					href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
 				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent"
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
+					<div
+						class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -64,9 +66,8 @@
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="/">View
-											Businesses</a> <a class="dropdown-item" href="/business/add">Add
-											a Business</a>
+										<a class="dropdown-item" href="/">View Businesses</a> <a
+											class="dropdown-item" href="/business/add">Add a Business</a>
 									</div></li>
 
 								<!-- Items Tab -->
@@ -81,7 +82,7 @@
 						</div>
 
 						<!-- Search Bar -->
-						
+
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"
@@ -106,14 +107,14 @@
 		<form:form action="/business/${business.id }/item/new" method="POST"
 			modelAttribute="newItem" enctype="multipart/form-data">
 
-			<form:errors path="name" class="text-danger" />
 			<form:label path="name">Item Name: </form:label>
 			<form:input type="text" path="name" class="form-control" />
+			<div class="alert alert-danger"><form:errors path="name" class="text-danger" /></div>
 			<br />
 
-			<form:errors path="description" class="text-danger" />
 			<form:label path="description">Description: </form:label>
 			<form:textarea type="text" path="description" class="form-control" />
+			<div class="alert alert-danger"><form:errors path="description" class="text-danger" /></div>
 			<br />
 
 			<form:errors path="price" class="text-danger" />
@@ -121,14 +122,13 @@
 			<form:input type="number" path="price" min="0" step=".01"
 				class="form-control" />
 			<br />
-
+			
 
 			<div class="form-group">
 				<%-- <form:errors path="photos" class="text-danger" /> --%>
-				<label for="imageFile">Item Photo: </label>
-				<input type="file" name="imageFiles"
-					accept="image/png, image/jpeg"
-					onchange="previewImages(event)" multiple/>
+				<label for="imageFile">Item Photo: </label> <input type="file"
+					name="imageFiles" accept="image/png, image/jpeg"
+					onchange="previewImages(event)" multiple />
 				<div id="imagePreviewContainer"></div>
 			</div>
 			<br />

@@ -1,12 +1,26 @@
 @charset "ISO-8859-1";
 
 
-.rightColumnShow{
-	height: fit-content;
-	position:sticky;
-	top:40px;
+@media (min-width: 768px) {
+    .rightColumnShow {
+        height: fit-content;
+        position: sticky;
+        top: 40px;
+        width: 25% !important;
+    }
+    .leftBusinessShow{
+   		width:75% !important;
+    }
+    
+    
 }
 
 p {
 	margin-bottom:0;
+}
+
+.website-link {
+    white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden; /* Hides overflowed content */
+    text-overflow: ellipsis; /* Displays ellipsis (...) for overflowed content */
 }

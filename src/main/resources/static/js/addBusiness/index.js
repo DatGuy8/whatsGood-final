@@ -82,3 +82,15 @@ function previewImage(event) {
 	};
 	reader.readAsDataURL(event.target.files[0]);
 }
+
+// Function to handle form submission
+function submitForm() {
+    // Assuming your form has an ID "businessForm"
+    document.getElementById("businessForm").submit();
+    
+    // Trigger the modal to show
+    $('#submissionModal').modal('show');
+}
+
+// Attach the submitForm function to the button click event
+document.getElementById("submitButton").addEventListener("click", submitForm);

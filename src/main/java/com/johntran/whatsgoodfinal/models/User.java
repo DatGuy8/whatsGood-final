@@ -30,11 +30,11 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty(message="User name must not be empty")
+	@NotEmpty
 	@Size(min=3, max=50)
 	private String userName;
 	
-	@NotEmpty(message="Email must not be empty")
+	@NotEmpty
 	@Size(min=5, max=255)
 	private String email;
 	

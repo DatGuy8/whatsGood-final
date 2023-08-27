@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
@@ -99,14 +100,19 @@ public class BusinessController {
 //=================POST ROUTE ADD BUSINESS=================
 	@PostMapping("/business/new")
 	public String saveBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result, Model model,
-			@RequestParam("imageFile") MultipartFile photoFile, Principal principal) throws IOException {
-		if (result.hasErrors()) {
-			return "business/addBusiness.jsp";
-		}
-		GeoApiContext context = new GeoApiContext.Builder().apiKey(googleApiKey).build();
-		String address = business.getAddress().getStreet();
+			@RequestParam("imageFile") MultipartFile photoFile, Principal principal,RedirectAttributes redirectAttributes) throws IOException {
+		
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
+		
+		if (result.hasErrors()) {
+			model.addAttribute("currentUser", currentUser);
+			model.addAttribute("googleApiKey", googleApiKey);
+			return "business/addBusiness.jsp";
+		}
+		
+		GeoApiContext context = new GeoApiContext.Builder().apiKey(googleApiKey).build();
+		String address = business.getAddress().getStreet();
 
 		GeocodingResult[] results;
 		try {
@@ -124,8 +130,7 @@ public class BusinessController {
 				// Pass the latitude and longitude to the model
 				business.setLatitude(latitude);
 				business.setLongitude(longitude);
-				System.out.println("latitude" + latitude);
-				System.out.println("longitude" + longitude);
+//				
 
 			} else {
 				// Handle case where no results are found
@@ -134,7 +139,7 @@ public class BusinessController {
 		} catch (ApiException | InterruptedException | IOException e) {
 			// Handle exceptions
 			System.out.println(e.getMessage());
-//		        model.addAttribute("error", "Geocoding error: " + e.getMessage());
+//		       
 		}
 
 		if (!photoFile.isEmpty()) {
@@ -158,9 +163,12 @@ public class BusinessController {
 			}
 		}
 
-		System.out.println("Business controller photofile area");
+		
+		// Add a success message to the model
+		redirectAttributes.addFlashAttribute("successMessage", "Business successfully sent for review!");
+		System.out.println("business added?");
 
-		return "redirect:/";
+		return "redirect:/business/add";
 	}
 
 //=====================BUSINESS SHOW PAGE===========================

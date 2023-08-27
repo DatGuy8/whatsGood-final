@@ -76,30 +76,30 @@
 
 					<div class="card bg-glass">
 						<div class="card-body px-4 py-5 px-md-5">
-
-
-							<p class="text-danger">
-								<form:errors path="user.*" />
-							</p>
+						
 							<form:form action="/register" method="post" modelAttribute="user">
 								<!-- User Name -->
 								<div class="form-outline mb-4">
+									<form:errors path="userName" class="text-danger" />
 									<form:input type="text" path="userName" class="form-control" />
-									<form:label class="form-label" path="userName">User Name</form:label>
+									<form:label class="form-label" path="userName">User Name</form:label>								
 								</div>
 								<!-- Email input -->
 								<div class="form-outline mb-4">
+									<form:errors path="email" class="text-danger" />
 									<form:input type="email" path="email" class="form-control" />
 									<form:label class="form-label" path="email">Email address</form:label>
 								</div>
 
 								<!-- Password input -->
 								<div class="form-outline mb-4">
+								<form:errors path="password" class="text-danger" />
 									<form:input type="password" path="password"
 										class="form-control" />
 									<form:label class="form-label" path="password">Password</form:label>
 								</div>
 								<div class="form-outline mb-4">
+								<form:errors path="confirm" class="text-danger" />
 									<form:input type="password" path="confirm" class="form-control" />
 									<form:label class="form-label" path="confirm">Confirm Password</form:label>
 								</div>
