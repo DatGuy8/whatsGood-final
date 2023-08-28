@@ -119,6 +119,9 @@
 					By <a href="/business/${item.business.id }"><c:out
 							value="${item.business.name }" /></a>
 				</p>
+				
+				<p>Description: ${item.description }</p>
+				
 				<p>
 					<c:choose>
 						<c:when test="${fn:length(item.ratings) > 0}">

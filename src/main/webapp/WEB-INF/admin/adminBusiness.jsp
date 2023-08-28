@@ -189,7 +189,7 @@
 								<tr>
 									<td>${business.id }</td>
 									<td><a href="/admin/editbusiness/${business.id }">${business.name }</a></td>
-									<td>${business.address.city },${business.address.state }</td>
+									<td>${business.address.city }, ${business.address.state }</td>
 									<td>${business.isFeatured }</td>
 									<td>${business.isApproved}</td>
 								</tr>

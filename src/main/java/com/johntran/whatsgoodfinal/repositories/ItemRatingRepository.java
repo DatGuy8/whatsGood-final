@@ -21,4 +21,6 @@ public interface ItemRatingRepository extends JpaRepository<ItemRating, Long> {
 	boolean existsByUserAndItem(User user, Item item);
 	
 	void deleteAllByItem(Item item);
+	
+	void deleteAllByItemId(Long id);
 }

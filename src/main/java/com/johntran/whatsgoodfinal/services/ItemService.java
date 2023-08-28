@@ -9,7 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
+import com.johntran.whatsgoodfinal.models.ItemRating;
+import com.johntran.whatsgoodfinal.repositories.ItemRatingRepository;
 import com.johntran.whatsgoodfinal.repositories.ItemRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ItemService {
@@ -19,6 +23,9 @@ public class ItemService {
 
 	@Autowired
 	private ItemRatingService itemRatingService;
+	
+	@Autowired
+	private ItemRatingRepository itemRatingRepo;
 
 	// ALL ITEMS
 	public List<Item> getAllItems() {
@@ -117,4 +124,18 @@ public class ItemService {
 
 		return totalRating / itemCount;
 	}
+	
+	// DELETE ITEM
+	@Transactional
+	public void deleteItemById(Long itemId) {
+		if(itemRepository.existsById(itemId)) {
+			itemRatingRepo.deleteAllByItemId(itemId);
+			itemRepository.deleteById(itemId);
+			
+		}else {
+			throw new IllegalArgumentException("Item not found with ID: " + itemId);
+		}
+		
+	}
+	
 }

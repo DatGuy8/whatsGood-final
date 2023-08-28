@@ -181,7 +181,7 @@
 							<c:forEach var="item" items="${items }">
 								<tr class="itemRow">
 									<td>${item.id }</td>
-									<td><p class="searchDes"><a href="/admin/editItem/${item.id }">${item.name }</a></p></td>
+									<td><p class="searchDes"><a href="/admin/edititem/${item.id }">${item.name }</a></p></td>
 									<td><p>${item.business.name }</p></td>
 
 

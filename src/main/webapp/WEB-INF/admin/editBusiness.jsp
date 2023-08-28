@@ -77,7 +77,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="sidebar border border-right col-md-3 col-lg-2 p-0">
-				<div class="offcanvas-lg offcanvas-end" tabindex="-1"
+				<div class="offcanvas-md offcanvas-end" tabindex="-1"
 					id="sidebarMenu">
 
 					<div class="offcanvas-header">
@@ -152,37 +152,55 @@
 
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-				<div class="mt-3">
-					<div class="row">
-						<c:forEach var="photo" items="${business.photos }">
-							<div class="col-md-4 mb-4">
-								<img src="${photo.filePath }" alt="pic of food" height="300px"
-									class="rounded">
-							</div>
-						</c:forEach>
+				<h2 class="mt-3">${business.name }</h2>
+				<div>
+					<div class="d-flex gap-2 my-3">
+						<c:if test="${business.isApproved == false }">
+
+							<form action="/admin/approve/business/${business.id }"
+								method="post">
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" /> <input type="hidden" name="_method"
+									value="put" />
+								<button class="btn btn-primary">Approve</button>
+							</form>
+						</c:if>
+						<form action="/admin/delete/business/${business.id }"
+							method="POST">
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" /> <input type="hidden" name="_method"
+								value="delete" />
+							<button class="btn btn-danger"
+								onclick="return confirm('Are you sure you want to delete this business?');">Delete</button>
+						</form>
 					</div>
 				</div>
-				<div class="d-flex">
-
+				<div class="d-lg-flex">
 
 					<form:form action="/admin/editbusiness/${business.id }"
-						method="post" modelAttribute="business" class="form-control">
+						method="post" modelAttribute="business" class="form-control d-flex gap-3 flex-column p-3 AdminForm">
 						<input type="hidden" name="_method" value="put">
 
-						<div>
-							<form:label path="name" class="form-label">Business Name: </form:label>
-							<form:errors path="name" />
-							<form:input path="name" class="form-control" />
+						<div class="form-group row">
+							<form:label path="name" class="col-sm-2 col-form-label">Business Name: </form:label>
+							<div class="col-sm-10">
+								<form:errors path="name" />
+								<form:input path="name" class="form-control" />
+							</div>
 						</div>
-						<div>
-							<form:label path="website" class="form-label">Website: </form:label>
-							<form:errors path="website" />
-							<form:input path="website" class="form-control" />
+						<div class="form-group row">
+							<form:label path="website" class="col-sm-2 col-form-label">Website: </form:label>
+							<div class="col-sm-10">
+								<form:errors path="website" />
+								<form:input path="website" class="form-control" />
+							</div>
 						</div>
-						<div>
-							<form:label path="address.street" class="form-label">Address: </form:label>
-							<form:errors path="address.street" />
-							<form:input path="address.street" class="form-control" />
+						<div class="form-group row">
+							<form:label path="address.street" class="col-sm-2 col-form-label">Address: </form:label>
+							<div class="col-sm-10">
+								<form:errors path="address.street" />
+								<form:input path="address.street" class="form-control" />
+							</div>
 						</div>
 						<div class="form-group col-md-5">
 							<form:errors path="address" class="text-danger" />
@@ -224,25 +242,18 @@
 					</form:form>
 
 
+				<div class="m-3">
+					<h3>Photos:</h3>
+					<div class="d-flex gap-3 flex-wrap">
+						<c:forEach var="photo" items="${business.photos }">
+							
+								<img src="${photo.filePath }" alt="pic of food" class="rounded" height="200px">
+							
+						</c:forEach>
+					</div>
 				</div>
-				<div class="mt-2 d-flex gap-2">
-					<c:if test="${business.isApproved == false }">
+				</div>
 
-						<form action="/admin/approve/business/${business.id }"
-							method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <input type="hidden" name="_method"
-								value="put" />
-							<button class="btn btn-primary">Approve</button>
-						</form>
-					</c:if>
-					<form action="/admin/delete/business/${business.id }" method="POST">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" /> <input type="hidden" name="_method"
-							value="delete" />
-						<button class="btn btn-danger">Delete</button>
-					</form>
-				</div>
 			</main>
 		</div>
 	</div>

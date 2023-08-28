@@ -151,91 +151,78 @@
 			</div>
 
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<div class="w-75 d-flex">
-				<c:forEach var="photo" items="${item.photos }">
-				
-					<img src="${photo.filePath }" alt="pic of food"
-						height="300px">
-				
-				</c:forEach>
+				<h2 class="mt-3">${item.name }
+					from <a href="/admin/editbusiness/${item.business.id }">${item.business.name }</a>
+				</h2>
+				<div class="my-3">
+					<form action="/admin/delete/item/${item.id }" method="POST">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" /> <input type="hidden" name="_method"
+							value="delete" />
+						<button class="btn btn-danger"
+							onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+					</form>
+				</div>
 
-					<%-- <form:form action="/admin/editItem/${item.id }"
-						method="post" modelAttribute="business" class="form-control">
+
+				<div class="d-lg-flex">
+					<form:form action="/admin/edititem/${item.id }" method="post"
+						modelAttribute="item"
+						class="form-control d-flex gap-3 flex-column p-3 AdminForm">
 						<input type="hidden" name="_method" value="put">
 
-						<div>
-							<form:label path="name" class="form-label">Business Name: </form:label>
-							<form:errors path="name" />
-							<form:input path="name" class="form-control" />
+						<div class="form-group row">
+							<form:label path="name" class="col-sm-2 col-form-label">Item Name:</form:label>
+							<div class="col-sm-10">
+								<form:errors path="name" />
+								<form:input path="name" class="form-control" />
+							</div>
 						</div>
-						<div>
-							<form:label path="website" class="form-label">Website: </form:label>
-							<form:errors path="website" />
-							<form:input path="website" class="form-control" />
+						<div class="form-group row">
+							<form:label path="description" class="col-sm-2 col-form-label">Description:</form:label>
+							<div class="col-sm-10">
+								<form:errors path="description" />
+								<form:textarea path="description" class="form-control" />
+							</div>
 						</div>
-						<div>
-							<form:label path="address.street" class="form-label">Address: </form:label>
-							<form:errors path="address.street" />
-							<form:input path="address.street" class="form-control" />
+						<div class="form-group row">
+							<form:label path="price" class="col-sm-2 col-form-label">Price:</form:label>
+							<div class="col-sm-10">
+								<form:errors path="price" />
+								<form:input path="price" class="form-control" />
+							</div>
 						</div>
-						<div class="form-group col-md-5">
-							<form:errors path="address" class="text-danger" />
-							<form:label path="address.city">City:</form:label>
-							<form:input type="text" class="form-control" path="address.city"
-								placeholder="Enter City" id="city" />
-						</div>
-						<div class="form-group col-md-5">
-							<form:errors path="address.state" class="text-danger" />
-							<form:label path="address.state">State:</form:label>
-							<form:input type="text" class="form-control" path="address.state"
-								placeholder="Enter State" id="state" />
-						</div>
-						<div class="form-group col-md-5">
-							<form:errors path="address.zipCode" class="text-danger" />
-							<form:label path="address.zipCode">Zip Code:</form:label>
-							<form:input type="text" class="form-control"
-								path="address.zipCode" placeholder="Enter Zip Code" id="zipCode" />
-						</div>
+
 						<div class="form-group col-md-5">
 							<form:errors path="isFeatured" class="text-danger" />
-							<form:label path="isFeatured">Featured Business?</form:label>
+							<form:label path="isFeatured">Featured Item?</form:label>
 							<div class="form-check">
 								<form:checkbox path="isFeatured" class="form-check-input" />
 							</div>
 						</div>
-						<div class="form-group col-md-5">
-							<form:errors path="isApproved" class="text-danger" />
-							<form:label path="isApproved">Approved?</form:label>
-							<form:input type="text" class="form-control" path="isApproved" readonly="true"/>
+						<form:input path="photos" type="hidden" />
+						<form:input path="ratings" type="hidden"/>
+						<form:input path="business" type="hidden"/>
+						<div class="mt-3">
+							<button class="btn btn-success">Update Item</button>
 						</div>
 
-						<form:input path="photos" type="hidden" />
-						<div class="mt-3">
-							<button class="btn btn-dark">Update Business</button>
-						</div>
+
 
 					</form:form>
 
-
 				</div>
-				<div class="mt-2 d-flex gap-2">
-					<c:if test="${business.isApproved == false }">
+				<div class="m-3">
+					<h3>Photos:</h3>
+					<div class="d-flex gap-3 flex-wrap">
+						<c:forEach var="photo" items="${item.photos }">
+							<img src="${photo.filePath }" alt="pic of food"
+								class="rounded imgWidth" height="200px">
 
-						<form action="/admin/approve/business/${business.id }"
-							method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <input type="hidden" name="_method"
-								value="put" />
-							<button class="btn btn-primary">Approve</button>
-						</form>
-					</c:if>
-					<form action="/admin/delete/business/${business.id }" method="POST">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" /> <input type="hidden" name="_method"
-							value="delete" />
-						<button class="btn btn-danger">Delete</button>
-					</form>
-				</div> --%>
+						</c:forEach>
+					</div>
+				</div>
+				
 			</main>
 		</div>
 	</div>
