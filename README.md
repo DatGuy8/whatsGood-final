@@ -56,7 +56,7 @@
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/adminAllBusiness.png)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/AdminEditBusiness.png)
-
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/addBusiness.gif)
 
 <!-- If you have screenshots you'd like to share, include them here. -->
 
