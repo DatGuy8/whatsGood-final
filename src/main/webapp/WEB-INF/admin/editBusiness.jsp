@@ -153,6 +153,9 @@
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
 				<h2 class="mt-3">${business.name }</h2>
+				<c:if test="${not empty successMessage}">
+					<div class="alert alert-success">${successMessage}</div>
+				</c:if>
 				<div>
 					<div class="d-flex gap-2 my-3">
 						<c:if test="${business.isApproved == false }">

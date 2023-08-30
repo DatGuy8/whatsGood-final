@@ -81,7 +81,8 @@ public class BusinessController {
 		List<Business> featuredBusinesses = businessService.findFeaturedBusinesses(true);
 		model.addAttribute("businesses", businesses);
 		model.addAttribute("featuredBusinesses", featuredBusinesses);
-
+		
+		System.out.println("home");
 //		List<Item> sortedItems = itemService.getHighestRated();
 //		model.addAttribute("sortedItems",sortedItems);
 		return "business/homePage.jsp";

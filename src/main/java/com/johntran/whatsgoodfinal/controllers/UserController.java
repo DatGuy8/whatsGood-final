@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.User;
@@ -38,7 +39,7 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public String registration(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+	public String registration(@Valid @ModelAttribute("user") User user, BindingResult result, Model model,RedirectAttributes redirectAttributes) {
 
 		userValidator.validate(user, result);
 
@@ -46,9 +47,11 @@ public class UserController {
 			return "user/registrationPage.jsp";
 		} else if (userService.allUsers().size() == 0) {
 			userService.saveUserWithAdminRole(user);
+			redirectAttributes.addFlashAttribute("successMessage", "Thanks For Registering, Please Log in");
 			return "redirect:/login";
 		} else {
 			userService.saveWithUserRole(user);
+			redirectAttributes.addFlashAttribute("successMessage", "Thanks For Registering, Please Log in");
 			return "redirect:/login";
 		}
 
@@ -57,23 +60,20 @@ public class UserController {
 	@GetMapping("/login")
 	public String login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, Model model) {
-		if(error != null) {
-            model.addAttribute("errorMessage", "Invalid Credentials, Please try again.");
-        }
-        if(logout != null) {
-            model.addAttribute("logoutMessage", "Logout Successful!");
-        }
 		
+
+		if (error != null) {
+			model.addAttribute("errorMessage", "Invalid Credentials, Please try again.");
+		}
+		if (logout != null) {
+			model.addAttribute("logoutMessage", "Logout Successful!");
+		}
+
 		return "user/loginPage.jsp";
 	}
 
 	@PostMapping("/user/addFavoriteBusiness/{businessId}")
 	public String addFavoriteBusiness(@PathVariable("businessId") Long businessId, Principal principal) {
-		String email = principal.getName();
-		User currentUser = userService.findByEmail(email);
-		Business business = businessService.getOne(businessId);
-
-		System.out.println("here");
 		
 		return "redirect:/comingsoon";
 	}
@@ -82,16 +82,16 @@ public class UserController {
 	public String profilePage() {
 		return "redirect:/comingsoon";
 	}
-	
+
 	@GetMapping("/user/{userId}")
-	public String userPage(@PathVariable("userId")Long userId) {
+	public String userPage(@PathVariable("userId") Long userId) {
 		return "redirect:/comingsoon";
 	}
-	
-	
 
 	@GetMapping("/comingsoon")
 	public String comingSoon() {
 		return "comingSoon.jsp";
 	}
+	
+	
 }

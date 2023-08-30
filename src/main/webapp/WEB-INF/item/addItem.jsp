@@ -99,22 +99,36 @@
 	</div>
 	<!--=================================END NAV BAR ========================================-->
 	<div class="container mt-3">
+	<a href="/business/${business.id }">
 		<img src="${business.photos[0].filePath }" height="200px" />
+	</a>
 		<h1>
 			Add an item to
-			<c:out value="${business.name}" />
+			<a href="/business/${business.id }" class="text-decoration-none">
+			${business.name}
+			</a>
 		</h1>
 		<form:form action="/business/${business.id }/item/new" method="POST"
 			modelAttribute="newItem" enctype="multipart/form-data">
 
 			<form:label path="name">Item Name: </form:label>
 			<form:input type="text" path="name" class="form-control" />
-			<div class="alert alert-danger"><form:errors path="name" class="text-danger" /></div>
+			<c:set var="nameError"><form:errors path='name'/></c:set>
+			<c:if test="${not empty nameError}">
+			<div class="alert alert-danger">
+				<form:errors path="name" class="text-danger" />
+			</div>
+			</c:if>
 			<br />
 
 			<form:label path="description">Description: </form:label>
 			<form:textarea type="text" path="description" class="form-control" />
-			<div class="alert alert-danger"><form:errors path="description" class="text-danger" /></div>
+			<c:set var="descriptionError"><form:errors path='description'/></c:set>
+			<c:if test="${not empty descriptionError}">
+				<div class="alert alert-danger">
+					<form:errors path="description" class="text-danger" />
+				</div>
+			</c:if>
 			<br />
 
 			<form:errors path="price" class="text-danger" />
@@ -122,18 +136,19 @@
 			<form:input type="number" path="price" min="0" step=".01"
 				class="form-control" />
 			<br />
-			
+
 
 			<div class="form-group">
 				<%-- <form:errors path="photos" class="text-danger" /> --%>
-				<label for="imageFile">Item Photo: </label> <input type="file"
+				<label for="imageFile">Item Photo: </label> 
+				<input type="file"
 					name="imageFiles" accept="image/png, image/jpeg"
 					onchange="previewImages(event)" multiple />
 				<div id="imagePreviewContainer"></div>
 			</div>
 			<br />
 
-			<button class="btn btn-primary">Submit</button>
+			<button class="btn btn-success">Submit</button>
 		</form:form>
 	</div>
 	<script src="/webjars/jquery/jquery.min.js"></script>

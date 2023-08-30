@@ -163,6 +163,9 @@
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h3 text-center">Items</h1>
 				</div>
+				<c:if test="${not empty successMessage}">
+					<div class="alert alert-danger">${successMessage}</div>
+				</c:if>
 				<div class="form-group">
 					<input type="text" id="filterInput" placeholder="Search Items..."
 						class="form-control mb-3" style="width: 300px;">

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
@@ -75,16 +76,18 @@ public class AdminController {
 	
 	// -------APPROVE BUSINESS ROUTE
 	@PutMapping("/admin/approve/business/{businessId}")
-	public String approveBusiness(@PathVariable("businessId") Long businessId) {
+	public String approveBusiness(@PathVariable("businessId") Long businessId,RedirectAttributes redirectAttributes) {
 		businessService.approveBusinessById(businessId);
+		redirectAttributes.addFlashAttribute("successMessage","Business Successfully Approved");
 		return "redirect:/admin";
 		
 	}
 	
 	// ---------DELETE/DENY BUSINESS
 	@DeleteMapping("/admin/delete/business/{businessId}")
-	public String deleteBusiness(@PathVariable("businessId") Long businessId) {
+	public String deleteBusiness(@PathVariable("businessId") Long businessId, RedirectAttributes redirectAttributes) {
 		businessService.deleteByBusinessId(businessId);
+		redirectAttributes.addFlashAttribute("deleteMessage","Business Successfully Deleted");
 		return "redirect:/admin";
 	}
 	
@@ -104,7 +107,7 @@ public class AdminController {
 	// ------------- UPDATE BUSINESS ROUTE
 	@PutMapping("/admin/editbusiness/{id}")
 	public String updateBusiness(@Valid @ModelAttribute("business") Business business, BindingResult result,
-			Principal principal, Model model) {
+			Principal principal, Model model,RedirectAttributes redirectAttributes) {
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		if (result.hasErrors()) {
@@ -143,8 +146,9 @@ public class AdminController {
 			System.out.println(e.getMessage());
 		}
 		// update business with new address
-		businessService.addBusiness(business);
-		return "redirect:/admin";
+		Business updatedBusiness = businessService.addBusiness(business);
+		redirectAttributes.addFlashAttribute("successMessage","Business Updated!");
+		return "redirect:/admin/editbusiness/" + updatedBusiness.getId();
 		
 	}
 	
@@ -169,7 +173,7 @@ public class AdminController {
 	
 	// ----------- CHANGE USER ROLE --------------
 	@PostMapping("/admin/role/{userId}")
-	public String changeRole(@PathVariable("userId") Long userId) {
+	public String changeRole(@PathVariable("userId") Long userId,RedirectAttributes redirectAttributes) {
 		User user = userService.findById(userId);
 		
 		if (user == null) {
@@ -178,17 +182,18 @@ public class AdminController {
 		}
 		userService.changeRole(user);
 		
+		String message = "User: " + user.getUserName() + " role successfully changed!";
+		redirectAttributes.addFlashAttribute("successMessage", message);
+		
 		return "redirect:/admin/users";
 	}
 	
 //============================= ITEM ROUTES ==============================
 
-
-
-
 	// ----------DELETE ITEM
 	@DeleteMapping("/admin/delete/item/{itemId}")
-	public String deleteItem(@PathVariable("itemId") Long itemId) {
+	public String deleteItem(@PathVariable("itemId") Long itemId,RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("successMessage", "Item successfully deleted!");
 		itemService.deleteItemById(itemId);
 		return "redirect:/admin/items";
 	}
@@ -209,7 +214,7 @@ public class AdminController {
 	// ------------UPDATE ITEM ROUTE
 	@PutMapping("/admin/edititem/{id}")
 	public String updateItem(@Valid @ModelAttribute("item") Item item, BindingResult result,
-			Principal principal, Model model) {
+			Principal principal, Model model,RedirectAttributes redirectAttributes) {
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		if (result.hasErrors()) {
@@ -219,8 +224,12 @@ public class AdminController {
 		}
 
 		// UPDATES ITEM
-		itemService.addItem(item);
-		return "redirect:/admin/items";
+		Item updatedItem = itemService.addItem(item);
+		
+		redirectAttributes.addFlashAttribute("successMessage", "Item successfully updated!");
+		
+		
+		return "redirect:/admin/edititem/" + updatedItem.getId();
 	}
 
 

@@ -163,6 +163,12 @@
 					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 					<h1 class="h3 text-center">Businesses</h1>
 				</div>
+				<c:if test="${not empty successMessage}">
+					<div class="alert alert-sucess">${successMessage}</div>
+				</c:if>
+				<c:if test="${not empty deleteMessage}">
+					<div class="alert alert-danger">${deleteMessage}</div>
+				</c:if>
 				<div class="input-group mb-3 filterSelect">
 					<label class="input-group-text" for="filterSelect">Filter</label> <select
 						class="form-select" id="filterSelect">

@@ -36,15 +36,22 @@
 						<form action="/login" method="post">
 							<!-- Email input -->
 							<h1 class="text-center">Login to What's Good</h1>
+							<c:if test="${not empty successMessage}">
+								<div class="alert alert-success">${successMessage}</div>
+							</c:if>
 							<c:if test="${logoutMessage != null}">
-								<div class="alert alert-success"><c:out value="${logoutMessage}"></c:out></div>
+								<div class="alert alert-success">
+									<c:out value="${logoutMessage}"></c:out>
+								</div>
 							</c:if>
 							<c:if test="${errorMessage != null}">
-								<div class="alert alert-danger"><c:out value="${errorMessage}"></c:out></div>
+								<div class="alert alert-danger">
+									<c:out value="${errorMessage}"></c:out>
+								</div>
 							</c:if>
 							<div class="form-outline mb-4 mt-5">
-								<input type="email" name="email" class="form-control" /> <label
-									class="form-label" for="email">Email address</label>
+								<input type="email" name="email" class="form-control" />
+								<label class="form-label" for="email">Email address</label>
 							</div>
 
 							<!-- Password input -->

@@ -154,6 +154,9 @@
 				<h2 class="mt-3">${item.name }
 					from <a href="/admin/editbusiness/${item.business.id }">${item.business.name }</a>
 				</h2>
+				<c:if test="${not empty successMessage}">
+					<div class="alert alert-success">${successMessage}</div>
+				</c:if>
 				<div class="my-3">
 					<form action="/admin/delete/item/${item.id }" method="POST">
 						<input type="hidden" name="${_csrf.parameterName}"
@@ -201,8 +204,8 @@
 							</div>
 						</div>
 						<form:input path="photos" type="hidden" />
-						<form:input path="ratings" type="hidden"/>
-						<form:input path="business" type="hidden"/>
+						<form:input path="ratings" type="hidden" />
+						<form:input path="business" type="hidden" />
 						<div class="mt-3">
 							<button class="btn btn-success">Update Item</button>
 						</div>
@@ -222,7 +225,7 @@
 						</c:forEach>
 					</div>
 				</div>
-				
+
 			</main>
 		</div>
 	</div>
