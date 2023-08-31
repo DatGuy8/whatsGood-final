@@ -1,3 +1,5 @@
+## Top
+
 # What's Good
  A food review platform, designed for foodies. This app centers around a simple idea: making it easy for food enthusiasts to share and discover reviews of individual dishes from various restaurants.
 
@@ -41,6 +43,7 @@
 - Google Maps API
 - Spring Security
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Features
 - Full CRUD support
@@ -51,6 +54,7 @@
 - Users can add reviews to items
 - Admins can control what businesses and items are approved and featured
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Examples
 
@@ -96,6 +100,8 @@
 - Filter by item name.
   
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/SearchItemsbetter.gif)
+<p align="right">(<a href="#top">back to top</a>)</p>
+<br>
 
 - [ ] Search Page
 
@@ -120,7 +126,7 @@
 
 
 
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- If you have screenshots you'd like to share, include them here. -->
 
@@ -130,6 +136,7 @@ What are the project requirements/dependencies? Where are they listed? A require
 
 Proceed to describe how to install / setup one's local environment / get started with the project.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Usage
 How does one go about using it?
@@ -141,9 +148,12 @@ Provide various use cases and code examples here.
 ## Project Status
 Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 
 ## Room for Improvement
 Include areas you believe need improvement / could be improved. Also add TODOs for future development.
+
 
 Room for improvement:
 - Improvement to be done 1
@@ -153,16 +163,7 @@ To do:
 - Feature to be added 1
 - Feature to be added 2
 
-
-## Acknowledgements
-Give credit here.
-- This project was inspired by...
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
-
-
-## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- Optional -->
