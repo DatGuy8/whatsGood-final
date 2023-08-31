@@ -47,30 +47,67 @@
 
 
 ## Examples
+
 - [ ] Home Page
-<p>Home page with businesses. Admins can control featured business in carousel. Able to sort and filter businesses.</p>
+- Home page with businesses.
+- Admins can control featured business in carousel.
+- Able to sort and filter businesses.
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/showingHomePage.gif)
 
 <br>
 
 - [ ] Adding Businesses
-<p>Users can recommend a business. Google Places API incorperated into submission form to help users add existing businesses.</p>
+- Users can recommend a business.
+- Google Places API incorporated into submission form to help users add existing businesses.
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingbusiness1.gif)
+
 <br>
 
-
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingitemandreview.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/ApprovingBusiness2.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/editItem.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/GetLocation.gif)
-
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/SearchItemsbetter.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/makeadmin.gif)
+- [ ] Business Pages
+- Shows Average rating of all dishes.
+- Top rated dishes.
+- Google Map of location.
+- Item filtering at bottom of page.
+- Able to get directions to business.
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/businessShowPageAndMap.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingPho.gif)
+
+<br>
+
+- [ ] Add Items and Review Page
+- Able to add items to business.
+- Adding multiple pictures, with image preview.
+- Able to rate out of 5 stars.
+  
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingitemandreview.gif)
+
+<br>
+
+- [ ] All Items Page
+- Sort By price or rating.
+- Filter by item name.
+  
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/SearchItemsbetter.gif)
+
+<br>
+
+- [ ] Admin Pages
+- Edit/Approve/Feature/Delete Businesses
+
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/ApproveBusiness3.gif)
+
+- Edit/Delete/Feature Items
+  
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/editItem.gif)
+
+- Make other users Admins or admins to users.
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/makeadmin.gif)
+
+
+
+
 
 <!-- If you have screenshots you'd like to share, include them here. -->
 
