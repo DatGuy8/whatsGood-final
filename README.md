@@ -149,8 +149,6 @@ Prerequisites: Need MySql Workbench and Google Maps API key
     
       # REPLACE "create" TO "update" AFTER FIRST LOAD IF MAKING CHANGES (on first load with create adds information form import.sql file to have some default businesses loaded)
       spring.jpa.hibernate.ddl-auto=create
-
-
     ```
    - add in mysql database name
    - add username and password
@@ -161,9 +159,6 @@ Prerequisites: Need MySql Workbench and Google Maps API key
 6. Then Run As Spring Boot App, open browser to port 8080.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-`write-your-code-here`
 
 
 
