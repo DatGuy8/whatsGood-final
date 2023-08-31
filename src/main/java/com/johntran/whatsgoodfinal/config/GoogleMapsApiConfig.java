@@ -12,5 +12,4 @@ public class GoogleMapsApiConfig {
 	public String getApiKey() {
 		return apiKey;
 	}
-
 }

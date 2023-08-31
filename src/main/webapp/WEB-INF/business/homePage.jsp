@@ -106,7 +106,7 @@
 
 		<div id="wrapper" class="fade-in">
 			<div id="intro">
-				
+
 				<h1 style="width: 60%;" class="d-none d-lg-block">Look for
 					Items Users have reviewed from Businesses, or help the community by
 					adding business or items reviews to What's Good!</h1>
@@ -233,9 +233,16 @@
 											<small class="text-muted">No Ratings Yet</small>
 										</c:when>
 										<c:otherwise>
-											<small class="text-muted"><fmt:formatNumber
-													type="number" maxFractionDigits="2" value="${formatRating}" />
-												Average Dish Rating</small>
+
+											<div>
+												<c:forEach var="i" begin="1" end="${business.averageRating}">
+													<i class="fa fa-star starAverage"></i>
+													<!-- Replace with your star icon class -->
+												</c:forEach>
+												<small class="text-muted"><fmt:formatNumber
+														type="number" maxFractionDigits="2"
+														value="${formatRating}" /> Average Dish Rating</small>
+											</div>
 										</c:otherwise>
 									</c:choose>
 

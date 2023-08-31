@@ -164,7 +164,7 @@
 					<h1 class="h3 text-center">Businesses</h1>
 				</div>
 				<c:if test="${not empty successMessage}">
-					<div class="alert alert-sucess">${successMessage}</div>
+					<div class="alert alert-success">${successMessage}</div>
 				</c:if>
 				<c:if test="${not empty deleteMessage}">
 					<div class="alert alert-danger">${deleteMessage}</div>

@@ -25,15 +25,16 @@
 				<a class="navbar-brand text-white offcanvas-header whatsGoodLogo"
 					href="/"> <img src="/images/whatsgoodlogo2.png" height="60" />
 				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent"
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="d-flex flex-column flex-md-row justify-content-between w-100">
+					<div
+						class="d-flex flex-column flex-md-row justify-content-between w-100">
 
 						<div class="marginLeft30">
 							<!----------- Nav Links ----------->
@@ -63,9 +64,8 @@
 								<li class="nav-item dropDown"><a class="nav-link dropBtn"
 									href="/"> Businesses </a>
 									<div class="dropDownContent">
-										<a class="dropdown-item" href="/">View
-											Businesses</a> <a class="dropdown-item" href="/business/add">Add
-											a Business</a>
+										<a class="dropdown-item" href="/">View Businesses</a> <a
+											class="dropdown-item" href="/business/add">Add a Business</a>
 									</div></li>
 
 								<!-- Items Tab -->
@@ -80,7 +80,7 @@
 						</div>
 
 						<!-- Search Bar -->
-						
+
 						<form class="d-flex" action="/search" method="get">
 							<input class="form-control me-2" type="text"
 								placeholder="Search What's Good" aria-label="Search"
@@ -100,11 +100,14 @@
 
 	<div class="container mt-3">
 		<h1 class="text-center">All Items on What's Good</h1>
-		
-		<div class="filter-container d-flex w-100 flex-row-reverse my-3">
+
+		<div class="filter-container d-flex w-100 my-3 justify-content-between">
+			<input type="text" id="filterInput" placeholder="Search Items..."
+				class="form-control mb-3" style="width: 300px;">
+
 			<div>
-			<label for="filter">Select Filter:</label>
-				<select id="filter" class="form-select w-100">
+				<label for="filter">Select Filter:</label> <select id="filter"
+					class="form-select w-100">
 					<option value="none">Select...</option>
 					<option value="highestPrice">Highest Price</option>
 					<option value="lowestPrice">Lowest Price</option>
@@ -139,14 +142,15 @@
 								</p>
 								<c:choose>
 									<c:when test="${fn:length(item.ratings) > 0}">
-										<div class="d-flex gap-1">
+										<div>
 											<div>
 												<c:forEach var="i" begin="1" end="${item.averageRating}">
 													<i class="fa fa-star starAverage"></i>
 													<!-- Replace with your star icon class -->
 												</c:forEach>
 											</div>
-											<p>(${fn:length(item.ratings)} Ratings)</p>
+											<p>${item.averageRating } out of
+												${fn:length(item.ratings)} ratings</p>
 										</div>
 
 									</c:when>

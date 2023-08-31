@@ -2,7 +2,6 @@ package com.johntran.whatsgoodfinal.controllers;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.johntran.whatsgoodfinal.config.FileUploadUtil;
-import com.johntran.whatsgoodfinal.config.ItemRatingComparator;
 import com.johntran.whatsgoodfinal.models.Business;
 import com.johntran.whatsgoodfinal.models.Item;
 import com.johntran.whatsgoodfinal.models.ItemRating;
@@ -91,7 +90,7 @@ public class ItemController {
 	@PostMapping("/business/{businessId}/item/new")
 	public String saveItem(@Valid @ModelAttribute("newItem") Item newItem, BindingResult result,
 			@PathVariable("businessId") Long businessId, @RequestParam("imageFiles") MultipartFile[] imageFiles,
-			Principal principal,Model model) throws IOException {
+			Principal principal,Model model, RedirectAttributes redirectAttributes) throws IOException {
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
 		Business business = businessService.getOne(businessId);
@@ -125,6 +124,9 @@ public class ItemController {
 				}
 			}
 		}
+		
+		redirectAttributes.addFlashAttribute("successMessage", "Item successfully added!");
+		
 		return "redirect:/item/" + savedItem.getId();	
 	}
 
@@ -151,7 +153,7 @@ public class ItemController {
 	
 	@PostMapping("/item/{itemId}")
 	public String itemRatingSave(@Valid @ModelAttribute("itemRating") ItemRating itemRating, BindingResult result,
-			@PathVariable("itemId") Long itemId, Principal principal, Model model) throws IOException {
+			@PathVariable("itemId") Long itemId, Principal principal, Model model,RedirectAttributes redirectAttributes) throws IOException {
 		
 		String email = principal.getName();
 		User currentUser = userService.findByEmail(email);
@@ -177,7 +179,7 @@ public class ItemController {
 		itemRating.setUser(currentUser);
 
 		itemRatingService.addRating(itemRating);
-
+		redirectAttributes.addFlashAttribute("successMessage", "Thanks for the review!");
 		return "redirect:/item/{itemId}";
 	}
 }

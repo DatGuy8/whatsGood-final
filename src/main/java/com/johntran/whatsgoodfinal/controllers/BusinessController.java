@@ -82,9 +82,6 @@ public class BusinessController {
 		model.addAttribute("businesses", businesses);
 		model.addAttribute("featuredBusinesses", featuredBusinesses);
 		
-		System.out.println("home");
-//		List<Item> sortedItems = itemService.getHighestRated();
-//		model.addAttribute("sortedItems",sortedItems);
 		return "business/homePage.jsp";
 	}
 
@@ -193,6 +190,7 @@ public class BusinessController {
 		Collections.sort(highestRatedItems, itemRatingComparator);
 
 		List<Item> sortedItems = itemService.findBusinessItems(business);
+		
 		// SORT ITEMS BY ALPHABETICAL ORDER
 		Collections.sort(sortedItems, Comparator.comparing(Item::getName));
 

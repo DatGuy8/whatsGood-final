@@ -109,12 +109,15 @@
 			<div class="container mt-3">
 				<div class="d-flex justify-content-center gap-3">
 					<c:forEach var="item" items="${ item.photos}">
-						<img src="${item.filePath }" alt="stock photo" height="150px" />
+						<img src="${item.filePath }" alt="stock photo" height="250px" />
 					</c:forEach>
 				</div>
 				<h1 class="mt-3">
 					<c:out value="${item.name }" />
 				</h1>
+				<c:if test="${not empty successMessage}">
+					<div class="alert alert-success">${successMessage}</div>
+				</c:if>
 				<p>
 					By <a href="/business/${item.business.id }"><c:out
 							value="${item.business.name }" /></a>
