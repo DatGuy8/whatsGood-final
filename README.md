@@ -5,8 +5,21 @@
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage.png)
 
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#technologies-used">Technologies Used</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#examples">Examples</a></li>
+  </ol>
+</details>
+
+
+
 ## Table of Contents
-* [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Examples](#examples)
@@ -18,13 +31,6 @@
 * [Contact](#contact)
 <!-- * [License](#license) -->
 
-
-## General Information
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
-- What is the purpose of your project?
-- Why did you undertake it?
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
 ## Technologies Used
@@ -91,6 +97,12 @@
   
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/SearchItemsbetter.gif)
 
+- [ ] Search Page
+
+- Search Business, Items, and Users
+
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/searchPage.png)
+
 <br>
 
 - [ ] Admin Pages
@@ -103,6 +115,7 @@
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/editItem.gif)
 
 - Make other users Admins or admins to users.
+  
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/makeadmin.gif)
 
 
