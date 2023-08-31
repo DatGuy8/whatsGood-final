@@ -1,4 +1,4 @@
-## Top
+<div id="top"></div>
 
 # What's Good
  A food review platform, designed for foodies. This app centers around a simple idea: making it easy for food enthusiasts to share and discover reviews of individual dishes from various restaurants.
@@ -26,10 +26,7 @@
 * [Features](#features)
 * [Examples](#examples)
 * [Setup](#setup)
-* [Usage](#usage)
-* [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 <!-- * [License](#license) -->
 
@@ -132,39 +129,62 @@
 
 
 ## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+Prerequisites: Need MySql Workbench and Google Maps API key
+<p>How to set up:</p>
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/DatGuy8/whatsGood-final.git
+   ```
+2. Create a new database schema in MySql.
+  
+3. Open project in Spring tool Suite.
+  
+4. Open src/main/resources/application properties and add information
+    ```sh
+      spring.datasource.url=jdbc:mysql://localhost:3306/<<ADD MYSQL DATABASE NAME>>
+      spring.datasource.username=<<ADD USERNAME>>
+      spring.datasource.password=<<ADD PASSWORD>>
+      apiKey=<<ADD IN GOOGLE API KEY>>
+    
+      # REPLACE "create" TO "update" AFTER FIRST LOAD IF MAKING CHANGES (on first load with create adds information form import.sql file to have some default businesses loaded)
+      spring.jpa.hibernate.ddl-auto=create
+
+
+    ```
+   - add in mysql database name
+   - add username and password
+   - add in google maps api key
+   - change "create" to "update" after first start up, if making changes
+   
+
+6. Then Run As Spring Boot App, open browser to port 8080.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
 
 `write-your-code-here`
 
 
-## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
-
 
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
+- User Pages
+- Favorite Restaurants
+- Restaurant categories 
+- Able to like/dislike reviews
 
-To do:
-- Feature to be added 1
-- Feature to be added 2
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Contact
+
+John Tran - namesjohntran@gmail.com
+
+Project Link: [https://github.com/DatGuy8/whatsGood-final](https://github.com/DatGuy8/whatsGood-final)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Optional -->
 <!-- ## License -->
