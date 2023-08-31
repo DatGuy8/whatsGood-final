@@ -1,14 +1,15 @@
 # What's Good
- A review platform inspired by Yelp, designed for foodies. This app centers around a simple idea: making it easy for food enthusiasts to share and discover reviews of individual dishes from various restaurants.
+ A food review platform, designed for foodies. This app centers around a simple idea: making it easy for food enthusiasts to share and discover reviews of individual dishes from various restaurants.
 
- I built this app to address a frustration I have with sites like Yelp - the overwhelming amount of information. With a user-friendly interface, you can quickly find out which dishes are highly recommended at different eateries. 
-<!-- Live demo [_here_](https://www.example.com).  If you have the project hosted somewhere, include the link here. -->
+ I built this app to address a frustration I have with sites like Yelp - the overwhelming amount of information. With a user-friendly interface, you can quickly find out which dishes are highly recommended at different eateries.
+
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage.png)
 
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
+* [Examples](#examples)
 * [Setup](#setup)
 * [Usage](#usage)
 * [Project Status](#project-status)
@@ -39,14 +40,21 @@
 - Full CRUD support
 - Admin/User roles and features
 - Users can recommend business to be added
-- Admins can edit/accept businesses
+- Admins can update/delete businesses
 - Users can add items to approved business
 - Users can add reviews to items
-- Admins can control what businesses and items are featured
+- Admins can control what businesses and items are approved and featured
 
 
-## Screenshots
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage.png)
+## Examples
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/showingHomePage.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingbusiness1.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingitemandreview.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/ApprovingBusiness2.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/editItem.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/GetLocation.gif)
+
+
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage2.png)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage3.png)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/BusinessShowPage.png)
