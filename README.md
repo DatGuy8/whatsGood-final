@@ -47,24 +47,30 @@
 
 
 ## Examples
+- [ ] Home Page
+<p>Home page with businesses. Admins can control featured business in carousel. Able to sort and filter businesses.</p>
+
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/showingHomePage.gif)
+
+<br>
+
+- [ ] Adding Businesses
+<p>Users can recommend a business. Google Places API incorperated into submission form to help users add existing businesses.</p>
+
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingbusiness1.gif)
+<br>
+
+
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingitemandreview.gif)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/ApprovingBusiness2.gif)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/editItem.gif)
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/GetLocation.gif)
 
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/SearchItemsbetter.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/makeadmin.gif)
 
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage2.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage3.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/BusinessShowPage.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/BusinessShowPage1.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/ItemsPage.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/addReviewPage.png)
-
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/adminAllBusiness.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/AdminEditBusiness.png)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/addBusiness.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/businessShowPageAndMap.gif)
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingPho.gif)
 
 <!-- If you have screenshots you'd like to share, include them here. -->
 
