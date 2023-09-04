@@ -14,21 +14,15 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#technologies-used">Technologies Used</a></li>
-    <li><a href="#setup">Setup</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#examples">Examples</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#room-for-improvement">Room For Improvement</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
 
-
-## Table of Contents
-* [Technologies Used](#technologies-used)
-* [Features](#features)
-* [Examples](#examples)
-* [Setup](#setup)
-* [Room for Improvement](#room-for-improvement)
-* [Contact](#contact)
-<!-- * [License](#license) -->
 
 
 
