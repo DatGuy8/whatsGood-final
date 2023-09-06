@@ -1,3 +1,5 @@
+<div id="top"></div>
+
 # What's Good
  A food review platform, designed for foodies. This app centers around a simple idea: making it easy for food enthusiasts to share and discover reviews of individual dishes from various restaurants.
 
@@ -5,26 +7,23 @@
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/HomePage.png)
 
-## Table of Contents
-* [General Info](#general-information)
-* [Technologies Used](#technologies-used)
-* [Features](#features)
-* [Examples](#examples)
-* [Setup](#setup)
-* [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
-<!-- * [License](#license) -->
 
 
-## General Information
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
-- What is the purpose of your project?
-- Why did you undertake it?
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary><h2>Table of Contents</h2></summary>
+  <ol>
+    <li><a href="#technologies-used">Technologies Used</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#room-for-improvement">Room For Improvement</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+
+
 
 
 ## Technologies Used
@@ -35,6 +34,7 @@
 - Google Maps API
 - Spring Security
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Features
 - Full CRUD support
@@ -45,75 +45,135 @@
 - Users can add reviews to items
 - Admins can control what businesses and items are approved and featured
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Examples
+
 - [ ] Home Page
-<p>Home page with businesses. Admins can control featured business in carousel. Able to sort and filter businesses.</p>
+- Home page with businesses.
+- Admins can control featured business in carousel.
+- Able to sort and filter businesses.
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/showingHomePage.gif)
 
 <br>
 
 - [ ] Adding Businesses
-<p>Users can recommend a business. Google Places API incorperated into submission form to help users add existing businesses.</p>
+- Users can recommend a business.
+- Google Places API incorporated into submission form to help users add existing businesses.
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingbusiness1.gif)
+
 <br>
 
-
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingitemandreview.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/ApprovingBusiness2.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/editItem.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/GetLocation.gif)
-
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/SearchItemsbetter.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/makeadmin.gif)
+- [ ] Business Pages
+- Shows Average rating of all dishes.
+- Top rated dishes.
+- Google Map of location.
+- Item filtering at bottom of page.
+- Able to get directions to business.
 
 ![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/businessShowPageAndMap.gif)
-![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingPho.gif)
+
+<br>
+
+- [ ] Add Items and Review Page
+- Able to add items to business.
+- Adding multiple pictures, with image preview.
+- Able to rate out of 5 stars.
+  
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/addingitemandreview.gif)
+
+<br>
+
+- [ ] All Items Page
+- Sort By price or rating.
+- Filter by item name.
+  
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/SearchItemsbetter.gif)
+<p align="right">(<a href="#top">back to top</a>)</p>
+<br>
+
+- [ ] Search Page
+
+- Search Business, Items, and Users
+
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/searchPage.png)
+
+<br>
+
+- [ ] Admin Pages
+- Edit/Approve/Feature/Delete Businesses
+
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/ApproveBusiness3.gif)
+
+- Edit/Delete/Feature Items
+  
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/editItem.gif)
+
+- Make other users Admins or admins to users.
+  
+![!](https://github.com/DatGuy8/whatsGood-final/blob/master/Screenshots/gifs/makeadmin.gif)
+
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
 ## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+Prerequisites: Need MySql Workbench and Google Maps API key
+<p>How to set up:</p>
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/DatGuy8/whatsGood-final.git
+   ```
+2. Create a new database schema in MySql.
+  
+3. Open project in Spring tool Suite.
+  
+4. Open src/main/resources/application properties and add information
+    ```sh
+      spring.datasource.url=jdbc:mysql://localhost:3306/<<ADD MYSQL DATABASE NAME>>
+      spring.datasource.username=<<ADD USERNAME>>
+      spring.datasource.password=<<ADD PASSWORD>>
+      apiKey=<<ADD IN GOOGLE API KEY>>
+    
+      # REPLACE "create" TO "update" AFTER FIRST LOAD IF MAKING CHANGES (on first load with create adds information form import.sql file to have some default businesses loaded)
+      spring.jpa.hibernate.ddl-auto=create
+    ```
+   - add in mysql database name
+   - add username and password
+   - add in google maps api key
+   - change "create" to "update" after first start up, if making changes
+   
 
+6. Then Run As Spring Boot App, open browser to port 8080.
 
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-`write-your-code-here`
-
-
-## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
 
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
 
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
-
-To do:
-- Feature to be added 1
-- Feature to be added 2
+- User Pages
+- Favorite Restaurants
+- Restaurant categories 
+- Able to like/dislike reviews
 
 
-## Acknowledgements
-Give credit here.
-- This project was inspired by...
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
 
+John Tran - namesjohntran@gmail.com
+
+Project Link: [https://github.com/DatGuy8/whatsGood-final](https://github.com/DatGuy8/whatsGood-final)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Optional -->
 <!-- ## License -->
